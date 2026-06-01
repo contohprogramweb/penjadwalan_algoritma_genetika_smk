@@ -1,0 +1,2 @@
+# penjadwalanalgoritmagenetikasmk
+penjadwalan algoritma genetika smk
