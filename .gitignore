@@ -1,1 +1,1 @@
-
+Nothing should be ignored based on the provided file changes. The added files are all source code files (.php, .sql, .md) which should be tracked in version control.
