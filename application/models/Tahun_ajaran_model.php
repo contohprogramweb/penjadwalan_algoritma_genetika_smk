@@ -126,6 +126,14 @@ class Tahun_ajaran_model extends CI_Model {
     }
 
     /**
+     * Count active tahun ajaran
+     */
+    public function count_active()
+    {
+        return $this->db->from($this->table)->where('status', 'aktif')->count_all_results();
+    }
+
+    /**
      * Get all tahun ajaran ordered by tanggal_mulai DESC
      */
     public function get_all_ordered()
