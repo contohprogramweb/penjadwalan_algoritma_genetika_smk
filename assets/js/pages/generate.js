@@ -36,19 +36,29 @@
 
     /**
      * Handle click tombol Generate
-     * Mencegah double-click dengan disable button
+     * Mencegah double-click dengan disable button dan debounce
      */
+    var generateDebounceTimer = null;
+    
     function handleGenerateClick() {
+        // Clear debounce timer
+        if (generateDebounceTimer) {
+            clearTimeout(generateDebounceTimer);
+        }
+        
         if (isGenerating) {
             console.warn('Generate already in progress');
             return;
         }
 
-        // Disable tombol untuk mencegah double-click
-        setButtonState(false);
+        // Debounce 500ms untuk mencegah double-click
+        generateDebounceTimer = setTimeout(function() {
+            // Disable tombol untuk mencegah double-click
+            setButtonState(false);
 
-        // Trigger proses generate
-        triggerGenerate();
+            // Trigger proses generate
+            triggerGenerate();
+        }, 500);
     }
 
     /**
@@ -68,14 +78,22 @@
 
     /**
      * Trigger proses generate via AJAX POST
+     * Menyertakan CSRF token untuk keamanan (SRS Bab 16.3)
      */
     function triggerGenerate() {
         console.log('Triggering generate process...');
+
+        // Siapkan data dengan CSRF token
+        var requestData = {};
+        if (typeof GENERATE_CONFIG.csrfName !== 'undefined' && typeof GENERATE_CONFIG.csrfHash !== 'undefined') {
+            requestData[GENERATE_CONFIG.csrfName] = GENERATE_CONFIG.csrfHash;
+        }
 
         $.ajax({
             url: GENERATE_CONFIG.triggerUrl,
             type: 'POST',
             dataType: 'json',
+            data: requestData,
             timeout: 30000, // 30 detik timeout
             success: function(response) {
                 console.log('Trigger response:', response);
@@ -346,10 +364,22 @@
         init();
     });
 
-    // Cleanup on page unload
+    // Cleanup on page unload - cegah memory leak (SRS Bab 16.3)
     $(window).on('beforeunload', function() {
         if (isGenerating) {
             return 'Proses generate sedang berjalan. Jika Anda keluar, proses akan terhenti.';
+        }
+    });
+    
+    // Cleanup interval saat halaman di-unload untuk mencegah memory leak
+    $(window).on('unload', function() {
+        if (pollingInterval) {
+            clearInterval(pollingInterval);
+            pollingInterval = null;
+        }
+        if (generateDebounceTimer) {
+            clearTimeout(generateDebounceTimer);
+            generateDebounceTimer = null;
         }
     });
 
