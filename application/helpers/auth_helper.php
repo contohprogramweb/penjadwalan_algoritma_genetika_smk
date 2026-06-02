@@ -110,3 +110,23 @@ if (!function_exists('has_role')) {
         return $user_role === $roles;
     }
 }
+
+/**
+ * Convert validation errors to array format for JSON response
+ * Format: ['field_name' => 'error message']
+ * 
+ * @return array
+ */
+if (!function_exists('validation_errors_array')) {
+    function validation_errors_array()
+    {
+        $CI =& get_instance();
+        $errors = [];
+        
+        foreach ($_ERROR_ARRAY as $field => $message) {
+            $errors[$field] = $message;
+        }
+        
+        return $errors;
+    }
+}
