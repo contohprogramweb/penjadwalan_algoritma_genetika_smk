@@ -84,9 +84,12 @@ if (!function_exists('current_user')) {
             'username' => $CI->session->userdata('username'),
             'nama_lengkap' => $CI->session->userdata('nama_lengkap'),
             'role' => $CI->session->userdata('role'),
+            'id_guru' => $CI->session->userdata('id_guru'),
+            'id_kelas' => $CI->session->userdata('id_kelas'),
+            'email' => $CI->session->userdata('email'),
+            'last_login' => $CI->session->userdata('last_login'),
             'nip' => $CI->session->userdata('nip'),
-            'login_time' => $CI->session->userdata('login_time'),
-            'last_activity' => $CI->session->userdata('last_activity')
+            'login_time' => $CI->session->userdata('login_time')
         ];
     }
 }

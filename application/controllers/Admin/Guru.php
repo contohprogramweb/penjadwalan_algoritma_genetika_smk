@@ -46,10 +46,9 @@ class Guru extends MY_Controller {
             ],
             'nuptk' => [
                 'label' => 'NUPTK',
-                'rules' => 'required|exact_length[16]|numeric',
+                'rules' => 'permit_empty|exact_length[16]|numeric',
                 'errors' => [
-                    'required' => 'NUPTK wajib diisi',
-                    'exact_length' => 'NUPTK harus 16 digit',
+                    'exact_length' => 'NUPTK harus 16 digit jika diisi',
                     'numeric' => 'NUPTK harus berupa angka'
                 ]
             ],
@@ -203,10 +202,9 @@ class Guru extends MY_Controller {
             ],
             'nuptk' => [
                 'label' => 'NUPTK',
-                'rules' => 'required|exact_length[16]|numeric',
+                'rules' => 'permit_empty|exact_length[16]|numeric',
                 'errors' => [
-                    'required' => 'NUPTK wajib diisi',
-                    'exact_length' => 'NUPTK harus 16 digit',
+                    'exact_length' => 'NUPTK harus 16 digit jika diisi',
                     'numeric' => 'NUPTK harus berupa angka'
                 ]
             ],

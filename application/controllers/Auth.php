@@ -119,16 +119,20 @@ class Auth extends CI_Controller
         // Regenerate session ID untuk keamanan (SRS Bab 16.2)
         $this->session->sess_regenerate(TRUE);
 
-        // Set session payload sesuai SRS Bab 16.2
+        // Set session payload LENGKAP sesuai SRS Bab 16.2
+        // Payload wajib: logged_in, user_id, username, nama_lengkap, role, id_guru, id_kelas, email, last_login
         $session_data = [
             'logged_in' => TRUE,
             'user_id' => $user->id,
             'username' => $user->username,
             'nama_lengkap' => $user->nama_lengkap,
             'role' => $user->role, // 'admin' atau 'waka'
-            'nip' => $user->nip,
-            'login_time' => date('Y-m-d H:i:s'),
-            'last_activity' => time()
+            'id_guru' => $user->id_guru ?? NULL, // Untuk role guru
+            'id_kelas' => $user->id_kelas ?? NULL, // Untuk role wali kelas
+            'email' => $user->email ?? NULL,
+            'last_login' => date('Y-m-d H:i:s'),
+            'nip' => $user->nip ?? NULL,
+            'login_time' => time()
         ];
 
         $this->session->set_userdata($session_data);
