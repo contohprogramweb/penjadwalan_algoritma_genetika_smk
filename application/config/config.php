@@ -123,5 +123,23 @@ $config['charset'] = 'UTF-8';
 $config['enable_query_strings'] = FALSE;
 
 // ------------------------------------------------------------------
+// SECURITY SETTINGS (SRS Bab 16.3 - CSRF Protection)
+// ------------------------------------------------------------------
+
+/*
+ |--------------------------------------------------------------------------
+ | CSRF Token Settings
+ |--------------------------------------------------------------------------
+ | Wajib untuk semua form POST/AJAX sesuai SRS Bab 16.3
+ | Header name: X-CSRF-Token (standar yang digunakan di app.js)
+ */
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_token_hash';
+$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_expire'] = 7200; // 2 jam
+$config['csrf_regenerate'] = TRUE; // Regenerate setiap POST
+$config['csrf_exclude_uris'] = []; // Tidak ada URI yang dikecualikan
+
+// ------------------------------------------------------------------
 // END OF CONFIGURATION FILE
 // ------------------------------------------------------------------

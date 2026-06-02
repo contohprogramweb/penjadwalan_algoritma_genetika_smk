@@ -213,12 +213,12 @@
     </div>
 
     <!-- Modal Edit Slot -->
-    <div class="modal fade" id="editSlotModal" tabindex="-1" role="dialog" aria-labelledby="editSlotModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editSlotModal" tabindex="-1" role="dialog" aria-labelledby="editSlotModalLabel" aria-modal="true" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="editSlotModalLabel">
-                        <i class="fas fa-edit"></i> Edit Slot Jadwal
+                        <i class="fas fa-edit" aria-hidden="true"></i> Edit Slot Jadwal
                     </h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -230,22 +230,22 @@
                         
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <label class="font-weight-bold">Kelas</label>
+                                <label for="edit-nama-kelas" class="font-weight-bold">Kelas</label>
                                 <input type="text" class="form-control" id="edit-nama-kelas" readonly>
                             </div>
                             <div class="col-md-4">
-                                <label class="font-weight-bold">Hari</label>
+                                <label for="edit-hari" class="font-weight-bold">Hari</label>
                                 <input type="text" class="form-control" id="edit-hari" readonly>
                             </div>
                             <div class="col-md-4">
-                                <label class="font-weight-bold">Jam Ke-</label>
+                                <label for="edit-slot" class="font-weight-bold">Jam Ke-</label>
                                 <input type="text" class="form-control" id="edit-slot" readonly>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="edit-id-penugasan" class="font-weight-bold">Penugasan Guru & Mapel</label>
-                            <select class="form-control" id="edit-id-penugasan" required>
+                            <select class="form-control" id="edit-id-penugasan" required aria-required="true">
                                 <option value="">-- Pilih Penugasan --</option>
                                 <!-- Akan di-load via AJAX -->
                             </select>
