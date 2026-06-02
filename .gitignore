@@ -5,7 +5,6 @@ __pycache__/
 
 # Dependencies
 vendor/
-node_modules/
 composer.lock
 
 # Logs and temp files
