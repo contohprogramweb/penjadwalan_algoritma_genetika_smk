@@ -166,6 +166,60 @@
     <script src="<?= base_url('assets/js/app.js') ?>"></script>
     <script>
         $(document).ready(function() {
+
+            // Initialize jValidate untuk form Mapel (SRS Bab 13)
+            jValidate.init('#formMapel', {
+                kode: {
+                    required: true,
+                    maxLength: 10,
+                    pattern: /^[a-zA-Z0-9\\-]+$/,
+                    messages: {
+                        required: 'Kode mapel wajib diisi.',
+                        maxLength: 'Kode mapel maksimal 10 karakter.',
+                        pattern: 'Kode hanya boleh berisi huruf, angka, dan tanda strip (-).'
+                    }
+                },
+                nama: {
+                    required: true,
+                    minLength: 3,
+                    maxLength: 100,
+                    messages: {
+                        required: 'Nama mata pelajaran wajib diisi.',
+                        minLength: 'Nama minimal 3 karakter.',
+                        maxLength: 'Nama maksimal 100 karakter.'
+                    }
+                },
+                tipe: {
+                    required: true,
+                    messages: {
+                        required: 'Tipe mapel wajib dipilih.'
+                    }
+                },
+                jp_per_minggu: {
+                    required: true,
+                    min: 1,
+                    max: 48,
+                    messages: {
+                        required: 'JP per minggu wajib diisi.',
+                        min: 'Minimal 1 jam pelajaran.',
+                        max: 'Maksimal 48 jam pelajaran.'
+                    }
+                },
+                semester: {
+                    required: true,
+                    messages: {
+                        required: 'Semester wajib dipilih.'
+                    }
+                }
+            });
+
+            // Tambahkan data-label untuk setiap field
+            $('#kode').data('label', 'Kode Mapel');
+            $('#nama').data('label', 'Nama Mata Pelajaran');
+            $('#tipe').data('label', 'Tipe Mapel');
+            $('#jp_per_minggu').data('label', 'JP Per Minggu');
+            $('#semester').data('label', 'Semester');
+
             // Setup CSRF dari app.js
             $.ajaxSetup({
                 headers: {
