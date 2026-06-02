@@ -1,0 +1,37 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * CodeIgniter Database Configuration File
+ * 
+ * Sistem Penjadwalan Guru SMK Berbasis Algoritma Genetika
+ * 
+ * SALIN FILE INI KE database.php DAN SESUAIKAN KONFIGURASI
+ */
+
+$active_group = 'default';
+$query_builder = TRUE;
+
+$db['default'] = array(
+'dsn'=> '',
+'hostname' => 'localhost',
+'username' => 'root',
+'password' => '',
+'database' => 'scheduling_smk',
+'dbdriver' => 'mysqli',
+'dbprefix' => '',
+'pconnect' => FALSE,
+'db_debug' => (ENVIRONMENT !== 'production'),
+'cache_on' => FALSE,
+'cachedir' => '',
+'char_set' => 'utf8mb4',
+'dbcollat' => 'utf8mb4_general_ci',
+'swap_pre' => '',
+'encrypt' => FALSE,
+'compress' => FALSE,
+'stricton' => FALSE,
+'stricton' => FALSE,
+'dbuser' => 'root',
+'failover_on' => TRUE,
+'use_sqlite' => FALSE,
+);
