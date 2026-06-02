@@ -1,0 +1,321 @@
+/**
+ * Design Token - Sistem Penjadwalan Guru SMK
+ * Bootstrap 4.6 Custom Variables
+ * Version: 3.0 (SRS Compliance)
+ */
+
+:root {
+  /* =========================================
+   * COLOR PALETTE (SRS Bab 11.1)
+   * ========================================= */
+  
+  /* Primary Colors */
+  --color-primary: #1A2E6F;
+  --color-primary-light: #2C4A9E;
+  --color-primary-dark: #0F1D4A;
+  
+  /* Accent Colors */
+  --color-accent: #E65C00;
+  --color-accent-light: #FF7B1A;
+  --color-accent-dark: #B34700;
+  
+  /* Semantic Colors */
+  --color-success: #28A745;
+  --color-success-light: #34CE57;
+  --color-success-dark: #1E7E34;
+  
+  --color-danger: #DC3545;
+  --color-danger-light: #E4606D;
+  --color-danger-dark: #BD2130;
+  
+  --color-warning: #FFC107;
+  --color-warning-light: #FFD54F;
+  --color-warning-dark: #FFA000;
+  
+  --color-info: #17A2B8;
+  --color-info-light: #3AB0C4;
+  --color-info-dark: #117A8B;
+  
+  /* Neutral Colors */
+  --color-white: #FFFFFF;
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --color-black: #000000;
+  
+  /* Schedule Grid Colors */
+  --color-schedule-mata-pelajaran-1: #E3F2FD;
+  --color-schedule-mata-pelajaran-2: #F3E5F5;
+  --color-schedule-mata-pelajaran-3: #E8F5E9;
+  --color-schedule-mata-pelajaran-4: #FFF3E0;
+  --color-schedule-mata-pelajaran-5: #FCE4EC;
+  --color-schedule-conflict: #FFEBEE;
+  --color-schedule-locked: #F5F5F5;
+  
+  /* =========================================
+   * TYPOGRAPHY
+   * ========================================= */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-heading: 'Poppins', var(--font-family-base);
+  --font-family-monospace: 'Fira Code', 'Consolas', 'Monaco', monospace;
+  
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* =========================================
+   * SPACING
+   * ========================================= */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;   /* 4px */
+  --spacing-2: 0.5rem;    /* 8px */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-5: 1.25rem;   /* 20px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-8: 2rem;      /* 32px */
+  --spacing-10: 2.5rem;   /* 40px */
+  --spacing-12: 3rem;     /* 48px */
+  --spacing-16: 4rem;     /* 64px */
+  --spacing-20: 5rem;     /* 80px */
+  
+  /* =========================================
+   * BORDER RADIUS
+   * ========================================= */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-full: 9999px;
+  
+  /* =========================================
+   * SHADOWS
+   * ========================================= */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  
+  /* =========================================
+   * LAYOUT
+   * ========================================= */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 64px;
+  --topbar-height: 64px;
+  --footer-height: 48px;
+  --container-max-width: 1400px;
+  
+  /* =========================================
+   * TRANSITIONS
+   * ========================================= */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+  
+  /* =========================================
+   * Z-INDEX
+   * ========================================= */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* =========================================
+ * BOOTSTRAP OVERRIDE
+ * ========================================= */
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* Accent Button */
+.btn-accent {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.btn-accent:hover,
+.btn-accent:focus,
+.btn-accent:active {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: var(--color-white);
+}
+
+/* Success Button */
+.btn-success {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+/* Card Customization */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-200);
+}
+
+.card-header {
+  background-color: var(--color-gray-50);
+  border-bottom: 1px solid var(--color-gray-200);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Table Customization */
+.table {
+  font-size: var(--font-size-sm);
+}
+
+.table thead th {
+  background-color: var(--color-gray-100);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+}
+
+/* Form Control */
+.form-control {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-300);
+  font-size: var(--font-size-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 46, 111, 0.1);
+}
+
+/* Badge Customization */
+.badge-primary {
+  background-color: var(--color-primary);
+}
+
+.badge-accent {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* Alert Customization */
+.alert {
+  border-radius: var(--radius-md);
+  border: none;
+}
+
+/* Modal Customization */
+.modal-content {
+  border-radius: var(--radius-xl);
+  border: none;
+  box-shadow: var(--shadow-xl);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--color-gray-200);
+}
+
+/* Dropdown Customization */
+.dropdown-menu {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-gray-200);
+}
+
+/* Navigation */
+.nav-pills .nav-link.active {
+  background-color: var(--color-primary);
+}
+
+.nav-pills .nav-link {
+  color: var(--color-gray-700);
+  border-radius: var(--radius-md);
+}
+
+/* Progress Bar */
+.progress {
+  border-radius: var(--radius-full);
+  height: 8px;
+}
+
+.progress-bar {
+  background-color: var(--color-primary);
+}
+
+/* =========================================
+ * UTILITIES
+ * ========================================= */
+
+.text-primary-custom {
+  color: var(--color-primary) !important;
+}
+
+.text-accent {
+  color: var(--color-accent) !important;
+}
+
+.bg-primary-custom {
+  background-color: var(--color-primary) !important;
+}
+
+.bg-accent {
+  background-color: var(--color-accent) !important;
+}
+
+.rounded-custom {
+  border-radius: var(--radius-lg);
+}
+
+.shadow-custom {
+  box-shadow: var(--shadow-md);
+}
+
+.transition-custom {
+  transition: all var(--transition-normal);
+}
