@@ -316,7 +316,9 @@ var GENERATE_CONFIG = {
     resetUrl: '<?= site_url("waka/generate/reset_progress"); ?>',
     reviewUrl: '<?= site_url("waka/jadwal"); ?>',
     pollingInterval: 2000, // 2 detik
-    redirectDelay: 3000 // 3 detik setelah selesai
+    redirectDelay: 3000, // 3 detik setelah selesai
+    csrfName: '<?= $this->security->get_csrf_token_name() ?>',
+    csrfHash: '<?= $this->security->get_csrf_hash() ?>'
 };
 var INITIAL_READY = <?= isset($ready) && $ready ? 'true' : 'false'; ?>;
 </script>
