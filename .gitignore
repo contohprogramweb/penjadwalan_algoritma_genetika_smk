@@ -1,1 +1,36 @@
-Nothing should be ignored based on the provided file changes. The added files are all source code files (.php, .sql, .md) which should be tracked in version control.
+```
+# CodeIgniter specific
+application/cache/
+application/logs/
+application/temp/
+
+# Dependencies
+vendor/
+composer.lock
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+node_modules/
+dist/
+build/
+*.min.js
+*.min.css
+```
