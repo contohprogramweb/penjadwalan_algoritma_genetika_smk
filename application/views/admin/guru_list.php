@@ -42,18 +42,19 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" role="grid" aria-label="Tabel data guru">
+                        <caption class="sr-only">Daftar semua guru dengan informasi NIP, NUPTK, nama, email, nomor HP, status, jam mengajar, dan aksi</caption>
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>NIP</th>
-                                <th>NUPTK</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>No HP</th>
-                                <th>Status</th>
-                                <th>Jam Mengajar</th>
-                                <th>Aksi</th>
+                                <th scope="col" aria-label="Nomor urut">No</th>
+                                <th scope="col">NIP</th>
+                                <th scope="col">NUPTK</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">No HP</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Jam Mengajar</th>
+                                <th scope="col"><span class="sr-only">Aksi</span></th>
                             </tr>
                         </thead>
                     </table>
@@ -179,6 +180,105 @@
     <script>
         $(document).ready(function() {
             let editMode = false;
+            
+            // Initialize jValidate untuk form Guru (SRS Bab 13)
+            jValidate.init('#formGuru', {
+                nip: {
+                    required: true,
+                    exactLength: 18,
+                    numeric: true,
+                    messages: {
+                        required: 'NIP wajib diisi.',
+                        exactLength: 'NIP harus tepat 18 digit.',
+                        numeric: 'NIP harus berupa angka.'
+                    }
+                },
+                nuptk: {
+                    required: true,
+                    exactLength: 16,
+                    numeric: true,
+                    messages: {
+                        required: 'NUPTK wajib diisi.',
+                        exactLength: 'NUPTK harus tepat 16 digit.',
+                        numeric: 'NUPTK harus berupa angka.'
+                    }
+                },
+                nama: {
+                    required: true,
+                    minLength: 3,
+                    maxLength: 100,
+                    messages: {
+                        required: 'Nama lengkap wajib diisi.',
+                        minLength: 'Nama minimal 3 karakter.',
+                        maxLength: 'Nama maksimal 100 karakter.'
+                    }
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    maxLength: 100,
+                    messages: {
+                        required: 'Email wajib diisi.',
+                        email: 'Format email tidak valid.',
+                        maxLength: 'Email maksimal 100 karakter.'
+                    }
+                },
+                no_hp: {
+                    required: true,
+                    minLength: 10,
+                    maxLength: 15,
+                    numeric: true,
+                    messages: {
+                        required: 'Nomor HP wajib diisi.',
+                        minLength: 'Nomor HP minimal 10 digit.',
+                        maxLength: 'Nomor HP maksimal 15 digit.',
+                        numeric: 'Nomor HP harus berupa angka.'
+                    }
+                },
+                jam_min: {
+                    required: true,
+                    min: 1,
+                    max: 48,
+                    messages: {
+                        required: 'Jam minimal wajib diisi.',
+                        min: 'Jam minimal minimal 1.',
+                        max: 'Jam maksimal maksimal 48.'
+                    }
+                },
+                jam_maks: {
+                    required: true,
+                    min: 1,
+                    max: 48,
+                    custom: function(value, $field) {
+                        const jamMin = parseInt($('#jam_min').val()) || 0;
+                        if (parseInt(value) < jamMin) {
+                            return 'Jam maksimal harus lebih besar atau sama dengan jam minimal.';
+                        }
+                        return true;
+                    },
+                    messages: {
+                        required: 'Jam maksimal wajib diisi.',
+                        min: 'Jam maksimal minimal 1.',
+                        max: 'Jam maksimal maksimal 48.'
+                    }
+                },
+                status: {
+                    required: true,
+                    messages: {
+                        required: 'Status kepegawaian wajib dipilih.'
+                    }
+                }
+            });
+
+            // Tambahkan data-label untuk setiap field untuk error message yang lebih baik
+            $('#nip').data('label', 'NIP');
+            $('#nuptk').data('label', 'NUPTK');
+            $('#nama').data('label', 'Nama Lengkap');
+            $('#email').data('label', 'Email');
+            $('#no_hp').data('label', 'Nomor HP');
+            $('#jam_min').data('label', 'Jam Minimal');
+            $('#jam_maks').data('label', 'Jam Maksimal');
+            $('#status').data('label', 'Status Kepegawaian');
             
             // Initialize DataTable
             const table = $('#dataTable').DataTable({
