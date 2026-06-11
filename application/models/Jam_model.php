@@ -8,9 +8,9 @@ class Jam_model extends CI_Model {
 
     private $table = 'jam_pelajaran';
     private $primary_key = 'id_jam';
-    private $column_order = ['jam_ke', 'waktu_mulai', 'waktu_selesai', 'durasi'];
-    private $column_search = ['jam_ke', 'waktu_mulai', 'waktu_selesai', 'keterangan'];
-    private $order = ['jam_ke' => 'ASC'];
+    private $column_order = ['slot', 'waktu_mulai', 'waktu_selesai', 'durasi_menit'];
+    private $column_search = ['slot', 'waktu_mulai', 'waktu_selesai', 'keterangan'];
+    private $order = ['slot' => 'ASC'];
 
     public function __construct()
     {
@@ -93,10 +93,18 @@ class Jam_model extends CI_Model {
     }
 
     /**
-     * Get all jam pelajaran ordered by jam_ke
+     * Get all jam pelajaran ordered by slot
      */
     public function get_all_ordered()
     {
-        return $this->db->order_by('jam_ke', 'ASC')->get($this->table)->result_array();
+        return $this->db->order_by('slot', 'ASC')->get($this->table)->result_array();
+    }
+
+    /**
+     * Get active jam pelajaran (not break time)
+     */
+    public function get_active_jam()
+    {
+        return $this->db->where('is_active', 1)->order_by('slot', 'ASC')->get($this->table)->result_array();
     }
 }
