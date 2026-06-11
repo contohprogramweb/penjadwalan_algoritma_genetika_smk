@@ -84,9 +84,9 @@
                         <?= csrf_field() ?>
                         
                         <div class="mb-3">
-                            <label for="jam_ke" class="form-label">Jam Ke- <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="jam_ke" name="jam_ke" min="1" max="16" placeholder="1-16" required>
-                            <div class="invalid-feedback" id="error-jam_ke"></div>
+                            <label for="slot" class="form-label">Jam Ke- <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="slot" name="slot" min="1" max="16" placeholder="1-16" required>
+                            <div class="invalid-feedback" id="error-slot"></div>
                             <small class="text-muted">Rentang: 1 - 16 jam pelajaran per hari</small>
                         </div>
 
@@ -167,7 +167,7 @@
                 },
                 columns: [
                     { data: 'no', orderable: false },
-                    { data: 'jam_ke' },
+                    { data: 'slot' },
                     { data: 'waktu_mulai' },
                     { data: 'waktu_selesai' },
                     { data: 'durasi' },
@@ -226,7 +226,7 @@
                             const data = response.data;
                             $('#modalTitle').text('Edit Jam Pelajaran');
                             $('#jamId').val(data.id);
-                            $('#jam_ke').val(data.jam_ke);
+                            $('#slot').val(data.slot);
                             $('#waktu_mulai').val(data.waktu_mulai);
                             $('#waktu_selesai').val(data.waktu_selesai);
                             $('#durasi').val(data.durasi);

@@ -227,10 +227,10 @@ class Datatables extends CI_Controller {
             $no++;
             $row = [];
             $row[] = $no;
-            $row[] = 'Jam ke-' . $item['jam_ke'];
+            $row[] = 'Slot ke-' . $item['slot'];
             $row[] = $item['waktu_mulai'];
             $row[] = $item['waktu_selesai'];
-            $row[] = $item['durasi'] . ' menit';
+            $row[] = $item['durasi_menit'] . ' menit';
             $row[] = $item['keterangan'] ?? '-';
             
             $aksi = '

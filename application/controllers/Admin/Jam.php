@@ -27,14 +27,14 @@ class Jam extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'jam_ke' => [
-                'label' => 'Jam Ke-',
+            'slot' => [
+                'label' => 'Slot Ke-',
                 'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[16]',
                 'errors' => [
-                    'required' => 'Jam ke- wajib diisi',
-                    'integer' => 'Jam ke- harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam ke- minimal 1',
-                    'less_than_equal_to' => 'Jam ke- maksimal 16'
+                    'required' => 'Slot ke- wajib diisi',
+                    'integer' => 'Slot ke- harus bilangan bulat',
+                    'greater_than_equal_to' => 'Slot ke- minimal 1',
+                    'less_than_equal_to' => 'Slot ke- maksimal 16'
                 ]
             ],
             'waktu_mulai' => [
@@ -54,14 +54,21 @@ class Jam extends MY_Controller {
                     'check_waktu' => 'Waktu selesai harus lebih besar dari waktu mulai'
                 ]
             ],
-            'durasi' => [
+            'durasi_menit' => [
                 'label' => 'Durasi (menit)',
-                'rules' => 'required|integer|greater_than_equal_to[30]|less_than_equal_to[120]',
+                'rules' => 'required|integer|greater_than_equal_to[15]|less_than_equal_to[120]',
                 'errors' => [
                     'required' => 'Durasi wajib diisi',
                     'integer' => 'Durasi harus bilangan bulat',
-                    'greater_than_equal_to' => 'Durasi minimal 30 menit',
+                    'greater_than_equal_to' => 'Durasi minimal 15 menit',
                     'less_than_equal_to' => 'Durasi maksimal 120 menit'
+                ]
+            ],
+            'is_istirahat' => [
+                'label' => 'Istirahat',
+                'rules' => 'integer|in_list[0,1]',
+                'errors' => [
+                    'in_list' => 'Nilai istirahat harus 0 atau 1'
                 ]
             ],
             'keterangan' => [
@@ -86,10 +93,12 @@ class Jam extends MY_Controller {
         }
 
         $data = [
-            'jam_ke' => $this->input->post('jam_ke'),
+            'slot' => $this->input->post('slot'),
             'waktu_mulai' => $this->input->post('waktu_mulai'),
             'waktu_selesai' => $this->input->post('waktu_selesai'),
-            'durasi' => $this->input->post('durasi'),
+            'durasi_menit' => $this->input->post('durasi_menit'),
+            'is_istirahat' => $this->input->post('is_istirahat', 0),
+            'is_active' => $this->input->post('is_active', 1),
             'keterangan' => $this->input->post('keterangan')
         ];
 
@@ -151,14 +160,14 @@ class Jam extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'jam_ke' => [
-                'label' => 'Jam Ke-',
+            'slot' => [
+                'label' => 'Slot Ke-',
                 'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[16]',
                 'errors' => [
-                    'required' => 'Jam ke- wajib diisi',
-                    'integer' => 'Jam ke- harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam ke- minimal 1',
-                    'less_than_equal_to' => 'Jam ke- maksimal 16'
+                    'required' => 'Slot ke- wajib diisi',
+                    'integer' => 'Slot ke- harus bilangan bulat',
+                    'greater_than_equal_to' => 'Slot ke- minimal 1',
+                    'less_than_equal_to' => 'Slot ke- maksimal 16'
                 ]
             ],
             'waktu_mulai' => [
@@ -178,14 +187,28 @@ class Jam extends MY_Controller {
                     'check_waktu' => 'Waktu selesai harus lebih besar dari waktu mulai'
                 ]
             ],
-            'durasi' => [
+            'durasi_menit' => [
                 'label' => 'Durasi (menit)',
-                'rules' => 'required|integer|greater_than_equal_to[30]|less_than_equal_to[120]',
+                'rules' => 'required|integer|greater_than_equal_to[15]|less_than_equal_to[120]',
                 'errors' => [
                     'required' => 'Durasi wajib diisi',
                     'integer' => 'Durasi harus bilangan bulat',
-                    'greater_than_equal_to' => 'Durasi minimal 30 menit',
+                    'greater_than_equal_to' => 'Durasi minimal 15 menit',
                     'less_than_equal_to' => 'Durasi maksimal 120 menit'
+                ]
+            ],
+            'is_istirahat' => [
+                'label' => 'Istirahat',
+                'rules' => 'integer|in_list[0,1]',
+                'errors' => [
+                    'in_list' => 'Nilai istirahat harus 0 atau 1'
+                ]
+            ],
+            'is_active' => [
+                'label' => 'Aktif',
+                'rules' => 'integer|in_list[0,1]',
+                'errors' => [
+                    'in_list' => 'Nilai aktif harus 0 atau 1'
                 ]
             ],
             'keterangan' => [
@@ -210,10 +233,12 @@ class Jam extends MY_Controller {
         }
 
         $data = [
-            'jam_ke' => $this->input->post('jam_ke'),
+            'slot' => $this->input->post('slot'),
             'waktu_mulai' => $this->input->post('waktu_mulai'),
             'waktu_selesai' => $this->input->post('waktu_selesai'),
-            'durasi' => $this->input->post('durasi'),
+            'durasi_menit' => $this->input->post('durasi_menit'),
+            'is_istirahat' => $this->input->post('is_istirahat', 0),
+            'is_active' => $this->input->post('is_active', 1),
             'keterangan' => $this->input->post('keterangan')
         ];
 
