@@ -1,75 +1,47 @@
+```
 # Compiled and build artifacts
 *.pyc
 __pycache__/
 *.o
 *.obj
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
 
 # Dependencies
+vendor/
 node_modules/
-venv/
-.venv/
-.env
-.env.local
-*.env.*
+*.egg-info/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 
+# Environment
+.env
+.env.local
+*.env.*
+
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# Distribution / Build
-dist/
-build/
-target/
-coverage/
-htmlcov/
-.mypy_cache/
-.pytest_cache/
-.gradle/
-
-# System files
+# OS generated files
 .DS_Store
 Thumbs.db
-*.DS_Store
-ehthumbs.db
-Icon?
-Network Trash Folder
-Temporary Items
-.Trash-*
-*.tmp
 
-# Compression files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
+# Backup files
+*~
+*.bak
+*.backup
+
+# Cache directories
+.cache/
+.php_cs.cache
+
+# Session files
+sess_*
+
+# Upload files (if not meant to be versioned)
+application/uploads/
+application/cache/
+application/logs/
+```
