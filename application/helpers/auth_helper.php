@@ -50,3 +50,20 @@ if (!function_exists('current_user')) {
         ];
     }
 }
+
+if (!function_exists('validation_errors_array')) {
+    /**
+     * Mengembalikan error validasi sebagai array
+     *
+     * @return array
+     */
+    function validation_errors_array()
+    {
+        $CI =& get_instance();
+        $errors = [];
+        foreach ($CI->form_validation->get_errors() as $field => $error) {
+            $errors[] = $error;
+        }
+        return $errors;
+    }
+}

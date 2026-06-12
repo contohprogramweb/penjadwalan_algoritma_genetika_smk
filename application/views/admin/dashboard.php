@@ -207,23 +207,17 @@
 
 <script>
 $(document).ready(function() {
-    // Load dashboard statistics
+    // Load dashboard statistics from server data
     loadDashboardStats();
 
     function loadDashboardStats() {
-        // Fetch stats from API or controller
-        // For now, using placeholder values
-        // In production, this should fetch from actual data
-
-        // Example: $.ajax({ url: '<?php site_url('admin/dashboard/stats') ?>', ... })
-
-        // Placeholder values (remove when real API is implemented)
-        $('#totalGuru').text('0');
-        $('#totalKelas').text('0');
-        $('#totalMapel').text('0');
-        $('#totalRuangan').text('0');
-        $('#totalTahunAjaran').text('0');
-        $('#totalJam').text('0');
+        // Gunakan data yang sudah dikirim dari controller
+        <?php if (isset($total_guru)): ?>$('#totalGuru').text('<?= $total_guru ?>');<?php endif; ?>
+        <?php if (isset($total_kelas)): ?>$('#totalKelas').text('<?= $total_kelas ?>');<?php endif; ?>
+        <?php if (isset($total_mapel)): ?>$('#totalMapel').text('<?= $total_mapel ?>');<?php endif; ?>
+        <?php if (isset($total_ruangan)): ?>$('#totalRuangan').text('<?= $total_ruangan ?>');<?php endif; ?>
+        <?php if (isset($total_tahun_ajaran)): ?>$('#totalTahunAjaran').text('<?= $total_tahun_ajaran ?>');<?php endif; ?>
+        <?php if (isset($total_jam)): ?>$('#totalJam').text('<?= $total_jam ?>');<?php endif; ?>
     }
 });
 </script>
