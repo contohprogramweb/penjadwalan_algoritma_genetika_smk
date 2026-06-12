@@ -5,7 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Controller untuk DataTables Server-Side Processing
  * Referensi: SRS Bab 15.1
  */
-class Datatables extends CI_Controller {
+require_once APPPATH . 'core/MY_Controller.php';
+
+class Datatables extends MY_Controller {
+
+    protected $allowed_roles = ['admin', 'waka'];
 
     public function __construct()
     {

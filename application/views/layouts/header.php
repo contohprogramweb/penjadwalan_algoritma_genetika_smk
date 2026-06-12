@@ -193,8 +193,7 @@
             </a>
             <div class="dropdown-menu">
               <?php 
-              $this->load->model('Kelas_model');
-              $kelas_list = $this->Kelas_model->get_all();
+              $kelas_list = $this->kelas_model->get_all();
               foreach ($kelas_list as $k): 
               ?>
               <a class="dropdown-item" href="<?= site_url('laporan/pdf_jadwal/' . $k->id_kelas) ?>" target="_blank">
@@ -213,8 +212,7 @@
             </a>
             <div class="dropdown-menu">
               <?php 
-              $this->load->model('Guru_model');
-              $guru_list = $this->Guru_model->get_all();
+              $guru_list = $this->guru_model->get_all();
               foreach ($guru_list as $g): 
               ?>
               <a class="dropdown-item" href="<?= site_url('laporan/pdf_beban_guru/' . $g->id_guru) ?>" target="_blank">
