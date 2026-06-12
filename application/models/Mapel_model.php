@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Mapel_model extends CI_Model {
 
-    private $table = 'mapel';
+    private $table = 'mata_pelajaran';
     private $primary_key = 'id_mapel';
     private $column_order = ['kode', 'nama', 'tipe', 'jp_per_minggu', 'semester'];
     private $column_search = ['kode', 'nama', 'tipe'];
