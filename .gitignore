@@ -1,16 +1,15 @@
-```
-# Compiled and build artifacts
+# Compiled and binary files
 *.pyc
 __pycache__/
-*.o
-*.obj
-*.log
-*.tmp
-*.swp
 
 # Dependencies
 vendor/
 composer.lock
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
 
 # Environment
 .env
@@ -21,13 +20,12 @@ composer.lock
 .vscode/
 .idea/
 
-# OS
-.DS_Store
-Thumbs.db
+# Build artifacts
+build/
+dist/
+target/
 
-# CodeIgniter specific
-application/cache/
-application/logs/
-application/sessions/
-system/
-```
+# Cache directories
+.cache/
+.mypy_cache/
+.pytest_cache/
