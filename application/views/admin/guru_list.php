@@ -1,4 +1,4 @@
-<?= $this->load->view('layouts/header'); ?>
+<?php $this->load->view('layouts/header'); ?>
 
 <div class="container-fluid">
     <div class="card mb-4">
@@ -133,14 +133,16 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        let editMode = false;
-        
-        // Initialize jValidate untuk form Guru (SRS Bab 13)
-        jValidate.init('#formGuru', {
-            nip: {
-                required: true,
+
+    
+    <script>
+        $(document).ready(function() {
+            let editMode = false;
+            
+            // Initialize jValidate untuk form Guru (SRS Bab 13)
+            jValidate.init('#formGuru', {
+                nip: {
+                    required: true,
                     exactLength: 18,
                     numeric: true,
                     messages: {
@@ -412,5 +414,5 @@
         });
     </script>
 
-<?= $this->load->view('layouts/footer'); ?>
 
+<?php $this->load->view('layouts/footer'); ?>

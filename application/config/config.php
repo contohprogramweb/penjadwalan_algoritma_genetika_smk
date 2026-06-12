@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/gapenjadwalansmk/';
 
 /*
 |--------------------------------------------------------------------------
@@ -160,7 +160,7 @@ $config['composer_autoload'] = FALSE;
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-/';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 
 /*
 |--------------------------------------------------------------------------
@@ -225,7 +225,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -457,12 +457,12 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
+$config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_regenerate'] = FALSE;
+$config['csrf_exclude_uris'] = ['auth/proses_login'];
 
 /*
 |--------------------------------------------------------------------------
@@ -535,74 +535,7 @@ $config['proxy_ips'] = '';
  
  
  
- 
-/**
- * CodeIgniter Application Configuration File
- * 
- * Referensi SRS: Bab 11.10 (PDF Engine) & Best Practices Production
- */
-
-// ------------------------------------------------------------------
-// ERROR REPORTING & LOGGING (Production Settings)
-// ------------------------------------------------------------------
-
-/*
- |--------------------------------------------------------------------------
- | Error Logging Threshold
- |--------------------------------------------------------------------------
- |
- | Setting untuk production environment:
- | - 0 = Disable logging
- | - 1 = Error Messages (Errors, PHP Errors)
- | - 2 = Debug Messages
- | - 3 = Informational Messages
- | - 4 = All Messages
- |
- | Untuk production: set ke 1 (hanya error penting yang dicatat)
- | Stack trace tidak ditampilkan ke user (lihat views/errors/)
- */
-$config['log_threshold'] = 1;
-
-/*
- |--------------------------------------------------------------------------
- | Error Logging Path
- |--------------------------------------------------------------------------
- */
-$config['log_path'] = APPPATH . 'logs/';
-
-/*
- |--------------------------------------------------------------------------
- | Date Format for Logs
- |--------------------------------------------------------------------------
- */
-$config['log_date_format'] = 'Y-m-d H:i:s';
-
-/*
- |--------------------------------------------------------------------------
- | Error Views Directory
- |--------------------------------------------------------------------------
- | Custom error pages telah dibuat di application/views/errors/
- | - 403.php: Akses Ditolak
- | - 404.php: Halaman Tidak Ditemukan
- | - 500.php: Terjadi Kesalahan Server
- */
-$config['error_view_path'] = APPPATH . 'views/errors/';
-
-/*
- |--------------------------------------------------------------------------
- | Show PHP Errors (Production: FALSE)
- |--------------------------------------------------------------------------
- | Di production, error PHP tidak ditampilkan langsung ke user.
- | User akan melihat halaman error yang ramah (views/errors/*.php)
- | Detail error dicatat ke log file untuk debugging admin.
- */
-// Note: Ini diatur juga di index.php dengan ini_set()
-// $config['show_php_errors'] = FALSE; // Implicit dalam error handler
-
-// ------------------------------------------------------------------
-// DOMPDF CONFIGURATION (Bab 11.10 - PDF Engine)
-// ------------------------------------------------------------------
-
+  
 /*
  |--------------------------------------------------------------------------
  | Dompdf Options
@@ -621,60 +554,5 @@ $config['dompdf_options'] = [
 // ------------------------------------------------------------------
 // GENERAL APPLICATION SETTINGS
 // ------------------------------------------------------------------
-
-/*
- |--------------------------------------------------------------------------
- | Base Site URL
- |--------------------------------------------------------------------------
- */
-$config['base_url'] = ''; // Auto-detect atau set manual
-
-/*
- |--------------------------------------------------------------------------
- | Index File
- |--------------------------------------------------------------------------
- */
-$config['index_page'] = '';
-
-/*
- |--------------------------------------------------------------------------
- | URI PROTOCOL
- |--------------------------------------------------------------------------
- */
-$config['uri_protocol'] = 'REQUEST_URI';
-
-/*
- |--------------------------------------------------------------------------
- | Default Character Set
- |--------------------------------------------------------------------------
- */
-$config['charset'] = 'UTF-8';
-
-/*
- |--------------------------------------------------------------------------
- | Enable Query Strings
- |--------------------------------------------------------------------------
- */
-$config['enable_query_strings'] = FALSE;
-
-// ------------------------------------------------------------------
-// SECURITY SETTINGS (SRS Bab 16.3 - CSRF Protection)
-// ------------------------------------------------------------------
-
-/*
- |--------------------------------------------------------------------------
- | CSRF Token Settings
- |--------------------------------------------------------------------------
- | Wajib untuk semua form POST/AJAX sesuai SRS Bab 16.3
- | Header name: X-CSRF-Token (standar yang digunakan di app.js)
- */
-$config['csrf_protection'] = TRUE;
-$config['csrf_token_name'] = 'csrf_token_hash';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
-$config['csrf_expire'] = 7200; // 2 jam
-$config['csrf_regenerate'] = TRUE; // Regenerate setiap POST
-$config['csrf_exclude_uris'] = []; // Tidak ada URI yang dikecualikan
-
-// ------------------------------------------------------------------
-// END OF CONFIGURATION FILE
-// ------------------------------------------------------------------
+ 
+ 

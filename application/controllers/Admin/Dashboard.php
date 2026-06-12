@@ -24,7 +24,7 @@ class Dashboard extends MY_Controller
 
     /**
      * Halaman Dashboard Admin
-     * Sesuai SRS Bab 11.6
+     * TODO: Implementasi sesuai SRS Bab 11.6
      */
     public function index()
     {
