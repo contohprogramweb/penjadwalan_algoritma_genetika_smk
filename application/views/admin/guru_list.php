@@ -133,16 +133,14 @@
     </div>
 </div>
 
-<?= $this->load->view('layouts/footer'); ?>
-    
-    <script>
-        $(document).ready(function() {
-            let editMode = false;
-            
-            // Initialize jValidate untuk form Guru (SRS Bab 13)
-            jValidate.init('#formGuru', {
-                nip: {
-                    required: true,
+<script>
+    $(document).ready(function() {
+        let editMode = false;
+        
+        // Initialize jValidate untuk form Guru (SRS Bab 13)
+        jValidate.init('#formGuru', {
+            nip: {
+                required: true,
                     exactLength: 18,
                     numeric: true,
                     messages: {
@@ -413,4 +411,6 @@
             });
         });
     </script>
+
+<?= $this->load->view('layouts/footer'); ?>
 

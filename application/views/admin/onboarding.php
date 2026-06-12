@@ -1,3 +1,5 @@
+<?= $this->load->view('layouts/header'); ?>
+
 <!-- Onboarding Wizard - SRS Bab 11.9 -->
 <div class="onboarding-wrapper">
   
@@ -648,3 +650,5 @@ window.onboardingConfig = {
   }
 };
 </script>
+
+<?= $this->load->view('layouts/footer'); ?>
