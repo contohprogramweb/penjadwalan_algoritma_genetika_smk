@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?= $this->load->view('layouts/header'); ?>
+<!-- OLD: <!DOCTYPE html> -->
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -351,5 +352,7 @@
             });
         });
     </script>
-</body>
-</html>
+<!-- OLD: </body> -->
+
+<?= $this->load->view('layouts/footer'); ?>
+<!-- OLD: </html> -->

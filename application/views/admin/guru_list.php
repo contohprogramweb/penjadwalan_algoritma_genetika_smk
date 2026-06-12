@@ -1,181 +1,139 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf_token_name" content="<?php echo $this->security->get_csrf_token_name(); ?>">
-    <meta name="csrf_token_hash" content="<?php echo $this->security->get_csrf_hash(); ?>">
-    <title>Data Guru - Sistem Penjadwalan</title>
-    
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #f8f9fc; }
-        .card { box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15); border: none; }
-        .card-header { background-color: #f8f9fc; border-bottom: 1px solid #e3e6f0; }
-        .btn-primary { background-color: #4e73df; border-color: #4e73df; }
-        .btn-primary:hover { background-color: #2e59d9; border-color: #2653d4; }
-    </style>
-</head>
-<body>
-    <!-- Navbar placeholder -->
-    <nav class="navbar navbar-expand navbar-dark bg-primary static-top mb-4">
-        <a class="navbar-brand mr-1" href="#">Sistem Penjadwalan</a>
-        <div class="navbar-nav ml-auto">
-            <span class="mr-3 text-white"><?php echo $current_user['nama_lengkap']; ?> (<?php echo ucfirst($current_user['role']); ?>)</span>
-            <a href="<?php echo site_url('auth/logout'); ?>" class="text-white"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        </div>
-    </nav>
+<?= $this->load->view('layouts/header'); ?>
 
-    <div class="container-fluid">
-        <div class="card mb-4">
-            <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                <h5 class="m-0 font-weight-bold text-primary">Data Guru</h5>
-                <button class="btn btn-primary btn-sm" id="btnTambah">
-                    <i class="fas fa-plus mr-1"></i> Tambah Guru
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h5 class="m-0 font-weight-bold text-primary">Data Guru</h5>
+            <button class="btn btn-primary btn-sm" id="btnTambah">
+                <i class="fas fa-plus mr-1"></i> Tambah Guru
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" role="grid" aria-label="Tabel data guru">
+                    <caption class="sr-only">Daftar semua guru dengan informasi NIP, NUPTK, nama, email, nomor HP, status, jam mengajar, dan aksi</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" aria-label="Nomor urut">No</th>
+                            <th scope="col">NIP</th>
+                            <th scope="col">NUPTK</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">No HP</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Jam Mengajar</th>
+                            <th scope="col"><span class="sr-only">Aksi</span></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah/Edit Guru -->
+<div class="modal fade" id="modalGuru" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Tambah Guru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" role="grid" aria-label="Tabel data guru">
-                        <caption class="sr-only">Daftar semua guru dengan informasi NIP, NUPTK, nama, email, nomor HP, status, jam mengajar, dan aksi</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col" aria-label="Nomor urut">No</th>
-                                <th scope="col">NIP</th>
-                                <th scope="col">NUPTK</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">No HP</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Jam Mengajar</th>
-                                <th scope="col"><span class="sr-only">Aksi</span></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+            <form id="formGuru" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                    <input type="hidden" name="id_guru" id="id_guru">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nip">NIP <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nip" name="nip" maxlength="18" placeholder="18 digit" required>
+                                <small class="text-muted">Harus 18 digit angka</small>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nuptk">NUPTK <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nuptk" name="nuptk" maxlength="16" placeholder="16 digit" required>
+                                <small class="text-muted">Harus 16 digit angka</small>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Modal Tambah/Edit Guru -->
-    <div class="modal fade" id="modalGuru" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Tambah Guru</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="nama" name="nama" maxlength="100" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="no_hp">Nomor HP <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="no_hp" name="no_hp" maxlength="15" placeholder="08xxxxxxxxxx" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="jam_min">Jam Minimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_min" name="jam_min" min="1" max="48" value="1" required>
+                                <small class="text-muted">1-48</small>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="jam_maks">Jam Maksimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_maks" name="jam_maks" min="1" max="48" value="24" required>
+                                <small class="text-muted">1-48, harus >= jam minimal</small>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="status">Status Kepegawaian <span class="text-danger">*</span></label>
+                                <select class="form-control" id="status" name="status" required>
+                                    <option value="">Pilih Status</option>
+                                    <option value="pns">PNS</option>
+                                    <option value="honorer">Honorer</option>
+                                    <option value="ttk">Tenaga Tidak Tetap</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="btnSimpan">
+                        <span class="btn-text"><i class="fas fa-save mr-1"></i> Simpan</span>
+                        <span class="btn-loading d-none">
+                            <span class="spinner-border spinner-border-sm mr-1"></span> Memproses...
+                        </span>
                     </button>
                 </div>
-                <form id="formGuru" method="POST">
-                    <div class="modal-body">
-                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                        <input type="hidden" name="id_guru" id="id_guru">
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nip">NIP <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="nip" name="nip" maxlength="18" placeholder="18 digit" required>
-                                    <small class="text-muted">Harus 18 digit angka</small>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nuptk">NUPTK <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="nuptk" name="nuptk" maxlength="16" placeholder="16 digit" required>
-                                    <small class="text-muted">Harus 16 digit angka</small>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama">Nama Lengkap <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="nama" name="nama" maxlength="100" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="email">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="no_hp">Nomor HP <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="no_hp" name="no_hp" maxlength="15" placeholder="08xxxxxxxxxx" required>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="jam_min">Jam Minimal <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" id="jam_min" name="jam_min" min="1" max="48" value="1" required>
-                                    <small class="text-muted">1-48</small>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="jam_maks">Jam Maksimal <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" id="jam_maks" name="jam_maks" min="1" max="48" value="24" required>
-                                    <small class="text-muted">1-48, harus >= jam minimal</small>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="status">Status Kepegawaian <span class="text-danger">*</span></label>
-                                    <select class="form-control" id="status" name="status" required>
-                                        <option value="">Pilih Status</option>
-                                        <option value="pns">PNS</option>
-                                        <option value="honorer">Honorer</option>
-                                        <option value="ttk">Tenaga Tidak Tetap</option>
-                                    </select>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary" id="btnSimpan">
-                            <span class="btn-text"><i class="fas fa-save mr-1"></i> Simpan</span>
-                            <span class="btn-loading d-none">
-                                <span class="spinner-border spinner-border-sm mr-1"></span> Memproses...
-                            </span>
-                        </button>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap 4 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- App JS -->
-    <script src="<?php echo base_url('assets/js/app.js'); ?>"></script>
+<?= $this->load->view('layouts/footer'); ?>
     
     <script>
         $(document).ready(function() {
@@ -455,5 +413,4 @@
             });
         });
     </script>
-</body>
-</html>
+
