@@ -59,7 +59,7 @@
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar Navigation">
       <!-- Sidebar Header -->
       <div class="sidebar-header">
-        <a href="<?= site_url('dashboard') ?>" class="sidebar-brand">
+        <a href="<?= site_url('admin/dashboard') ?>" class="sidebar-brand">
           <i class="fas fa-calendar-alt mr-2"></i>
           SIJADWAL
           <small>Sistem Penjadwalan SMK</small>
@@ -74,7 +74,7 @@
         <!-- Dashboard -->
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('dashboard') ?>" class="sidebar-menu-link <?= $this->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/dashboard') ?>" class="sidebar-menu-link <?= $this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'dashboard' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
@@ -96,7 +96,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/mata_pelajaran') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'mata_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/mapel') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'mapel' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-book"></i>
               </span>
@@ -120,7 +120,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/jam_pelajaran') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'jam_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/jam') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'jam' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clock"></i>
               </span>
@@ -143,7 +143,7 @@
         <div class="sidebar-nav-title">Penugasan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/penugasan') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
+            <a href="<?= site_url('waka/penugasan') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clipboard-list"></i>
               </span>
@@ -151,14 +151,6 @@
               <?php if (isset($pending_penugasan_count) && $pending_penugasan_count > 0): ?>
                 <span class="sidebar-menu-badge"><?= $pending_penugasan_count ?></span>
               <?php endif; ?>
-            </a>
-          </li>
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/preferensi') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'preferensi' ? 'active' : '' ?>">
-              <span class="sidebar-menu-icon">
-                <i class="fas fa-heart"></i>
-              </span>
-              <span class="sidebar-menu-text">Preferensi</span>
             </a>
           </li>
         </ul>
@@ -177,7 +169,7 @@
           </li>
           <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('jadwal/generate') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
+            <a href="<?= site_url('waka/generate') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-magic"></i>
               </span>
@@ -191,21 +183,45 @@
         <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
         <div class="sidebar-nav-title">Laporan</div>
         <ul class="sidebar-menu">
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('laporan/jadwal') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'jadwal' ? 'active' : '' ?>">
+          <li class="sidebar-menu-item dropdown">
+            <a href="#" class="sidebar-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-file-pdf"></i>
               </span>
               <span class="sidebar-menu-text">Cetak Jadwal</span>
+              <i class="fas fa-chevron-right ml-auto dropdown-arrow"></i>
             </a>
+            <div class="dropdown-menu">
+              <?php 
+              $this->load->model('Kelas_model');
+              $kelas_list = $this->Kelas_model->get_all();
+              foreach ($kelas_list as $k): 
+              ?>
+              <a class="dropdown-item" href="<?= site_url('laporan/pdf_jadwal/' . $k->id_kelas) ?>" target="_blank">
+                <i class="fas fa-print mr-2"></i><?= htmlspecialchars($k->nama_kelas) ?>
+              </a>
+              <?php endforeach; ?>
+            </div>
           </li>
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('laporan/beban_guru') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'beban_guru' ? 'active' : '' ?>">
+          <li class="sidebar-menu-item dropdown">
+            <a href="#" class="sidebar-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-chart-bar"></i>
               </span>
               <span class="sidebar-menu-text">Beban Guru</span>
+              <i class="fas fa-chevron-right ml-auto dropdown-arrow"></i>
             </a>
+            <div class="dropdown-menu">
+              <?php 
+              $this->load->model('Guru_model');
+              $guru_list = $this->Guru_model->get_all();
+              foreach ($guru_list as $g): 
+              ?>
+              <a class="dropdown-item" href="<?= site_url('laporan/pdf_beban_guru/' . $g->id_guru) ?>" target="_blank">
+                <i class="fas fa-print mr-2"></i><?= htmlspecialchars($g->nama_guru) ?>
+              </a>
+              <?php endforeach; ?>
+            </div>
           </li>
         </ul>
         <?php endif; ?>
@@ -215,27 +231,11 @@
         <div class="sidebar-nav-title">Pengaturan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/users') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'users' ? 'active' : '' ?>">
+            <a href="<?= site_url('auth/logout') ?>" class="sidebar-menu-link" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
               <span class="sidebar-menu-icon">
-                <i class="fas fa-users-cog"></i>
+                <i class="fas fa-sign-out-alt"></i>
               </span>
-              <span class="sidebar-menu-text">Manajemen User</span>
-            </a>
-          </li>
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/settings') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'settings' ? 'active' : '' ?>">
-              <span class="sidebar-menu-icon">
-                <i class="fas fa-cog"></i>
-              </span>
-              <span class="sidebar-menu-text">Pengaturan</span>
-            </a>
-          </li>
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/activity_log') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'activity_log' ? 'active' : '' ?>">
-              <span class="sidebar-menu-icon">
-                <i class="fas fa-history"></i>
-              </span>
-              <span class="sidebar-menu-text">Activity Log</span>
+              <span class="sidebar-menu-text">Logout</span>
             </a>
           </li>
         </ul>
@@ -279,7 +279,7 @@
                   <?php endif; ?>
                 <?php endforeach; ?>
               <?php else: ?>
-                <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= site_url('admin/dashboard') ?>">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?= isset($page_title) ? $page_title : 'Dashboard' ?></li>
               <?php endif; ?>
             </ol>
