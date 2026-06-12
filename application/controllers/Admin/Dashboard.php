@@ -24,15 +24,11 @@ class Dashboard extends MY_Controller
 
     /**
      * Halaman Dashboard Admin
-     * TODO: Implementasi sesuai SRS Bab 11.6
+     * Sesuai SRS Bab 11.6
      */
     public function index()
     {
-        // Placeholder untuk dashboard admin
-        // Akan diimplementasikan terpisah
-        echo '<h1>Admin Dashboard</h1>';
-        echo '<p>Selamat datang, ' . $this->session->userdata('nama_lengkap') . '</p>';
-        echo '<p>Role: ' . $this->session->userdata('role') . '</p>';
-        echo '<a href="' . site_url('auth/logout') . '">Logout</a>';
+        // Load view dashboard dengan layout yang sudah lengkap
+        $this->load->view('admin/dashboard');
     }
 }
