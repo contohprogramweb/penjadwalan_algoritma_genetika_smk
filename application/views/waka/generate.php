@@ -317,8 +317,8 @@ var GENERATE_CONFIG = {
     reviewUrl: '<?= site_url("waka/jadwal"); ?>',
     pollingInterval: 2000, // 2 detik
     redirectDelay: 3000, // 3 detik setelah selesai
-    csrfName: '<?= $this->security->get_csrf_token_name() ?>',
-    csrfHash: '<?= $this->security->get_csrf_hash() ?>'
+    csrfName: '<?php $this->security->get_csrf_token_name() ?>',
+    csrfHash: '<?php $this->security->get_csrf_hash() ?>'
 };
 var INITIAL_READY = <?= isset($ready) && $ready ? 'true' : 'false'; ?>;
 </script>

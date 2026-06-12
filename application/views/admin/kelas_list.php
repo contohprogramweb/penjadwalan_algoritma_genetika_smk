@@ -1,4 +1,4 @@
-<?= $this->load->view('layouts/header'); ?>
+<?php $this->load->view('layouts/header'); ?>
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -312,4 +312,4 @@
         });
     </script>
 
-<?= $this->load->view('layouts/footer'); ?>
+<?php $this->load->view('layouts/footer'); ?>

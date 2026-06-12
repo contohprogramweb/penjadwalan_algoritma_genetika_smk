@@ -9,8 +9,8 @@
   <!-- Meta Tags -->
   <meta name="description" content="Sistem Penjadwalan Guru SMK Berbasis Algoritma Genetika">
   <meta name="author" content="SMK Development Team">
-  <meta name="csrf_token_name" content="<?= $this->security->get_csrf_token_name() ?>">
-  <meta name="csrf_token_hash" content="<?= $this->security->get_csrf_hash() ?>">
+  <meta name="csrf_token_name" content="<?php $this->security->get_csrf_token_name() ?>">
+  <meta name="csrf_token_hash" content="<?php $this->security->get_csrf_hash() ?>">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.png') ?>">
@@ -74,7 +74,7 @@
         <!-- Dashboard -->
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('dashboard') ?>" class="sidebar-menu-link <?= $this->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
+            <a href="<?= site_url('dashboard') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
@@ -88,7 +88,7 @@
         <div class="sidebar-nav-title">Master Data</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/guru') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'guru' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/guru') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'guru' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-chalkboard-teacher"></i>
               </span>
@@ -96,7 +96,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/mata_pelajaran') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'mata_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/mata_pelajaran') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'mata_pelajaran' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-book"></i>
               </span>
@@ -104,7 +104,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/kelas') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'kelas' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/kelas') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'kelas' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-school"></i>
               </span>
@@ -112,7 +112,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/ruangan') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'ruangan' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/ruangan') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'ruangan' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-door-open"></i>
               </span>
@@ -120,7 +120,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/jam_pelajaran') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'jam_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/jam_pelajaran') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'jam_pelajaran' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clock"></i>
               </span>
@@ -128,7 +128,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/tahun_ajaran') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'tahun_ajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/tahun_ajaran') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'tahun_ajaran' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-calendar"></i>
               </span>
@@ -143,7 +143,7 @@
         <div class="sidebar-nav-title">Penugasan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/penugasan') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/penugasan') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clipboard-list"></i>
               </span>
@@ -154,7 +154,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/preferensi') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'preferensi' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/preferensi') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'preferensi' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-heart"></i>
               </span>
@@ -168,7 +168,7 @@
         <div class="sidebar-nav-title">Jadwal</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('jadwal') ?>" class="sidebar-menu-link <?= $this->uri->segment(1) == 'jadwal' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
+            <a href="<?= site_url('jadwal') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'jadwal' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-calendar-week"></i>
               </span>
@@ -177,7 +177,7 @@
           </li>
           <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('jadwal/generate') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
+            <a href="<?= site_url('jadwal/generate') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-magic"></i>
               </span>
@@ -192,7 +192,7 @@
         <div class="sidebar-nav-title">Laporan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('laporan/jadwal') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'jadwal' ? 'active' : '' ?>">
+            <a href="<?= site_url('laporan/jadwal') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'jadwal' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-file-pdf"></i>
               </span>
@@ -200,7 +200,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('laporan/beban_guru') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'beban_guru' ? 'active' : '' ?>">
+            <a href="<?= site_url('laporan/beban_guru') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'beban_guru' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-chart-bar"></i>
               </span>
@@ -215,7 +215,7 @@
         <div class="sidebar-nav-title">Pengaturan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/users') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'users' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/users') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'users' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-users-cog"></i>
               </span>
@@ -223,7 +223,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/settings') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'settings' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/settings') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'settings' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-cog"></i>
               </span>
@@ -231,7 +231,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/activity_log') ?>" class="sidebar-menu-link <?= $this->uri->segment(2) == 'activity_log' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/activity_log') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'activity_log' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-history"></i>
               </span>
@@ -332,7 +332,7 @@
       <?php if ($this->session->flashdata('success')): ?>
         <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
           <i class="fas fa-check-circle mr-2"></i>
-          <?= $this->session->flashdata('success') ?>
+          <?php $this->session->flashdata('success') ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -342,7 +342,7 @@
       <?php if ($this->session->flashdata('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
           <i class="fas fa-exclamation-circle mr-2"></i>
-          <?= $this->session->flashdata('error') ?>
+          <?php $this->session->flashdata('error') ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -352,7 +352,7 @@
       <?php if ($this->session->flashdata('warning')): ?>
         <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
           <i class="fas fa-exclamation-triangle mr-2"></i>
-          <?= $this->session->flashdata('warning') ?>
+          <?php $this->session->flashdata('warning') ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
