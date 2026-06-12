@@ -43,11 +43,13 @@ class Auth extends CI_Controller
      */
     public function proses_login()
     {
+        // Pastikan response JSON
+        $this->output->set_content_type('application/json');
+        
         // Validasi CSRF
         if ($this->security->csrf_verify() === FALSE) {
             $this->output
                 ->set_status_header(403)
-                ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => false,
                     'message' => 'Token keamanan kadaluarsa. Silakan refresh halaman.'
@@ -67,7 +69,6 @@ class Auth extends CI_Controller
             $errors = validation_errors('<li>', '</li>');
             $this->output
                 ->set_status_header(400)
-                ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => false,
                     'message' => 'Validasi gagal',
@@ -76,75 +77,84 @@ class Auth extends CI_Controller
             return;
         }
 
-        // TODO: Ganti dengan model user yang sebenarnya
-        // Contoh hardcoded untuk development (HAPUS di production)
-        $this->load->model('user_model', 'user');
-        $user = $this->user->get_by_username($username);
+        try {
+            // Load user model
+            $this->load->model('User_model', 'user');
+            $user = $this->user->get_by_username($username);
 
-        if (!$user) {
+            if (!$user) {
+                $this->output
+                    ->set_status_header(401)
+                    ->set_output(json_encode([
+                        'success' => false,
+                        'message' => 'Username tidak ditemukan'
+                    ]));
+                return;
+            }
+
+            // Verifikasi password
+            if (!password_verify($password, $user->password)) {
+                $this->output
+                    ->set_status_header(401)
+                    ->set_output(json_encode([
+                        'success' => false,
+                        'message' => 'Password salah'
+                    ]));
+                return;
+            }
+
+            // Cek apakah user aktif
+            if (!isset($user->is_active) || $user->is_active != 1) {
+                $this->output
+                    ->set_status_header(403)
+                    ->set_output(json_encode([
+                        'success' => false,
+                        'message' => 'Akun Anda nonaktif. Hubungi administrator.'
+                    ]));
+                return;
+            }
+
+            // Regenerate session ID untuk keamanan (SRS Bab 16.2)
+            $this->session->sess_regenerate(TRUE);
+
+            // Set session payload LENGKAP sesuai SRS Bab 16.2
+            // Payload wajib: logged_in, user_id, username, nama_lengkap, role, id_guru, id_kelas, email, last_login
+            $session_data = [
+                'logged_in' => TRUE,
+                'user_id' => $user->id,
+                'username' => $user->username,
+                'nama_lengkap' => $user->nama_lengkap,
+                'role' => $user->role, // 'admin' atau 'waka'
+                'id_guru' => isset($user->id_guru) ? $user->id_guru : NULL, // Untuk role guru
+                'id_kelas' => isset($user->id_kelas) ? $user->id_kelas : NULL, // Untuk role wali kelas
+                'email' => isset($user->email) ? $user->email : NULL,
+                'last_login' => date('Y-m-d H:i:s'),
+                'nip' => isset($user->nip) ? $user->nip : NULL,
+                'login_time' => time()
+            ];
+
+            $this->session->set_userdata($session_data);
+
+            // Return success response
             $this->output
-                ->set_status_header(401)
-                ->set_content_type('application/json')
+                ->set_status_header(200)
+                ->set_output(json_encode([
+                    'success' => true,
+                    'message' => 'Login berhasil',
+                    'redirect_url' => site_url($this->_get_redirect_url($user->role))
+                ]));
+                
+        } catch (Exception $e) {
+            // Log error untuk debugging
+            log_message('error', 'Login error: ' . $e->getMessage());
+            
+            $this->output
+                ->set_status_header(500)
                 ->set_output(json_encode([
                     'success' => false,
-                    'message' => 'Username tidak ditemukan'
+                    'message' => 'Terjadi kesalahan pada server. Silakan hubungi administrator.'
                 ]));
-            return;
         }
-
-        // Verifikasi password
-        if (!password_verify($password, $user->password)) {
-            $this->output
-                ->set_status_header(401)
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => false,
-                    'message' => 'Password salah'
-                ]));
-            return;
-        }
-
-        // Cek apakah user aktif
-        if ($user->is_active != 1) {
-            $this->output
-                ->set_status_header(403)
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => false,
-                    'message' => 'Akun Anda nonaktif. Hubungi administrator.'
-                ]));
-            return;
-        }
-
-        // Regenerate session ID untuk keamanan (SRS Bab 16.2)
-        $this->session->sess_regenerate(TRUE);
-
-        // Set session payload LENGKAP sesuai SRS Bab 16.2
-        // Payload wajib: logged_in, user_id, username, nama_lengkap, role, id_guru, id_kelas, email, last_login
-        $session_data = [
-            'logged_in' => TRUE,
-            'user_id' => $user->id,
-            'username' => $user->username,
-            'nama_lengkap' => $user->nama_lengkap,
-            'role' => $user->role, // 'admin' atau 'waka'
-            'id_guru' => $user->id_guru ?? NULL, // Untuk role guru
-            'id_kelas' => $user->id_kelas ?? NULL, // Untuk role wali kelas
-            'email' => $user->email ?? NULL,
-            'last_login' => date('Y-m-d H:i:s'),
-            'nip' => $user->nip ?? NULL,
-            'login_time' => time()
-        ];
-
-        $this->session->set_userdata($session_data);
-
-        // Return success response
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode([
-                'success' => true,
-                'message' => 'Login berhasil',
-                'redirect_url' => site_url($this->_get_redirect_url($user->role))
-            ]));
     }
 
     /**
