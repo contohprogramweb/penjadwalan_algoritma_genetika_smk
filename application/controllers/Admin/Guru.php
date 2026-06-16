@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Controller untuk CRUD Guru
- * Field sesuai DB: nip, nuptk, nama_lengkap, jenis_kelamin,
+ * Field sesuai DB: nip, nama_lengkap, jenis_kelamin,
  *                  jam_min_minggu, jam_maks_minggu, status_aktif
  */
 require_once APPPATH . 'core/MY_Controller.php';
@@ -35,7 +35,6 @@ class Guru extends MY_Controller {
     {
         $rules = [
             ['field' => 'nip',          'label' => 'NIP',           'rules' => 'required|exact_length[18]|numeric'],
-            ['field' => 'nuptk',        'label' => 'NUPTK',         'rules' => 'permit_empty|exact_length[16]|numeric'],
             ['field' => 'nama_lengkap', 'label' => 'Nama Lengkap',  'rules' => 'required|min_length[3]|max_length[100]'],
             ['field' => 'jenis_kelamin','label' => 'Jenis Kelamin', 'rules' => 'required|in_list[L,P]'],
             ['field' => 'jam_min_minggu','label' => 'Jam Min',      'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[40]'],
@@ -62,7 +61,6 @@ class Guru extends MY_Controller {
 
         $data = [
             'nip'            => $nip,
-            'nuptk'          => $this->input->post('nuptk') ?: NULL,
             'nama_lengkap'   => $this->input->post('nama_lengkap'),
             'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
             'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),
@@ -93,7 +91,6 @@ class Guru extends MY_Controller {
 
         $data = [
             'nip'            => $this->input->post('nip'),
-            'nuptk'          => $this->input->post('nuptk') ?: NULL,
             'nama_lengkap'   => $this->input->post('nama_lengkap'),
             'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
             'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),

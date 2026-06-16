@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Model untuk CRUD Guru
- * Kolom DB: id_guru, nip, nuptk, nama_lengkap, jenis_kelamin, tempat_lahir,
+ * Kolom DB: id_guru, nip, nama_lengkap, jenis_kelamin, tempat_lahir,
  *           tanggal_lahir, pendidikan_terakhir, jam_maks_minggu, jam_min_minggu,
  *           status_aktif, created_at, updated_at
  */
@@ -12,7 +12,7 @@ class Guru_model extends CI_Model {
     private $table       = 'guru';
     private $primary_key = 'id_guru';
     private $column_order  = ['nip', 'nama_lengkap', 'pendidikan_terakhir', 'jam_min_minggu', 'jam_maks_minggu', 'status_aktif'];
-    private $column_search = ['nip', 'nuptk', 'nama_lengkap'];
+    private $column_search = ['nip', 'nama_lengkap'];
     private $order = ['id_guru' => 'DESC'];
 
     public function __construct() { parent::__construct(); }
@@ -88,13 +88,6 @@ class Guru_model extends CI_Model {
     public function check_nip_exists($nip, $exclude_id = null)
     {
         $this->db->where('nip', $nip);
-        if ($exclude_id) $this->db->where($this->primary_key . ' !=', $exclude_id);
-        return $this->db->count_all_results($this->table) > 0;
-    }
-
-    public function check_nuptk_exists($nuptk, $exclude_id = null)
-    {
-        $this->db->where('nuptk', $nuptk);
         if ($exclude_id) $this->db->where($this->primary_key . ' !=', $exclude_id);
         return $this->db->count_all_results($this->table) > 0;
     }

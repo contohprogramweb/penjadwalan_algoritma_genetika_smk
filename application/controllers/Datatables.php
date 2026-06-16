@@ -50,7 +50,6 @@ class Datatables extends MY_Controller {
             $data[] = [
                 'no'          => $no,
                 'nip'         => htmlspecialchars($r['nip']),
-                'nuptk'       => htmlspecialchars($r['nuptk'] ?? '-'),
                 'nama'        => htmlspecialchars($r['nama_lengkap']),
                 'email'       => '-',
                 'no_hp'       => '-',
