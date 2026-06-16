@@ -44,20 +44,27 @@ class Datatables extends MY_Controller {
         $total    = $this->Guru_model->count_all();
         $filtered = $this->Guru_model->count_filtered();
 
-        $no = intval($_POST['start'] ?? 0);
+        $no = isset($_POST['start']) ? intval($_POST['start']) : 0;
         $data = [];
         foreach ($list as $r) {
             $no++;
-            $status_label = '<span class="badge badge-secondary">' . ucfirst($r['status_kepegawaian']) . '</span>';
-            $status_aktif_label = $r['status_aktif'] == 1 ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Non Aktif</span>';
+            $status_kepegawaian_val = !empty($r['status_kepegawaian']) ? $r['status_kepegawaian'] : 'honorer';
+            $status_label = '<span class="badge badge-secondary">' . ucfirst($status_kepegawaian_val) . '</span>';
+            $status_aktif_label = (isset($r['status_aktif']) && $r['status_aktif'] == 1) ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Non Aktif</span>';
+            $jenis_kelamin_text = '';
+            if (isset($r['jenis_kelamin'])) {
+                $jenis_kelamin_text = ($r['jenis_kelamin'] === 'L') ? 'Laki-laki' : 'Perempuan';
+            } else {
+                $jenis_kelamin_text = 'Perempuan';
+            }
             $data[] = [
                 'no'             => $no,
                 'nip'            => htmlspecialchars($r['nip']),
                 'nama'           => htmlspecialchars($r['nama_lengkap']),
-                'jenis_kelamin'  => $r['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan',
+                'jenis_kelamin'  => $jenis_kelamin_text,
                 'tempat_lahir'   => htmlspecialchars($r['tempat_lahir']),
-                'tanggal_lahir'  => $r['tanggal_lahir'] ? date('d-m-Y', strtotime($r['tanggal_lahir'])) : '-',
-                'pendidikan'     => $r['pendidikan_terakhir'],
+                'tanggal_lahir'  => !empty($r['tanggal_lahir']) ? date('d-m-Y', strtotime($r['tanggal_lahir'])) : '-',
+                'pendidikan'     => $r['pendidikan_terakhir'] ?? '-',
                 'status_kepegawaian' => $status_label,
                 'status_aktif'   => $status_aktif_label,
                 'aksi'           =>
