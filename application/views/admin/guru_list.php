@@ -18,8 +18,11 @@
                             <th scope="col">NIP</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Jam Mengajar</th>
+                            <th scope="col">Tempat Lahir</th>
+                            <th scope="col">Tanggal Lahir</th>
+                            <th scope="col">Pendidikan</th>
+                            <th scope="col">Status Kepegawaian</th>
+                            <th scope="col">Status Aktif</th>
                             <th scope="col"><span class="sr-only">Aksi</span></th>
                         </tr>
                     </thead>
@@ -53,16 +56,17 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nama_lengkap">Nama Lengkap <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" maxlength="100" required>
-                        <div class="invalid-feedback"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama_lengkap">Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" maxlength="100" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="jenis_kelamin">Jenis Kelamin <span class="text-danger">*</span></label>
                                 <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
@@ -73,10 +77,41 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tempat_lahir">Tempat Lahir <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" maxlength="50" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tanggal_lahir">Tanggal Lahir <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status_aktif">Status Kepegawaian <span class="text-danger">*</span></label>
-                                <select class="form-control" id="status_aktif" name="status_aktif" required>
+                                <label for="pendidikan_terakhir">Pendidikan Terakhir <span class="text-danger">*</span></label>
+                                <select class="form-control" id="pendidikan_terakhir" name="pendidikan_terakhir" required>
+                                    <option value="">Pilih Pendidikan</option>
+                                    <option value="D3">D3</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="S3">S3</option>
+                                    <option value="D4">D4</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="status_kepegawaian">Status Kepegawaian <span class="text-danger">*</span></label>
+                                <select class="form-control" id="status_kepegawaian" name="status_kepegawaian" required>
                                     <option value="">Pilih Status</option>
                                     <option value="pns">PNS</option>
                                     <option value="honorer">Honorer</option>
@@ -88,19 +123,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="jam_min_minggu">Jam Minimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_min_minggu" name="jam_min_minggu" min="1" max="48" value="1" required>
-                                <small class="text-muted">1-48</small>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="jam_maks_minggu">Jam Maksimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_maks_minggu" name="jam_maks_minggu" min="1" max="48" value="24" required>
-                                <small class="text-muted">1-48, harus >= jam minimal</small>
+                                <label for="status_aktif">Status Aktif <span class="text-danger">*</span></label>
+                                <select class="form-control" id="status_aktif" name="status_aktif" required>
+                                    <option value="">Pilih Status</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Non Aktif</option>
+                                </select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -138,7 +168,7 @@
                         numeric: 'NIP harus berupa angka.'
                     }
                 },
-                nama: {
+                nama_lengkap: {
                     required: true,
                     minLength: 3,
                     maxLength: 100,
@@ -154,37 +184,36 @@
                         required: 'Jenis kelamin wajib dipilih.'
                     }
                 },
-                jam_min: {
+                tempat_lahir: {
                     required: true,
-                    min: 1,
-                    max: 48,
+                    maxLength: 50,
                     messages: {
-                        required: 'Jam minimal wajib diisi.',
-                        min: 'Jam minimal minimal 1.',
-                        max: 'Jam maksimal maksimal 48.'
+                        required: 'Tempat lahir wajib diisi.',
+                        maxLength: 'Tempat lahir maksimal 50 karakter.'
                     }
                 },
-                jam_maks: {
+                tanggal_lahir: {
                     required: true,
-                    min: 1,
-                    max: 48,
-                    custom: function(value, $field) {
-                        const jamMin = parseInt($('#jam_min_minggu').val()) || 0;
-                        if (parseInt(value) < jamMin) {
-                            return 'Jam maksimal harus lebih besar atau sama dengan jam minimal.';
-                        }
-                        return true;
-                    },
                     messages: {
-                        required: 'Jam maksimal wajib diisi.',
-                        min: 'Jam maksimal minimal 1.',
-                        max: 'Jam maksimal maksimal 48.'
+                        required: 'Tanggal lahir wajib diisi.'
                     }
                 },
-                status: {
+                pendidikan_terakhir: {
+                    required: true,
+                    messages: {
+                        required: 'Pendidikan terakhir wajib dipilih.'
+                    }
+                },
+                status_kepegawaian: {
                     required: true,
                     messages: {
                         required: 'Status kepegawaian wajib dipilih.'
+                    }
+                },
+                status_aktif: {
+                    required: true,
+                    messages: {
+                        required: 'Status aktif wajib dipilih.'
                     }
                 }
             });
@@ -193,9 +222,11 @@
             $('#nip').data('label', 'NIP');
             $('#nama_lengkap').data('label', 'Nama Lengkap');
             $('#jenis_kelamin').data('label', 'Jenis Kelamin');
-            $('#jam_min_minggu').data('label', 'Jam Minimal');
-            $('#jam_maks_minggu').data('label', 'Jam Maksimal');
-            $('#status_aktif').data('label', 'Status Kepegawaian');
+            $('#tempat_lahir').data('label', 'Tempat Lahir');
+            $('#tanggal_lahir').data('label', 'Tanggal Lahir');
+            $('#pendidikan_terakhir').data('label', 'Pendidikan Terakhir');
+            $('#status_kepegawaian').data('label', 'Status Kepegawaian');
+            $('#status_aktif').data('label', 'Status Aktif');
             
             // Initialize DataTable
             const table = $('#dataTable').DataTable({
@@ -214,8 +245,11 @@
                     {data: 'nip'},
                     {data: 'nama'},
                     {data: 'jenis_kelamin'},
-                    {data: 'status'},
-                    {data: 'jam_mengajar'},
+                    {data: 'tempat_lahir'},
+                    {data: 'tanggal_lahir'},
+                    {data: 'pendidikan'},
+                    {data: 'status_kepegawaian'},
+                    {data: 'status_aktif'},
                     {data: 'aksi', orderable: false, searchable: false}
                 ],
                 order: [[3, 'asc']],
@@ -268,8 +302,10 @@
                             $('#nip').val(data.nip);
                             $('#nama_lengkap').val(data.nama_lengkap);
                             $('#jenis_kelamin').val(data.jenis_kelamin);
-                            $('#jam_min_minggu').val(data.jam_min_minggu);
-                            $('#jam_maks_minggu').val(data.jam_maks_minggu);
+                            $('#tempat_lahir').val(data.tempat_lahir);
+                            $('#tanggal_lahir').val(data.tanggal_lahir);
+                            $('#pendidikan_terakhir').val(data.pendidikan_terakhir);
+                            $('#status_kepegawaian').val(data.status_kepegawaian);
                             $('#status_aktif').val(data.status_aktif);
                             
                             $('#modalGuru').modal('show');

@@ -46,14 +46,18 @@ class Datatables extends MY_Controller {
         $data = [];
         foreach ($list as $r) {
             $no++;
-            $status_label = '<span class="badge badge-secondary">' . ucfirst($r['status_aktif']) . '</span>';
+            $status_label = '<span class="badge badge-secondary">' . ucfirst($r['status_kepegawaian']) . '</span>';
+            $status_aktif_label = $r['status_aktif'] == 1 ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Non Aktif</span>';
             $data[] = [
                 'no'             => $no,
                 'nip'            => htmlspecialchars($r['nip']),
                 'nama'           => htmlspecialchars($r['nama_lengkap']),
                 'jenis_kelamin'  => $r['jenis_kelamin'] === 'L' ? 'Laki-laki' : 'Perempuan',
-                'status'         => $status_label,
-                'jam_mengajar'   => ($r['jam_min_minggu'] ?? 0) . ' - ' . ($r['jam_maks_minggu'] ?? 0) . ' jam/mgg',
+                'tempat_lahir'   => htmlspecialchars($r['tempat_lahir']),
+                'tanggal_lahir'  => $r['tanggal_lahir'] ? date('d-m-Y', strtotime($r['tanggal_lahir'])) : '-',
+                'pendidikan'     => $r['pendidikan_terakhir'],
+                'status_kepegawaian' => $status_label,
+                'status_aktif'   => $status_aktif_label,
                 'aksi'           =>
                     '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_guru'].'"><i class="fas fa-edit"></i></button>' .
                     '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_guru'].'"><i class="fas fa-trash"></i></button>',
