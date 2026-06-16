@@ -11,7 +11,7 @@ class Guru_model extends CI_Model {
 
     private $table       = 'guru';
     private $primary_key = 'id_guru';
-    private $column_order  = ['nip', 'nama_lengkap', 'pendidikan_terakhir', 'jam_min_minggu', 'jam_maks_minggu', 'status_aktif'];
+    private $column_order  = ['nip', 'nama_lengkap', 'jenis_kelamin', 'jam_min_minggu', 'jam_maks_minggu', 'status_aktif'];
     private $column_search = ['nip', 'nama_lengkap'];
     private $order = ['id_guru' => 'DESC'];
 

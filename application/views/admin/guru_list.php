@@ -17,8 +17,7 @@
                             <th scope="col" aria-label="Nomor urut">No</th>
                             <th scope="col">NIP</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">No HP</th>
+                            <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Status</th>
                             <th scope="col">Jam Mengajar</th>
                             <th scope="col"><span class="sr-only">Aksi</span></th>
@@ -65,38 +64,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="email">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="email" name="email" maxlength="100" required>
+                                <label for="jenis_kelamin">Jenis Kelamin <span class="text-danger">*</span></label>
+                                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
+                                    <option value="">Pilih Jenis Kelamin</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="no_hp">Nomor HP <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="no_hp" name="no_hp" maxlength="15" placeholder="08xxxxxxxxxx" required>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="jam_min_minggu">Jam Minimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_min_minggu" name="jam_min_minggu" min="1" max="48" value="1" required>
-                                <small class="text-muted">1-48</small>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="jam_maks_minggu">Jam Maksimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_maks_minggu" name="jam_maks_minggu" min="1" max="48" value="24" required>
-                                <small class="text-muted">1-48, harus >= jam minimal</small>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="status_aktif">Status Kepegawaian <span class="text-danger">*</span></label>
                                 <select class="form-control" id="status_aktif" name="status_aktif" required>
@@ -105,6 +82,25 @@
                                     <option value="honorer">Honorer</option>
                                     <option value="ttk">Tenaga Tidak Tetap</option>
                                 </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="jam_min_minggu">Jam Minimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_min_minggu" name="jam_min_minggu" min="1" max="48" value="1" required>
+                                <small class="text-muted">1-48</small>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="jam_maks_minggu">Jam Maksimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_maks_minggu" name="jam_maks_minggu" min="1" max="48" value="24" required>
+                                <small class="text-muted">1-48, harus >= jam minimal</small>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -152,26 +148,10 @@
                         maxLength: 'Nama maksimal 100 karakter.'
                     }
                 },
-                email: {
+                jenis_kelamin: {
                     required: true,
-                    email: true,
-                    maxLength: 100,
                     messages: {
-                        required: 'Email wajib diisi.',
-                        email: 'Format email tidak valid.',
-                        maxLength: 'Email maksimal 100 karakter.'
-                    }
-                },
-                no_hp: {
-                    required: true,
-                    minLength: 10,
-                    maxLength: 15,
-                    numeric: true,
-                    messages: {
-                        required: 'Nomor HP wajib diisi.',
-                        minLength: 'Nomor HP minimal 10 digit.',
-                        maxLength: 'Nomor HP maksimal 15 digit.',
-                        numeric: 'Nomor HP harus berupa angka.'
+                        required: 'Jenis kelamin wajib dipilih.'
                     }
                 },
                 jam_min: {
@@ -211,9 +191,8 @@
 
             // Tambahkan data-label untuk setiap field untuk error message yang lebih baik
             $('#nip').data('label', 'NIP');
-            $('#nama').data('label', 'Nama Lengkap');
-            $('#email').data('label', 'Email');
-            $('#no_hp').data('label', 'Nomor HP');
+            $('#nama_lengkap').data('label', 'Nama Lengkap');
+            $('#jenis_kelamin').data('label', 'Jenis Kelamin');
             $('#jam_min_minggu').data('label', 'Jam Minimal');
             $('#jam_maks_minggu').data('label', 'Jam Maksimal');
             $('#status_aktif').data('label', 'Status Kepegawaian');
@@ -234,8 +213,7 @@
                     {data: 'no', orderable: false},
                     {data: 'nip'},
                     {data: 'nama'},
-                    {data: 'email'},
-                    {data: 'no_hp'},
+                    {data: 'jenis_kelamin'},
                     {data: 'status'},
                     {data: 'jam_mengajar'},
                     {data: 'aksi', orderable: false, searchable: false}
@@ -289,8 +267,7 @@
                             $('#id_guru').val(data.id_guru);
                             $('#nip').val(data.nip);
                             $('#nama_lengkap').val(data.nama_lengkap);
-                            $('#email').val(data.email);
-                            $('#no_hp').val(data.no_hp);
+                            $('#jenis_kelamin').val(data.jenis_kelamin);
                             $('#jam_min_minggu').val(data.jam_min_minggu);
                             $('#jam_maks_minggu').val(data.jam_maks_minggu);
                             $('#status_aktif').val(data.status_aktif);
