@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS guru (
     tempat_lahir VARCHAR(50) DEFAULT NULL,
     tanggal_lahir DATE DEFAULT NULL,
     pendidikan_terakhir ENUM('S1', 'S2', 'S3', 'D3', 'D4') DEFAULT 'S1',
+    status_kepegawaian ENUM('pns', 'honorer', 'ttk') DEFAULT 'honorer' COMMENT 'Status kepegawaian',
     jam_maks_minggu TINYINT(2) DEFAULT 24 COMMENT 'Maksimal 24 jam/minggu',
     jam_min_minggu TINYINT(2) DEFAULT 12 COMMENT 'Minimal 12 jam/minggu',
     status_aktif TINYINT(1) DEFAULT 1 COMMENT '1=aktif, 0=nonaktif',

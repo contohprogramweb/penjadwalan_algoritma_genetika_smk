@@ -11,7 +11,7 @@ class Guru_model extends CI_Model {
 
     private $table       = 'guru';
     private $primary_key = 'id_guru';
-    private $column_order  = [null, 'nip', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'status_kepegawaian', 'status_aktif'];
+    private $column_order  = [null, 'nip', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'status_aktif'];
     private $column_search = ['nip', 'nama_lengkap', 'tempat_lahir'];
     private $order = ['id_guru' => 'DESC'];
 
@@ -20,8 +20,10 @@ class Guru_model extends CI_Model {
     public function get_datatables()
     {
         $this->_get_datatables_query();
-        if ($_POST['length'] != -1) {
-            $this->db->limit($_POST['length'], $_POST['start']);
+        if (isset($_POST['length']) && $_POST['length'] != -1) {
+            $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
+            $length = intval($_POST['length']);
+            $this->db->limit($length, $start);
         }
         return $this->db->get($this->table)->result_array();
     }
