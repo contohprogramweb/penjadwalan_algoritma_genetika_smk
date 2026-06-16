@@ -11,7 +11,7 @@ class Guru_model extends CI_Model {
 
     private $table       = 'guru';
     private $primary_key = 'id_guru';
-    private $column_order  = ['nip', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'status_aktif'];
+    private $column_order  = [null, 'nip', 'nama_lengkap', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'status_kepegawaian', 'status_aktif'];
     private $column_search = ['nip', 'nama_lengkap', 'tempat_lahir'];
     private $order = ['id_guru' => 'DESC'];
 
@@ -43,14 +43,18 @@ class Guru_model extends CI_Model {
             $kw = $_POST['search']['value'];
             $this->db->group_start();
             foreach ($this->column_search as $i => $col) {
-                $i === 0 ? $this->db->like($col, $kw) : $this->db->or_like($col, $kw);
+                if ($col !== null) {
+                    $i === 0 ? $this->db->like($col, $kw) : $this->db->or_like($col, $kw);
+                }
             }
             $this->db->group_end();
         }
         if (!empty($_POST['order'])) {
             $idx = intval($_POST['order']['0']['column']);
             $col = $this->column_order[$idx] ?? 'id_guru';
-            $this->db->order_by($col, $_POST['order']['0']['dir']);
+            if ($col !== null) {
+                $this->db->order_by($col, $_POST['order']['0']['dir']);
+            }
         } else {
             foreach ($this->order as $k => $v) { $this->db->order_by($k, $v); }
         }

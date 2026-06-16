@@ -32,6 +32,8 @@ class Datatables extends MY_Controller {
                 'recordsTotal'    => intval($total),
                 'recordsFiltered' => intval($filtered),
                 'data'            => $data,
+                'csrf_token_name' => $this->security->get_csrf_token_name(),
+                'csrf_hash'       => $this->security->get_csrf_hash(),
             ]));
     }
 
