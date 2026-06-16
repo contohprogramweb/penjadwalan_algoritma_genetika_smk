@@ -49,14 +49,14 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="kode" class="form-label">Kode Kelas <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="kode" name="kode" maxlength="20" placeholder="Contoh: X-RPL-1" required>
+                                <label for="kode_kelas" class="form-label">Kode Kelas <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="kode_kelas" name="kode_kelas" maxlength="20" placeholder="Contoh: X-RPL-1" required>
                                 <div class="invalid-feedback" id="error-kode"></div>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="nama" class="form-label">Nama Kelas <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="nama" name="nama" maxlength="100" placeholder="Contoh: Kelas X RPL 1" required>
+                                <label for="nama_kelas" class="form-label">Nama Kelas <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nama_kelas" name="nama_kelas" maxlength="100" placeholder="Contoh: Kelas X RPL 1" required>
                                 <div class="invalid-feedback" id="error-nama"></div>
                             </div>
                         </div>
@@ -77,8 +77,8 @@
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label for="kapasitas" class="form-label">Kapasitas Siswa <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="kapasitas" name="kapasitas" min="10" max="50" placeholder="10-50" required>
+                                <label for="kapasitas_siswa" class="form-label">Kapasitas Siswa <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="kapasitas_siswa" name="kapasitas_siswa" min="10" max="50" placeholder="10-50" required>
                                 <div class="invalid-feedback" id="error-kapasitas"></div>
                                 <small class="text-muted">Rentang: 10 - 50 siswa</small>
                             </div>
@@ -203,10 +203,10 @@
                             const data = response.data;
                             $('#modalTitle').text('Edit Kelas');
                             $('#kelasId').val(data.id);
-                            $('#kode').val(data.kode);
-                            $('#nama').val(data.nama);
+                            $('#kode_kelas').val(data.kode_kelas);
+                            $('#nama_kelas').val(data.nama_kelas);
                             $('#tingkat').val(data.tingkat);
-                            $('#kapasitas').val(data.kapasitas);
+                            $('#kapasitas_siswa').val(data.kapasitas_siswa);
                             $('#jurusan').val(data.jurusan);
                             $('#tahun_ajaran').val(data.tahun_ajaran);
                             $('#btnSubmit').prop('disabled', false);

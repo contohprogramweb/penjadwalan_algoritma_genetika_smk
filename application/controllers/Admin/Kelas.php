@@ -28,7 +28,7 @@ class Kelas extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_kelas' => [
                 'label' => 'Kode Kelas',
                 'rules' => 'required|min_length[3]|max_length[20]',
                 'errors' => [
@@ -37,7 +37,7 @@ class Kelas extends MY_Controller {
                     'max_length' => 'Kode maksimal 20 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_kelas' => [
                 'label' => 'Nama Kelas',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -56,7 +56,7 @@ class Kelas extends MY_Controller {
                     'less_than_equal_to' => 'Tingkat maksimal 6'
                 ]
             ],
-            'kapasitas' => [
+            'kapasitas_siswa' => [
                 'label' => 'Kapasitas Siswa',
                 'rules' => 'required|integer|greater_than_equal_to[10]|less_than_equal_to[50]',
                 'errors' => [
@@ -98,24 +98,24 @@ class Kelas extends MY_Controller {
         }
 
         // Cek kode unik
-        if ($this->Kelas_model->check_kode_exists($this->input->post('kode'))) {
+        if ($this->Kelas_model->check_kode_exists($this->input->post('kode_kelas'))) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode kelas sudah digunakan',
-                    'errors' => ['kode' => 'Kode kelas sudah digunakan']
+                    'errors' => ['kode_kelas' => 'Kode kelas sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_kelas' => strtoupper($this->input->post('kode_kelas')),
+            'nama_kelas' => $this->input->post('nama_kelas'),
             'tingkat' => $this->input->post('tingkat'),
-            'kapasitas' => $this->input->post('kapasitas'),
+            'kapasitas_siswa' => intval($this->input->post('kapasitas_siswa')),
             'jurusan' => $this->input->post('jurusan'),
-            'tahun_ajaran' => $this->input->post('tahun_ajaran')
+            // tahun_ajaran removed - not in DB schema
         ];
 
         $result = $this->Kelas_model->insert($data);
@@ -155,7 +155,7 @@ class Kelas extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_kelas' => [
                 'label' => 'Kode Kelas',
                 'rules' => 'required|min_length[3]|max_length[20]',
                 'errors' => [
@@ -164,7 +164,7 @@ class Kelas extends MY_Controller {
                     'max_length' => 'Kode maksimal 20 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_kelas' => [
                 'label' => 'Nama Kelas',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -183,7 +183,7 @@ class Kelas extends MY_Controller {
                     'less_than_equal_to' => 'Tingkat maksimal 6'
                 ]
             ],
-            'kapasitas' => [
+            'kapasitas_siswa' => [
                 'label' => 'Kapasitas Siswa',
                 'rules' => 'required|integer|greater_than_equal_to[10]|less_than_equal_to[50]',
                 'errors' => [
@@ -225,24 +225,24 @@ class Kelas extends MY_Controller {
         }
 
         // Cek kode unik (kecuali untuk record ini)
-        if ($this->Kelas_model->check_kode_exists($this->input->post('kode'), $id)) {
+        if ($this->Kelas_model->check_kode_exists($this->input->post('kode_kelas'), $id)) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode kelas sudah digunakan',
-                    'errors' => ['kode' => 'Kode kelas sudah digunakan']
+                    'errors' => ['kode_kelas' => 'Kode kelas sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_kelas' => strtoupper($this->input->post('kode_kelas')),
+            'nama_kelas' => $this->input->post('nama_kelas'),
             'tingkat' => $this->input->post('tingkat'),
-            'kapasitas' => $this->input->post('kapasitas'),
+            'kapasitas_siswa' => intval($this->input->post('kapasitas_siswa')),
             'jurusan' => $this->input->post('jurusan'),
-            'tahun_ajaran' => $this->input->post('tahun_ajaran')
+            // tahun_ajaran removed - not in DB schema
         ];
 
         $result = $this->Kelas_model->update($id, $data);

@@ -27,7 +27,7 @@ class Ruangan extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_ruangan' => [
                 'label' => 'Kode Ruangan',
                 'rules' => 'required|min_length[2]|max_length[10]',
                 'errors' => [
@@ -36,7 +36,7 @@ class Ruangan extends MY_Controller {
                     'max_length' => 'Kode maksimal 10 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_ruangan' => [
                 'label' => 'Nama Ruangan',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -55,7 +55,7 @@ class Ruangan extends MY_Controller {
                     'less_than_equal_to' => 'Kapasitas maksimal 100'
                 ]
             ],
-            'jenis' => [
+            'tipe' => [
                 'label' => 'Jenis Ruangan',
                 'rules' => 'required|in_list[reguler,laboratorium,lapangan,aula]',
                 'errors' => [
@@ -88,22 +88,22 @@ class Ruangan extends MY_Controller {
         }
 
         // Cek kode unik
-        if ($this->Ruangan_model->check_kode_exists($this->input->post('kode'))) {
+        if ($this->Ruangan_model->check_kode_exists($this->input->post('kode_ruangan'))) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode ruangan sudah digunakan',
-                    'errors' => ['kode' => 'Kode ruangan sudah digunakan']
+                    'errors' => ['kode_ruangan' => 'Kode ruangan sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
+            'nama_ruangan' => $this->input->post('nama_ruangan'),
             'kapasitas' => $this->input->post('kapasitas'),
-            'jenis' => $this->input->post('jenis'),
+            'tipe' => $this->input->post('tipe'),
             'lantai' => $this->input->post('lantai')
         ];
 
@@ -144,7 +144,7 @@ class Ruangan extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_ruangan' => [
                 'label' => 'Kode Ruangan',
                 'rules' => 'required|min_length[2]|max_length[10]',
                 'errors' => [
@@ -153,7 +153,7 @@ class Ruangan extends MY_Controller {
                     'max_length' => 'Kode maksimal 10 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_ruangan' => [
                 'label' => 'Nama Ruangan',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -172,7 +172,7 @@ class Ruangan extends MY_Controller {
                     'less_than_equal_to' => 'Kapasitas maksimal 100'
                 ]
             ],
-            'jenis' => [
+            'tipe' => [
                 'label' => 'Jenis Ruangan',
                 'rules' => 'required|in_list[reguler,laboratorium,lapangan,aula]',
                 'errors' => [
@@ -205,22 +205,22 @@ class Ruangan extends MY_Controller {
         }
 
         // Cek kode unik (kecuali untuk record ini)
-        if ($this->Ruangan_model->check_kode_exists($this->input->post('kode'), $id)) {
+        if ($this->Ruangan_model->check_kode_exists($this->input->post('kode_ruangan'), $id)) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode ruangan sudah digunakan',
-                    'errors' => ['kode' => 'Kode ruangan sudah digunakan']
+                    'errors' => ['kode_ruangan' => 'Kode ruangan sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
+            'nama_ruangan' => $this->input->post('nama_ruangan'),
             'kapasitas' => $this->input->post('kapasitas'),
-            'jenis' => $this->input->post('jenis'),
+            'tipe' => $this->input->post('tipe'),
             'lantai' => $this->input->post('lantai')
         ];
 

@@ -3,71 +3,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Model untuk CRUD Kelas
+ * Kolom DB: id_kelas, kode_kelas, nama_kelas, jurusan, tingkat,
+ *           kapasitas_siswa, id_kurikulum, created_at, updated_at
  */
 class Kelas_model extends CI_Model {
 
-    private $table = 'kelas';
+    private $table       = 'kelas';
     private $primary_key = 'id_kelas';
-    private $column_order = ['kode', 'nama', 'tingkat', 'kapasitas', 'jurusan', 'tahun_ajaran'];
-    private $column_search = ['kode', 'nama', 'tingkat', 'jurusan', 'tahun_ajaran'];
-    private $order = ['id_kelas' => 'DESC'];
+    private $column_order  = ['kode_kelas', 'nama_kelas', 'tingkat', 'jurusan', 'kapasitas_siswa'];
+    private $column_search = ['kode_kelas', 'nama_kelas', 'jurusan', 'tingkat'];
+    private $order = ['tingkat' => 'ASC', 'nama_kelas' => 'ASC'];
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    public function __construct() { parent::__construct(); }
 
     public function get_datatables()
     {
         $this->_get_datatables_query();
-        
         if ($_POST['length'] != -1) {
             $this->db->limit($_POST['length'], $_POST['start']);
         }
-        
-        $query = $this->db->get($this->table);
-        return $query->result_array();
+        return $this->db->get($this->table)->result_array();
     }
 
     public function count_all()
     {
-        $this->db->from($this->table);
-        return $this->db->count_all_results();
+        return $this->db->count_all($this->table);
     }
 
     public function count_filtered()
     {
         $this->_get_datatables_query();
-        $query = $this->db->get($this->table);
-        return $query->num_rows();
+        return $this->db->get($this->table)->num_rows();
     }
 
     private function _get_datatables_query()
     {
-        if (isset($_POST['search']['value']) && !empty($_POST['search']['value'])) {
-            $keyword = $_POST['search']['value'];
+        if (!empty($_POST['search']['value'])) {
+            $kw = $_POST['search']['value'];
             $this->db->group_start();
-            foreach ($this->column_search as $i => $column) {
-                if ($i === 0) {
-                    $this->db->like($column, $keyword);
-                } else {
-                    $this->db->or_like($column, $keyword);
-                }
+            foreach ($this->column_search as $i => $col) {
+                $i === 0 ? $this->db->like($col, $kw) : $this->db->or_like($col, $kw);
             }
             $this->db->group_end();
         }
-
-        if (isset($_POST['order'])) {
-            $this->db->order_by(
-                $this->column_order[$_POST['order']['0']['column']], 
-                $_POST['order']['0']['dir']
-            );
-        } elseif (isset($this->order)) {
-            $order = $this->order;
-            foreach ($order as $key => $value) {
-                $this->db->order_by($key, $value);
-            }
+        if (!empty($_POST['order'])) {
+            $idx = intval($_POST['order']['0']['column']);
+            $col = $this->column_order[$idx] ?? 'id_kelas';
+            $this->db->order_by($col, $_POST['order']['0']['dir']);
+        } else {
+            foreach ($this->order as $k => $v) { $this->db->order_by($k, $v); }
         }
+    }
+
+    public function get_all()
+    {
+        return $this->db->order_by('tingkat', 'ASC')->order_by('nama_kelas', 'ASC')->get($this->table)->result();
     }
 
     public function get_by_id($id)
@@ -75,10 +65,7 @@ class Kelas_model extends CI_Model {
         return $this->db->get_where($this->table, [$this->primary_key => $id])->row_array();
     }
 
-    public function insert($data)
-    {
-        return $this->db->insert($this->table, $data);
-    }
+    public function insert($data) { return $this->db->insert($this->table, $data); }
 
     public function update($id, $data)
     {
@@ -94,10 +81,8 @@ class Kelas_model extends CI_Model {
 
     public function check_kode_exists($kode, $exclude_id = null)
     {
-        $this->db->where('kode', strtoupper($kode));
-        if ($exclude_id) {
-            $this->db->where($this->primary_key . ' !=', $exclude_id);
-        }
+        $this->db->where('kode_kelas', strtoupper($kode));
+        if ($exclude_id) $this->db->where($this->primary_key . ' !=', $exclude_id);
         return $this->db->count_all_results($this->table) > 0;
     }
 }

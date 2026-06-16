@@ -1620,3 +1620,570 @@ INFO - 2026-06-12 02:36:48 --> Form Validation Class Initialized
 INFO - 2026-06-12 02:36:48 --> Model "Kelas_model" initialized
 ERROR - 2026-06-12 02:36:48 --> Severity: Notice --> Undefined property: CI_Loader::$Kelas_model C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
 ERROR - 2026-06-12 02:36:48 --> Severity: error --> Exception: Call to a member function get_all() on null C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:01:46 --> Config Class Initialized
+INFO - 2026-06-12 03:01:46 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:01:46 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:01:46 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:01:46 --> URI Class Initialized
+INFO - 2026-06-12 03:01:46 --> Router Class Initialized
+INFO - 2026-06-12 03:01:46 --> Output Class Initialized
+INFO - 2026-06-12 03:01:46 --> Security Class Initialized
+DEBUG - 2026-06-12 03:01:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:01:46 --> CSRF cookie sent
+INFO - 2026-06-12 03:01:46 --> Input Class Initialized
+INFO - 2026-06-12 03:01:46 --> Language Class Initialized
+INFO - 2026-06-12 03:01:46 --> Loader Class Initialized
+INFO - 2026-06-12 03:01:46 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:01:46 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:01:46 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:01:47 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:01:47 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:01:47 --> Controller Class Initialized
+INFO - 2026-06-12 03:01:47 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:01:47 --> Helper loaded: form_helper
+INFO - 2026-06-12 03:01:47 --> Form Validation Class Initialized
+INFO - 2026-06-12 03:01:47 --> Model "Kelas_model" initialized
+ERROR - 2026-06-12 03:01:47 --> Severity: Notice --> Undefined property: CI_Loader::$Kelas_model C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+ERROR - 2026-06-12 03:01:47 --> Severity: error --> Exception: Call to a member function get_all() on null C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:13:30 --> Config Class Initialized
+INFO - 2026-06-12 03:13:30 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:13:30 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:13:30 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:13:30 --> URI Class Initialized
+INFO - 2026-06-12 03:13:30 --> Router Class Initialized
+INFO - 2026-06-12 03:13:30 --> Output Class Initialized
+INFO - 2026-06-12 03:13:30 --> Security Class Initialized
+DEBUG - 2026-06-12 03:13:30 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:13:30 --> CSRF cookie sent
+INFO - 2026-06-12 03:13:30 --> Input Class Initialized
+INFO - 2026-06-12 03:13:30 --> Language Class Initialized
+INFO - 2026-06-12 03:13:30 --> Loader Class Initialized
+INFO - 2026-06-12 03:13:31 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:13:31 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:13:31 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:13:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:13:31 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:13:31 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:13:31 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:13:31 --> Controller Class Initialized
+INFO - 2026-06-12 03:13:31 --> Helper loaded: form_helper
+INFO - 2026-06-12 03:13:31 --> Form Validation Class Initialized
+ERROR - 2026-06-12 03:13:31 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:14:49 --> Config Class Initialized
+INFO - 2026-06-12 03:14:49 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:14:49 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:14:49 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:14:49 --> URI Class Initialized
+INFO - 2026-06-12 03:14:49 --> Router Class Initialized
+INFO - 2026-06-12 03:14:49 --> Output Class Initialized
+INFO - 2026-06-12 03:14:49 --> Security Class Initialized
+DEBUG - 2026-06-12 03:14:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:14:49 --> CSRF cookie sent
+INFO - 2026-06-12 03:14:49 --> Input Class Initialized
+INFO - 2026-06-12 03:14:49 --> Language Class Initialized
+INFO - 2026-06-12 03:14:49 --> Loader Class Initialized
+INFO - 2026-06-12 03:14:49 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:14:49 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:14:49 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:14:50 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:14:50 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:14:50 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:14:50 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:14:50 --> Controller Class Initialized
+INFO - 2026-06-12 03:14:50 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:14:50 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:14:50 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:14:50 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:14:59 --> Query error: Table 'gapenjadwalansmk.mapel' doesn't exist - Invalid query: SELECT COUNT(*) AS `numrows`
+FROM `mapel`
+INFO - 2026-06-12 03:14:59 --> Language file loaded: language/english/db_lang.php
+INFO - 2026-06-12 03:15:24 --> Config Class Initialized
+INFO - 2026-06-12 03:15:24 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:15:24 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:15:24 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:15:24 --> URI Class Initialized
+INFO - 2026-06-12 03:15:24 --> Router Class Initialized
+INFO - 2026-06-12 03:15:24 --> Output Class Initialized
+INFO - 2026-06-12 03:15:24 --> Security Class Initialized
+DEBUG - 2026-06-12 03:15:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:15:24 --> CSRF cookie sent
+INFO - 2026-06-12 03:15:24 --> Input Class Initialized
+INFO - 2026-06-12 03:15:24 --> Language Class Initialized
+INFO - 2026-06-12 03:15:24 --> Loader Class Initialized
+INFO - 2026-06-12 03:15:25 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:15:25 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:15:25 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:15:25 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:15:25 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:15:25 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:15:25 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:15:25 --> Controller Class Initialized
+INFO - 2026-06-12 03:15:25 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:15:25 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:15:25 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:15:25 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:15:28 --> Query error: Table 'gapenjadwalansmk.mapel' doesn't exist - Invalid query: SELECT COUNT(*) AS `numrows`
+FROM `mapel`
+INFO - 2026-06-12 03:15:28 --> Language file loaded: language/english/db_lang.php
+INFO - 2026-06-12 03:15:30 --> Config Class Initialized
+INFO - 2026-06-12 03:15:30 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:15:30 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:15:30 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:15:30 --> URI Class Initialized
+INFO - 2026-06-12 03:15:30 --> Router Class Initialized
+INFO - 2026-06-12 03:15:30 --> Output Class Initialized
+INFO - 2026-06-12 03:15:30 --> Security Class Initialized
+DEBUG - 2026-06-12 03:15:30 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:15:30 --> CSRF cookie sent
+INFO - 2026-06-12 03:15:30 --> Input Class Initialized
+INFO - 2026-06-12 03:15:30 --> Language Class Initialized
+INFO - 2026-06-12 03:15:30 --> Loader Class Initialized
+INFO - 2026-06-12 03:15:30 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:15:30 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:15:30 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:15:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:15:30 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:15:30 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:15:30 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:15:30 --> Controller Class Initialized
+INFO - 2026-06-12 03:15:30 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:15:30 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:15:30 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:15:30 --> Model "Jam_model" initialized
+INFO - 2026-06-12 03:15:30 --> Config Class Initialized
+INFO - 2026-06-12 03:15:30 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:15:30 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:15:30 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:15:30 --> URI Class Initialized
+INFO - 2026-06-12 03:15:30 --> Router Class Initialized
+INFO - 2026-06-12 03:15:30 --> Output Class Initialized
+INFO - 2026-06-12 03:15:30 --> Security Class Initialized
+DEBUG - 2026-06-12 03:15:30 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:15:30 --> CSRF cookie sent
+INFO - 2026-06-12 03:15:30 --> Input Class Initialized
+INFO - 2026-06-12 03:15:30 --> Language Class Initialized
+INFO - 2026-06-12 03:15:30 --> Loader Class Initialized
+INFO - 2026-06-12 03:15:30 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:15:30 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:15:30 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:15:31 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:15:32 --> Config Class Initialized
+INFO - 2026-06-12 03:15:32 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:15:32 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:15:32 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:15:32 --> URI Class Initialized
+INFO - 2026-06-12 03:15:32 --> Router Class Initialized
+INFO - 2026-06-12 03:15:32 --> Output Class Initialized
+INFO - 2026-06-12 03:15:32 --> Security Class Initialized
+DEBUG - 2026-06-12 03:15:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:15:32 --> CSRF cookie sent
+INFO - 2026-06-12 03:15:32 --> Input Class Initialized
+INFO - 2026-06-12 03:15:32 --> Language Class Initialized
+INFO - 2026-06-12 03:15:32 --> Loader Class Initialized
+INFO - 2026-06-12 03:15:32 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:15:32 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:15:33 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:15:33 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2026-06-12 03:15:34 --> Query error: Table 'gapenjadwalansmk.mapel' doesn't exist - Invalid query: SELECT COUNT(*) AS `numrows`
+FROM `mapel`
+INFO - 2026-06-12 03:15:34 --> Language file loaded: language/english/db_lang.php
+INFO - 2026-06-12 03:15:34 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:15:34 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:15:34 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:15:34 --> Controller Class Initialized
+INFO - 2026-06-12 03:15:34 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:15:34 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:15:34 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:15:34 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:15:35 --> Query error: Table 'gapenjadwalansmk.mapel' doesn't exist - Invalid query: SELECT COUNT(*) AS `numrows`
+FROM `mapel`
+INFO - 2026-06-12 03:15:35 --> Language file loaded: language/english/db_lang.php
+INFO - 2026-06-12 03:15:35 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:15:35 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:15:35 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:15:35 --> Controller Class Initialized
+INFO - 2026-06-12 03:15:35 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:15:35 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:15:35 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:15:35 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:15:37 --> Query error: Table 'gapenjadwalansmk.mapel' doesn't exist - Invalid query: SELECT COUNT(*) AS `numrows`
+FROM `mapel`
+INFO - 2026-06-12 03:15:37 --> Language file loaded: language/english/db_lang.php
+INFO - 2026-06-12 03:27:25 --> Config Class Initialized
+INFO - 2026-06-12 03:27:25 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:27:25 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:27:25 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:27:25 --> URI Class Initialized
+INFO - 2026-06-12 03:27:25 --> Router Class Initialized
+INFO - 2026-06-12 03:27:25 --> Output Class Initialized
+INFO - 2026-06-12 03:27:25 --> Security Class Initialized
+DEBUG - 2026-06-12 03:27:25 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:27:25 --> CSRF cookie sent
+INFO - 2026-06-12 03:27:25 --> Input Class Initialized
+INFO - 2026-06-12 03:27:25 --> Language Class Initialized
+INFO - 2026-06-12 03:27:25 --> Loader Class Initialized
+INFO - 2026-06-12 03:27:25 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:27:25 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:27:25 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:27:25 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:27:25 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:27:25 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:27:25 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:27:25 --> Controller Class Initialized
+INFO - 2026-06-12 03:27:25 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:27:25 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:27:25 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:27:25 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:27:26 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:27:28 --> Config Class Initialized
+INFO - 2026-06-12 03:27:28 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:27:28 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:27:28 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:27:28 --> URI Class Initialized
+INFO - 2026-06-12 03:27:28 --> Router Class Initialized
+INFO - 2026-06-12 03:27:28 --> Output Class Initialized
+INFO - 2026-06-12 03:27:28 --> Security Class Initialized
+DEBUG - 2026-06-12 03:27:28 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:27:28 --> CSRF cookie sent
+INFO - 2026-06-12 03:27:28 --> Input Class Initialized
+INFO - 2026-06-12 03:27:28 --> Language Class Initialized
+INFO - 2026-06-12 03:27:28 --> Loader Class Initialized
+INFO - 2026-06-12 03:27:28 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:27:28 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:27:28 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:27:29 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:27:29 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:27:29 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:27:29 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:27:29 --> Controller Class Initialized
+INFO - 2026-06-12 03:27:29 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:27:29 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:27:29 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:27:29 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:27:31 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:27:49 --> Config Class Initialized
+INFO - 2026-06-12 03:27:49 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:27:49 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:27:49 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:27:49 --> URI Class Initialized
+INFO - 2026-06-12 03:27:49 --> Router Class Initialized
+INFO - 2026-06-12 03:27:49 --> Output Class Initialized
+INFO - 2026-06-12 03:27:49 --> Security Class Initialized
+DEBUG - 2026-06-12 03:27:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:27:49 --> CSRF cookie sent
+INFO - 2026-06-12 03:27:49 --> Input Class Initialized
+INFO - 2026-06-12 03:27:49 --> Language Class Initialized
+INFO - 2026-06-12 03:27:49 --> Loader Class Initialized
+INFO - 2026-06-12 03:27:49 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:27:49 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:27:50 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:27:50 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:27:50 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:27:50 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:27:50 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:27:50 --> Controller Class Initialized
+INFO - 2026-06-12 03:27:50 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:27:50 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:27:50 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:27:50 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:27:50 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:28:04 --> Config Class Initialized
+INFO - 2026-06-12 03:28:04 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:28:04 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:28:04 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:28:04 --> URI Class Initialized
+INFO - 2026-06-12 03:28:04 --> Router Class Initialized
+INFO - 2026-06-12 03:28:04 --> Output Class Initialized
+INFO - 2026-06-12 03:28:04 --> Security Class Initialized
+DEBUG - 2026-06-12 03:28:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:28:04 --> CSRF cookie sent
+INFO - 2026-06-12 03:28:04 --> Input Class Initialized
+INFO - 2026-06-12 03:28:04 --> Language Class Initialized
+INFO - 2026-06-12 03:28:04 --> Loader Class Initialized
+INFO - 2026-06-12 03:28:04 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:28:04 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:28:04 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:28:05 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:28:05 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:28:05 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:28:05 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:28:05 --> Controller Class Initialized
+INFO - 2026-06-12 03:28:05 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:28:05 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:28:05 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:28:05 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:28:05 --> Severity: error --> Exception: syntax error, unexpected 'echo' (T_ECHO) C:\laragon\www\gapenjadwalansmk\application\views\admin\dashboard.php 1
+INFO - 2026-06-12 03:28:16 --> Config Class Initialized
+INFO - 2026-06-12 03:28:16 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:28:16 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:28:16 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:28:16 --> URI Class Initialized
+INFO - 2026-06-12 03:28:16 --> Router Class Initialized
+INFO - 2026-06-12 03:28:16 --> Output Class Initialized
+INFO - 2026-06-12 03:28:16 --> Security Class Initialized
+DEBUG - 2026-06-12 03:28:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:28:16 --> CSRF cookie sent
+INFO - 2026-06-12 03:28:16 --> Input Class Initialized
+INFO - 2026-06-12 03:28:16 --> Language Class Initialized
+INFO - 2026-06-12 03:28:16 --> Loader Class Initialized
+INFO - 2026-06-12 03:28:16 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:28:16 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:28:16 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:28:16 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:28:16 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:28:16 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:28:16 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:28:16 --> Controller Class Initialized
+INFO - 2026-06-12 03:28:16 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:28:16 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:28:16 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:28:16 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:28:17 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:34:39 --> Config Class Initialized
+INFO - 2026-06-12 03:34:39 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:34:39 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:34:39 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:34:39 --> URI Class Initialized
+INFO - 2026-06-12 03:34:40 --> Router Class Initialized
+INFO - 2026-06-12 03:34:40 --> Output Class Initialized
+INFO - 2026-06-12 03:34:40 --> Security Class Initialized
+DEBUG - 2026-06-12 03:34:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:34:40 --> Config Class Initialized
+INFO - 2026-06-12 03:34:40 --> CSRF cookie sent
+INFO - 2026-06-12 03:34:40 --> Hooks Class Initialized
+INFO - 2026-06-12 03:34:40 --> Input Class Initialized
+INFO - 2026-06-12 03:34:40 --> Language Class Initialized
+INFO - 2026-06-12 03:34:40 --> Loader Class Initialized
+INFO - 2026-06-12 03:34:40 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:34:40 --> Helper loaded: auth_helper
+DEBUG - 2026-06-12 03:34:40 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:34:40 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:34:40 --> URI Class Initialized
+INFO - 2026-06-12 03:34:40 --> Database Driver Class Initialized
+INFO - 2026-06-12 03:34:40 --> Router Class Initialized
+INFO - 2026-06-12 03:34:40 --> Output Class Initialized
+INFO - 2026-06-12 03:34:40 --> Security Class Initialized
+DEBUG - 2026-06-12 03:34:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:34:40 --> CSRF cookie sent
+INFO - 2026-06-12 03:34:40 --> Input Class Initialized
+INFO - 2026-06-12 03:34:40 --> Language Class Initialized
+INFO - 2026-06-12 03:34:40 --> Loader Class Initialized
+INFO - 2026-06-12 03:34:40 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:34:40 --> Helper loaded: auth_helper
+DEBUG - 2026-06-12 03:34:40 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:34:40 --> Database Driver Class Initialized
+INFO - 2026-06-12 03:34:40 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:34:40 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:40 --> Controller Class Initialized
+INFO - 2026-06-12 03:34:40 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Jam_model" initialized
+DEBUG - 2026-06-12 03:34:40 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:34:40 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:34:40 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:40 --> Controller Class Initialized
+INFO - 2026-06-12 03:34:40 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:34:40 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:34:41 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+ERROR - 2026-06-12 03:34:41 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:34:43 --> Config Class Initialized
+INFO - 2026-06-12 03:34:43 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:34:43 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:34:43 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:34:43 --> URI Class Initialized
+INFO - 2026-06-12 03:34:43 --> Router Class Initialized
+INFO - 2026-06-12 03:34:43 --> Output Class Initialized
+INFO - 2026-06-12 03:34:43 --> Security Class Initialized
+DEBUG - 2026-06-12 03:34:43 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:34:43 --> CSRF cookie sent
+INFO - 2026-06-12 03:34:43 --> Input Class Initialized
+INFO - 2026-06-12 03:34:43 --> Language Class Initialized
+INFO - 2026-06-12 03:34:43 --> Loader Class Initialized
+INFO - 2026-06-12 03:34:43 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:34:43 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:34:43 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:34:43 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:34:43 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:34:43 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:43 --> Controller Class Initialized
+INFO - 2026-06-12 03:34:43 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:34:43 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:34:45 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:35:05 --> Config Class Initialized
+INFO - 2026-06-12 03:35:05 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:35:05 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:35:05 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:35:05 --> URI Class Initialized
+INFO - 2026-06-12 03:35:05 --> Router Class Initialized
+INFO - 2026-06-12 03:35:05 --> Output Class Initialized
+INFO - 2026-06-12 03:35:05 --> Security Class Initialized
+DEBUG - 2026-06-12 03:35:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:35:05 --> CSRF cookie sent
+INFO - 2026-06-12 03:35:05 --> Input Class Initialized
+INFO - 2026-06-12 03:35:05 --> Language Class Initialized
+INFO - 2026-06-12 03:35:05 --> Loader Class Initialized
+INFO - 2026-06-12 03:35:05 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:35:05 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:35:05 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:35:05 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:35:05 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:35:05 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:35:05 --> Controller Class Initialized
+INFO - 2026-06-12 03:35:05 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:35:05 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:35:08 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:35:10 --> Config Class Initialized
+INFO - 2026-06-12 03:35:10 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:35:10 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:35:10 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:35:10 --> URI Class Initialized
+INFO - 2026-06-12 03:35:10 --> Router Class Initialized
+INFO - 2026-06-12 03:35:10 --> Output Class Initialized
+INFO - 2026-06-12 03:35:10 --> Security Class Initialized
+DEBUG - 2026-06-12 03:35:10 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:35:10 --> CSRF cookie sent
+INFO - 2026-06-12 03:35:10 --> Input Class Initialized
+INFO - 2026-06-12 03:35:10 --> Language Class Initialized
+INFO - 2026-06-12 03:35:10 --> Loader Class Initialized
+INFO - 2026-06-12 03:35:10 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:35:10 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:35:10 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:35:10 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:35:10 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:35:10 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:35:10 --> Controller Class Initialized
+INFO - 2026-06-12 03:35:10 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:35:10 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:35:11 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 197
+INFO - 2026-06-12 03:37:21 --> Config Class Initialized
+INFO - 2026-06-12 03:37:21 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:37:21 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:37:21 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:37:21 --> URI Class Initialized
+INFO - 2026-06-12 03:37:21 --> Router Class Initialized
+INFO - 2026-06-12 03:37:21 --> Output Class Initialized
+INFO - 2026-06-12 03:37:21 --> Security Class Initialized
+DEBUG - 2026-06-12 03:37:21 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:37:21 --> CSRF cookie sent
+INFO - 2026-06-12 03:37:21 --> Input Class Initialized
+INFO - 2026-06-12 03:37:21 --> Language Class Initialized
+INFO - 2026-06-12 03:37:21 --> Loader Class Initialized
+INFO - 2026-06-12 03:37:21 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:37:21 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:37:21 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:37:21 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:37:21 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:37:21 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:37:21 --> Controller Class Initialized
+INFO - 2026-06-12 03:37:21 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:37:21 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:37:22 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 212
+INFO - 2026-06-12 03:37:24 --> Config Class Initialized
+INFO - 2026-06-12 03:37:24 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:37:24 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:37:24 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:37:24 --> URI Class Initialized
+INFO - 2026-06-12 03:37:25 --> Router Class Initialized
+INFO - 2026-06-12 03:37:25 --> Output Class Initialized
+INFO - 2026-06-12 03:37:25 --> Security Class Initialized
+DEBUG - 2026-06-12 03:37:25 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:37:25 --> CSRF cookie sent
+INFO - 2026-06-12 03:37:25 --> Input Class Initialized
+INFO - 2026-06-12 03:37:25 --> Language Class Initialized
+INFO - 2026-06-12 03:37:25 --> Loader Class Initialized
+INFO - 2026-06-12 03:37:25 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:37:25 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:37:25 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:37:25 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:37:25 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:37:25 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:37:25 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:37:25 --> Controller Class Initialized
+INFO - 2026-06-12 03:37:25 --> Helper loaded: form_helper
+INFO - 2026-06-12 03:37:25 --> Form Validation Class Initialized
+ERROR - 2026-06-12 03:37:25 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 212
+INFO - 2026-06-12 03:37:27 --> Config Class Initialized
+INFO - 2026-06-12 03:37:27 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:37:27 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:37:27 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:37:27 --> URI Class Initialized
+INFO - 2026-06-12 03:37:27 --> Router Class Initialized
+INFO - 2026-06-12 03:37:27 --> Output Class Initialized
+INFO - 2026-06-12 03:37:27 --> Security Class Initialized
+DEBUG - 2026-06-12 03:37:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:37:27 --> CSRF cookie sent
+INFO - 2026-06-12 03:37:27 --> Input Class Initialized
+INFO - 2026-06-12 03:37:27 --> Language Class Initialized
+INFO - 2026-06-12 03:37:27 --> Loader Class Initialized
+INFO - 2026-06-12 03:37:27 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:37:27 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:37:27 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:37:27 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:37:27 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:37:27 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:37:27 --> Controller Class Initialized
+INFO - 2026-06-12 03:37:27 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:37:27 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:37:27 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 212
+INFO - 2026-06-12 03:39:29 --> Config Class Initialized
+INFO - 2026-06-12 03:39:29 --> Hooks Class Initialized
+DEBUG - 2026-06-12 03:39:29 --> UTF-8 Support Enabled
+INFO - 2026-06-12 03:39:29 --> Utf8 Class Initialized
+INFO - 2026-06-12 03:39:29 --> URI Class Initialized
+INFO - 2026-06-12 03:39:29 --> Router Class Initialized
+INFO - 2026-06-12 03:39:29 --> Output Class Initialized
+INFO - 2026-06-12 03:39:29 --> Security Class Initialized
+DEBUG - 2026-06-12 03:39:29 --> Global POST, GET and COOKIE data sanitized
+INFO - 2026-06-12 03:39:29 --> CSRF cookie sent
+INFO - 2026-06-12 03:39:29 --> Input Class Initialized
+INFO - 2026-06-12 03:39:29 --> Language Class Initialized
+INFO - 2026-06-12 03:39:29 --> Loader Class Initialized
+INFO - 2026-06-12 03:39:29 --> Helper loaded: url_helper
+INFO - 2026-06-12 03:39:29 --> Helper loaded: auth_helper
+INFO - 2026-06-12 03:39:29 --> Database Driver Class Initialized
+DEBUG - 2026-06-12 03:39:30 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2026-06-12 03:39:30 --> Session: Class initialized using 'files' driver.
+INFO - 2026-06-12 03:39:30 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:39:30 --> Controller Class Initialized
+INFO - 2026-06-12 03:39:30 --> Model "Guru_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Kelas_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Mapel_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Ruangan_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Tahun_ajaran_model" initialized
+INFO - 2026-06-12 03:39:30 --> Model "Jam_model" initialized
+ERROR - 2026-06-12 03:39:30 --> Severity: error --> Exception: Call to undefined method Kelas_model::get_all() C:\laragon\www\gapenjadwalansmk\application\views\layouts\header.php 212

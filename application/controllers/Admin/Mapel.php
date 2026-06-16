@@ -28,7 +28,7 @@ class Mapel extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_mapel' => [
                 'label' => 'Kode Mapel',
                 'rules' => 'required|alpha_dash|max_length[10]',
                 'errors' => [
@@ -37,7 +37,7 @@ class Mapel extends MY_Controller {
                     'max_length' => 'Kode maksimal 10 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_mapel' => [
                 'label' => 'Nama Mapel',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -54,7 +54,7 @@ class Mapel extends MY_Controller {
                     'in_list' => 'Tipe harus teori atau praktikum'
                 ]
             ],
-            'jp_per_minggu' => [
+            'jam_per_minggu' => [
                 'label' => 'JP Per Minggu',
                 'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]',
                 'errors' => [
@@ -64,7 +64,7 @@ class Mapel extends MY_Controller {
                     'less_than_equal_to' => 'JP maksimal 48'
                 ]
             ],
-            'semester' => [
+            'kelompok' => [
                 'label' => 'Semester',
                 'rules' => 'required|integer|in_list[1,2]',
                 'errors' => [
@@ -88,23 +88,23 @@ class Mapel extends MY_Controller {
         }
 
         // Cek kode unik
-        if ($this->Mapel_model->check_kode_exists($this->input->post('kode'))) {
+        if ($this->Mapel_model->check_kode_exists($this->input->post('kode_mapel'))) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode mapel sudah digunakan',
-                    'errors' => ['kode' => 'Kode mapel sudah digunakan']
+                    'errors' => ['kode_mapel' => 'Kode mapel sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_mapel' => strtoupper($this->input->post('kode_mapel')),
+            'nama_mapel' => $this->input->post('nama_mapel'),
             'tipe' => $this->input->post('tipe'),
-            'jp_per_minggu' => $this->input->post('jp_per_minggu'),
-            'semester' => $this->input->post('semester')
+            'jam_per_minggu' => intval($this->input->post('jam_per_minggu')),
+            'kelompok' => $this->input->post('kelompok')
         ];
 
         $result = $this->Mapel_model->insert($data);
@@ -144,7 +144,7 @@ class Mapel extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'kode' => [
+            'kode_mapel' => [
                 'label' => 'Kode Mapel',
                 'rules' => 'required|alpha_dash|max_length[10]',
                 'errors' => [
@@ -153,7 +153,7 @@ class Mapel extends MY_Controller {
                     'max_length' => 'Kode maksimal 10 karakter'
                 ]
             ],
-            'nama' => [
+            'nama_mapel' => [
                 'label' => 'Nama Mapel',
                 'rules' => 'required|min_length[3]|max_length[100]',
                 'errors' => [
@@ -170,7 +170,7 @@ class Mapel extends MY_Controller {
                     'in_list' => 'Tipe harus teori atau praktikum'
                 ]
             ],
-            'jp_per_minggu' => [
+            'jam_per_minggu' => [
                 'label' => 'JP Per Minggu',
                 'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]',
                 'errors' => [
@@ -180,7 +180,7 @@ class Mapel extends MY_Controller {
                     'less_than_equal_to' => 'JP maksimal 48'
                 ]
             ],
-            'semester' => [
+            'kelompok' => [
                 'label' => 'Semester',
                 'rules' => 'required|integer|in_list[1,2]',
                 'errors' => [
@@ -204,23 +204,23 @@ class Mapel extends MY_Controller {
         }
 
         // Cek kode unik (kecuali untuk record ini)
-        if ($this->Mapel_model->check_kode_exists($this->input->post('kode'), $id)) {
+        if ($this->Mapel_model->check_kode_exists($this->input->post('kode_mapel'), $id)) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode mapel sudah digunakan',
-                    'errors' => ['kode' => 'Kode mapel sudah digunakan']
+                    'errors' => ['kode_mapel' => 'Kode mapel sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode' => strtoupper($this->input->post('kode')),
-            'nama' => $this->input->post('nama'),
+            'kode_mapel' => strtoupper($this->input->post('kode_mapel')),
+            'nama_mapel' => $this->input->post('nama_mapel'),
             'tipe' => $this->input->post('tipe'),
-            'jp_per_minggu' => $this->input->post('jp_per_minggu'),
-            'semester' => $this->input->post('semester')
+            'jam_per_minggu' => intval($this->input->post('jam_per_minggu')),
+            'kelompok' => $this->input->post('kelompok')
         ];
 
         $result = $this->Mapel_model->update($id, $data);

@@ -84,7 +84,7 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         // Cek tahun ajaran unik
-        if ($this->Tahun_ajaran_model->check_tahun_exists($this->input->post('tahun'), $this->input->post('semester'))) {
+        if ($this->Tahun_ajaran_model->check_tahun_exists($this->input->post('tahun_mulai'), $this->input->post('semester'))) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
@@ -96,15 +96,17 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         $data = [
-            'tahun' => $this->input->post('tahun'),
+            'tahun_mulai' => $this->input->post('tahun_mulai'),
+            'tahun_selesai' => $this->input->post('tahun_selesai'),
             'semester' => $this->input->post('semester'),
-            'status' => $this->input->post('status'),
+            'is_aktif' => ($this->input->post('status') === 'aktif') ? 1 : 0,
+            'status' => ($this->input->post('status') === 'aktif') ? 'active' : 'draft',
             'tanggal_mulai' => $this->input->post('tanggal_mulai'),
             'tanggal_selesai' => $this->input->post('tanggal_selesai')
         ];
 
         // Jika status aktif, set semua yang lain menjadi tidak aktif
-        if ($data['status'] === 'aktif') {
+        if ($this->input->post('status') === 'aktif') {
             $this->Tahun_ajaran_model->set_all_inactive();
         }
 
@@ -223,7 +225,7 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         // Cek tahun ajaran unik (kecuali untuk record ini)
-        if ($this->Tahun_ajaran_model->check_tahun_exists($this->input->post('tahun'), $this->input->post('semester'), $id)) {
+        if ($this->Tahun_ajaran_model->check_tahun_exists($this->input->post('tahun_mulai'), $this->input->post('semester'), $id)) {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
@@ -235,15 +237,17 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         $data = [
-            'tahun' => $this->input->post('tahun'),
+            'tahun_mulai' => $this->input->post('tahun_mulai'),
+            'tahun_selesai' => $this->input->post('tahun_selesai'),
             'semester' => $this->input->post('semester'),
-            'status' => $this->input->post('status'),
+            'is_aktif' => ($this->input->post('status') === 'aktif') ? 1 : 0,
+            'status' => ($this->input->post('status') === 'aktif') ? 'active' : 'draft',
             'tanggal_mulai' => $this->input->post('tanggal_mulai'),
             'tanggal_selesai' => $this->input->post('tanggal_selesai')
         ];
 
         // Jika status aktif, set semua yang lain menjadi tidak aktif
-        if ($data['status'] === 'aktif') {
+        if ($this->input->post('status') === 'aktif') {
             $this->Tahun_ajaran_model->set_all_inactive($id);
         }
 
@@ -284,7 +288,7 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         // Tidak boleh hapus jika status aktif
-        if ($ta['status'] === 'aktif') {
+        if (($ta['is_aktif'] ?? 0) == 1 || ($ta['status'] ?? '') === 'active') {
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([

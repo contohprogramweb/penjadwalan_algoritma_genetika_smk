@@ -1,8 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once APPPATH . 'core/MY_Controller.php';
+
 /**
  * Controller untuk CRUD Jam Pelajaran
+ * DB: slot, waktu_mulai, waktu_selesai, durasi_menit, is_istirahat, is_active
  */
 class Jam extends MY_Controller {
 
@@ -70,10 +73,7 @@ class Jam extends MY_Controller {
                 'errors' => [
                     'in_list' => 'Nilai istirahat harus 0 atau 1'
                 ]
-            ],
-            'keterangan' => [
-                'label' => 'Keterangan',
-                'rules' => 'max_length[200]',
+            ]',
                 'errors' => [
                     'max_length' => 'Keterangan maksimal 200 karakter'
                 ]
@@ -97,9 +97,8 @@ class Jam extends MY_Controller {
             'waktu_mulai' => $this->input->post('waktu_mulai'),
             'waktu_selesai' => $this->input->post('waktu_selesai'),
             'durasi_menit' => $this->input->post('durasi_menit'),
-            'is_istirahat' => $this->input->post('is_istirahat', 0),
-            'is_active' => $this->input->post('is_active', 1),
-            'keterangan' => $this->input->post('keterangan')
+            'is_istirahat' => intval($this->input->post('is_istirahat') ?: 0),
+            'is_active' => 1,
         ];
 
         $result = $this->Jam_model->insert($data);
@@ -210,10 +209,7 @@ class Jam extends MY_Controller {
                 'errors' => [
                     'in_list' => 'Nilai aktif harus 0 atau 1'
                 ]
-            ],
-            'keterangan' => [
-                'label' => 'Keterangan',
-                'rules' => 'max_length[200]',
+            ]',
                 'errors' => [
                     'max_length' => 'Keterangan maksimal 200 karakter'
                 ]
@@ -237,9 +233,8 @@ class Jam extends MY_Controller {
             'waktu_mulai' => $this->input->post('waktu_mulai'),
             'waktu_selesai' => $this->input->post('waktu_selesai'),
             'durasi_menit' => $this->input->post('durasi_menit'),
-            'is_istirahat' => $this->input->post('is_istirahat', 0),
-            'is_active' => $this->input->post('is_active', 1),
-            'keterangan' => $this->input->post('keterangan')
+            'is_istirahat' => intval($this->input->post('is_istirahat') ?: 0),
+            'is_active' => intval($this->input->post('is_active', 1)),
         ];
 
         $result = $this->Jam_model->update($id, $data);

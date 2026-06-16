@@ -9,8 +9,8 @@
   <!-- Meta Tags -->
   <meta name="description" content="Sistem Penjadwalan Guru SMK Berbasis Algoritma Genetika">
   <meta name="author" content="SMK Development Team">
-  <meta name="csrf_token_name" content="<?php $this->security->get_csrf_token_name() ?>">
-  <meta name="csrf_token_hash" content="<?php $this->security->get_csrf_hash() ?>">
+  <meta name="csrf_token_name" content="<?= $this->security->get_csrf_token_name() ?>">
+  <meta name="csrf_token_hash" content="<?= $this->security->get_csrf_hash() ?>">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="<?= base_url('assets/img/favicon.png') ?>">

@@ -66,8 +66,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nama">Nama Lengkap <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nama" name="nama" maxlength="100" required>
+                        <label for="nama_lengkap">Nama Lengkap <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" maxlength="100" required>
                         <div class="invalid-feedback"></div>
                     </div>
 
@@ -91,24 +91,24 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="jam_min">Jam Minimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_min" name="jam_min" min="1" max="48" value="1" required>
+                                <label for="jam_min_minggu">Jam Minimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_min_minggu" name="jam_min_minggu" min="1" max="48" value="1" required>
                                 <small class="text-muted">1-48</small>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="jam_maks">Jam Maksimal <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="jam_maks" name="jam_maks" min="1" max="48" value="24" required>
+                                <label for="jam_maks_minggu">Jam Maksimal <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="jam_maks_minggu" name="jam_maks_minggu" min="1" max="48" value="24" required>
                                 <small class="text-muted">1-48, harus >= jam minimal</small>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="status">Status Kepegawaian <span class="text-danger">*</span></label>
-                                <select class="form-control" id="status" name="status" required>
+                                <label for="status_aktif">Status Kepegawaian <span class="text-danger">*</span></label>
+                                <select class="form-control" id="status_aktif" name="status_aktif" required>
                                     <option value="">Pilih Status</option>
                                     <option value="pns">PNS</option>
                                     <option value="honorer">Honorer</option>
@@ -208,7 +208,7 @@
                     min: 1,
                     max: 48,
                     custom: function(value, $field) {
-                        const jamMin = parseInt($('#jam_min').val()) || 0;
+                        const jamMin = parseInt($('#jam_min_minggu').val()) || 0;
                         if (parseInt(value) < jamMin) {
                             return 'Jam maksimal harus lebih besar atau sama dengan jam minimal.';
                         }
@@ -234,9 +234,9 @@
             $('#nama').data('label', 'Nama Lengkap');
             $('#email').data('label', 'Email');
             $('#no_hp').data('label', 'Nomor HP');
-            $('#jam_min').data('label', 'Jam Minimal');
-            $('#jam_maks').data('label', 'Jam Maksimal');
-            $('#status').data('label', 'Status Kepegawaian');
+            $('#jam_min_minggu').data('label', 'Jam Minimal');
+            $('#jam_maks_minggu').data('label', 'Jam Maksimal');
+            $('#status_aktif').data('label', 'Status Kepegawaian');
             
             // Initialize DataTable
             const table = $('#dataTable').DataTable({
@@ -310,12 +310,12 @@
                             $('#id_guru').val(data.id_guru);
                             $('#nip').val(data.nip);
                             $('#nuptk').val(data.nuptk);
-                            $('#nama').val(data.nama);
+                            $('#nama_lengkap').val(data.nama_lengkap);
                             $('#email').val(data.email);
                             $('#no_hp').val(data.no_hp);
-                            $('#jam_min').val(data.jam_min);
-                            $('#jam_maks').val(data.jam_maks);
-                            $('#status').val(data.status);
+                            $('#jam_min_minggu').val(data.jam_min_minggu);
+                            $('#jam_maks_minggu').val(data.jam_maks_minggu);
+                            $('#status_aktif').val(data.status_aktif);
                             
                             $('#modalGuru').modal('show');
                         }
