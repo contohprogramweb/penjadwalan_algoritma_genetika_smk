@@ -252,7 +252,7 @@
                     {data: 'status_aktif'},
                     {data: 'aksi', orderable: false, searchable: false}
                 ],
-                order: [[3, 'asc']],
+                order: [[1, 'desc']],
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Indonesian.json'
                 },
