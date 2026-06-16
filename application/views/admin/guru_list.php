@@ -11,12 +11,11 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" role="grid" aria-label="Tabel data guru">
-                    <caption class="sr-only">Daftar semua guru dengan informasi NIP, NUPTK, nama, email, nomor HP, status, jam mengajar, dan aksi</caption>
+                    <caption class="sr-only">Daftar semua guru dengan informasi NIP, nama, email, nomor HP, status, jam mengajar, dan aksi</caption>
                     <thead>
                         <tr>
                             <th scope="col" aria-label="Nomor urut">No</th>
                             <th scope="col">NIP</th>
-                            <th scope="col">NUPTK</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Email</th>
                             <th scope="col">No HP</th>
@@ -52,14 +51,6 @@
                                 <label for="nip">NIP <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="nip" name="nip" maxlength="18" placeholder="18 digit" required>
                                 <small class="text-muted">Harus 18 digit angka</small>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nuptk">NUPTK <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="nuptk" name="nuptk" maxlength="16" placeholder="16 digit" required>
-                                <small class="text-muted">Harus 16 digit angka</small>
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
@@ -151,16 +142,6 @@
                         numeric: 'NIP harus berupa angka.'
                     }
                 },
-                nuptk: {
-                    required: true,
-                    exactLength: 16,
-                    numeric: true,
-                    messages: {
-                        required: 'NUPTK wajib diisi.',
-                        exactLength: 'NUPTK harus tepat 16 digit.',
-                        numeric: 'NUPTK harus berupa angka.'
-                    }
-                },
                 nama: {
                     required: true,
                     minLength: 3,
@@ -230,7 +211,6 @@
 
             // Tambahkan data-label untuk setiap field untuk error message yang lebih baik
             $('#nip').data('label', 'NIP');
-            $('#nuptk').data('label', 'NUPTK');
             $('#nama').data('label', 'Nama Lengkap');
             $('#email').data('label', 'Email');
             $('#no_hp').data('label', 'Nomor HP');
@@ -251,9 +231,8 @@
                     }
                 },
                 columns: [
-                    {data: null, orderable: false},
+                    {data: 'no', orderable: false},
                     {data: 'nip'},
-                    {data: 'nuptk'},
                     {data: 'nama'},
                     {data: 'email'},
                     {data: 'no_hp'},
@@ -309,7 +288,6 @@
                             $('#modalTitle').text('Edit Guru');
                             $('#id_guru').val(data.id_guru);
                             $('#nip').val(data.nip);
-                            $('#nuptk').val(data.nuptk);
                             $('#nama_lengkap').val(data.nama_lengkap);
                             $('#email').val(data.email);
                             $('#no_hp').val(data.no_hp);
