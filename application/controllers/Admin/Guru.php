@@ -39,7 +39,7 @@ class Guru extends MY_Controller {
             ['field' => 'jenis_kelamin','label' => 'Jenis Kelamin', 'rules' => 'required|in_list[L,P]'],
             ['field' => 'jam_min_minggu','label' => 'Jam Min',      'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[40]'],
             ['field' => 'jam_maks_minggu','label' => 'Jam Maks',    'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[40]'],
-            ['field' => 'status_aktif', 'label' => 'Status',        'rules' => 'required|in_list[0,1]'],
+            ['field' => 'status_aktif', 'label' => 'Status',        'rules' => 'required|in_list[pns,honorer,ttk]'],
         ];
         $this->form_validation->set_rules($rules);
         return $this->form_validation->run();
@@ -65,7 +65,7 @@ class Guru extends MY_Controller {
             'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
             'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),
             'jam_maks_minggu'=> intval($this->input->post('jam_maks_minggu')),
-            'status_aktif'   => intval($this->input->post('status_aktif')),
+            'status_aktif'   => $this->input->post('status_aktif'),
         ];
 
         if ($data['jam_maks_minggu'] < $data['jam_min_minggu']) {
@@ -95,7 +95,7 @@ class Guru extends MY_Controller {
             'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
             'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),
             'jam_maks_minggu'=> intval($this->input->post('jam_maks_minggu')),
-            'status_aktif'   => intval($this->input->post('status_aktif')),
+            'status_aktif'   => $this->input->post('status_aktif'),
         ];
 
         if ($data['jam_maks_minggu'] < $data['jam_min_minggu']) {

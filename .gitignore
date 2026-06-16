@@ -1,1 +1,1 @@
-(application/controllers/Admin/Guru.php, application/controllers/Datatables.php, application/models/Guru_model.php, application/views/admin/guru_list.php)
+Nothing should be ignored based on the provided file changes, as they only contain PHP source files (.php) which are legitimate code files that should be tracked in version control. No build artifacts, dependencies, or temporary files were detected in the changes.
