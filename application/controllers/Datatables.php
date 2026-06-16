@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Controller untuk DataTables Server-Side Processing
- * Referensi: SRS Bab 15.1
+ * Semua method mengembalikan object bernama kolom (bukan indexed array)
+ * agar cocok dengan konfigurasi DataTables views yang menggunakan `data: 'nama_kolom'`
  */
 require_once APPPATH . 'core/MY_Controller.php';
 
@@ -22,290 +23,184 @@ class Datatables extends MY_Controller {
         $this->load->model('Tahun_ajaran_model');
     }
 
-    /**
-     * DataTables untuk Guru
-     * Response format sesuai SRS Bab 15.1
-     */
+    private function _json($data, $total, $filtered)
+    {
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'draw'            => isset($_POST['draw']) ? intval($_POST['draw']) : 0,
+                'recordsTotal'    => intval($total),
+                'recordsFiltered' => intval($filtered),
+                'data'            => $data,
+            ]));
+    }
+
+    /** DataTables Guru */
     public function guru()
     {
-        $list = $this->Guru_model->get_datatables();
-        $total = $this->Guru_model->count_all();
+        $list     = $this->Guru_model->get_datatables();
+        $total    = $this->Guru_model->count_all();
         $filtered = $this->Guru_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = $item['nip'];
-            $row[] = $item['nuptk'];
-            $row[] = $item['nama'];
-            $row[] = $item['email'];
-            $row[] = $item['no_hp'];
-            $row[] = ucfirst($item['status']);
-            $row[] = $item['jam_min'] . ' - ' . $item['jam_maks'];
-            
-            // Aksi buttons
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_guru'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_guru'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $status_label = $r['status_aktif'] ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-secondary">Nonaktif</span>';
+            $data[] = [
+                'no'          => $no,
+                'nip'         => htmlspecialchars($r['nip']),
+                'nuptk'       => htmlspecialchars($r['nuptk'] ?? '-'),
+                'nama'        => htmlspecialchars($r['nama_lengkap']),
+                'email'       => '-',
+                'no_hp'       => '-',
+                'status'      => $status_label,
+                'jam_mengajar'=> ($r['jam_min_minggu'] ?? 0) . ' - ' . ($r['jam_maks_minggu'] ?? 0) . ' jam/mgg',
+                'aksi'        =>
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_guru'].'"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_guru'].'"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 
-    /**
-     * DataTables untuk Mapel
-     */
+    /** DataTables Mapel */
     public function mapel()
     {
-        $list = $this->Mapel_model->get_datatables();
-        $total = $this->Mapel_model->count_all();
+        $list     = $this->Mapel_model->get_datatables();
+        $total    = $this->Mapel_model->count_all();
         $filtered = $this->Mapel_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = $item['kode'];
-            $row[] = $item['nama'];
-            $row[] = ucfirst($item['tipe']);
-            $row[] = $item['jp_per_minggu'];
-            $row[] = 'Semester ' . $item['semester'];
-            
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_mapel'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_mapel'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $data[] = [
+                'no'           => $no,
+                'kode'         => htmlspecialchars($r['kode_mapel']),
+                'nama'         => htmlspecialchars($r['nama_mapel']),
+                'tipe'         => '<span class="badge badge-' . ($r['tipe'] === 'praktikum' ? 'warning' : 'info') . '">' . ucfirst($r['tipe']) . '</span>',
+                'jp_per_minggu'=> $r['jam_per_minggu'] . ' JP',
+                'semester'     => 'Kelompok ' . $r['kelompok'],
+                'aksi'         =>
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_mapel'].'"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_mapel'].'"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 
-    /**
-     * DataTables untuk Kelas
-     */
+    /** DataTables Kelas */
     public function kelas()
     {
-        $list = $this->Kelas_model->get_datatables();
-        $total = $this->Kelas_model->count_all();
+        $list     = $this->Kelas_model->get_datatables();
+        $total    = $this->Kelas_model->count_all();
         $filtered = $this->Kelas_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = $item['kode'];
-            $row[] = $item['nama'];
-            $row[] = 'Tingkat ' . $item['tingkat'];
-            $row[] = $item['kapasitas'];
-            $row[] = $item['jurusan'];
-            $row[] = $item['tahun_ajaran'];
-            
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_kelas'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_kelas'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $data[] = [
+                'no'           => $no,
+                'kode'         => htmlspecialchars($r['kode_kelas']),
+                'nama'         => htmlspecialchars($r['nama_kelas']),
+                'tingkat'      => 'Kelas ' . $r['tingkat'],
+                'jurusan'      => htmlspecialchars($r['jurusan']),
+                'kapasitas'    => $r['kapasitas_siswa'] . ' siswa',
+                'tahun_ajaran' => '-',
+                'aksi'         =>
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_kelas'].'"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_kelas'].'"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 
-    /**
-     * DataTables untuk Ruangan
-     */
+    /** DataTables Ruangan */
     public function ruangan()
     {
-        $list = $this->Ruangan_model->get_datatables();
-        $total = $this->Ruangan_model->count_all();
+        $list     = $this->Ruangan_model->get_datatables();
+        $total    = $this->Ruangan_model->count_all();
         $filtered = $this->Ruangan_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = $item['kode'];
-            $row[] = $item['nama'];
-            $row[] = $item['kapasitas'];
-            $row[] = ucfirst($item['jenis']);
-            $row[] = 'Lantai ' . $item['lantai'];
-            
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_ruangan'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_ruangan'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $tipe_map = ['kelas' => 'info', 'lab' => 'warning', 'bengkel' => 'danger', 'lapangan' => 'success', 'aula' => 'primary'];
+            $badge_cls = $tipe_map[$r['tipe']] ?? 'secondary';
+            $data[] = [
+                'no'       => $no,
+                'kode'     => htmlspecialchars($r['kode_ruangan']),
+                'nama'     => htmlspecialchars($r['nama_ruangan']),
+                'kapasitas'=> $r['kapasitas'] . ' orang',
+                'jenis'    => '<span class="badge badge-'.$badge_cls.'">'.ucfirst($r['tipe']).'</span>',
+                'lantai'   => $r['lantai'] ? 'Lantai ' . $r['lantai'] : '-',
+                'aksi'     =>
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_ruangan'].'"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_ruangan'].'"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 
-    /**
-     * DataTables untuk Jam Pelajaran
-     */
+    /** DataTables Jam Pelajaran */
     public function jam()
     {
-        $list = $this->Jam_model->get_datatables();
-        $total = $this->Jam_model->count_all();
+        $list     = $this->Jam_model->get_datatables();
+        $total    = $this->Jam_model->count_all();
         $filtered = $this->Jam_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = 'Slot ke-' . $item['slot'];
-            $row[] = $item['waktu_mulai'];
-            $row[] = $item['waktu_selesai'];
-            $row[] = $item['durasi_menit'] . ' menit';
-            $row[] = $item['keterangan'] ?? '-';
-            
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_jam'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_jam'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $ket = $r['is_istirahat'] ? '<span class="badge badge-warning">Istirahat</span>' : '<span class="badge badge-success">Reguler</span>';
+            $data[] = [
+                'no'           => $no,
+                'id_jam'       => $r['id_jam'],
+                'slot'         => 'Jam ke-' . $r['slot'],
+                'waktu_mulai'  => $r['waktu_mulai'],
+                'waktu_selesai'=> $r['waktu_selesai'],
+                'durasi_menit' => $r['durasi_menit'] . ' menit',
+                'keterangan'   => $ket,
+                'aksi'         =>
+                    '<button class="btn btn-sm btn-warning mr-1" onclick="editData('.$r['id_jam'].')"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger" onclick="konfirmasiHapus('.$r['id_jam'].')"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 
-    /**
-     * DataTables untuk Tahun Ajaran
-     */
+    /** DataTables Tahun Ajaran */
     public function tahun_ajaran()
     {
-        $list = $this->Tahun_ajaran_model->get_datatables();
-        $total = $this->Tahun_ajaran_model->count_all();
+        $list     = $this->Tahun_ajaran_model->get_datatables();
+        $total    = $this->Tahun_ajaran_model->count_all();
         $filtered = $this->Tahun_ajaran_model->count_filtered();
 
+        $no = intval($_POST['start'] ?? 0);
         $data = [];
-        $no = $_POST['start'];
-        
-        foreach ($list as $item) {
+        foreach ($list as $r) {
             $no++;
-            $row = [];
-            $row[] = $no;
-            $row[] = $item['tahun'];
-            $row[] = ucfirst($item['semester']);
-            $row[] = $item['tanggal_mulai'];
-            $row[] = $item['tanggal_selesai'];
-            $row[] = '<span class="badge badge-'.($item['status'] === 'aktif' ? 'success' : 'secondary').'">'.ucfirst(str_replace('_', ' ', $item['status'])).'</span>';
-            
-            $aksi = '
-                <button class="btn btn-sm btn-info btn-edit" data-id="'.$item['id_tahun_ajaran'].'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="btn btn-sm btn-danger btn-hapus" data-id="'.$item['id_tahun_ajaran'].'">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-            ';
-            $row[] = $aksi;
-
-            $data[] = $row;
+            $is_active = ($r['is_aktif'] == 1) || ($r['status'] === 'active');
+            $status_html = $is_active
+                ? '<span class="badge badge-success">Aktif</span>'
+                : '<span class="badge badge-secondary">'.ucfirst($r['status'] ?? 'Draft').'</span>';
+            $nama_tahun = $r['tahun_mulai'] . '/' . $r['tahun_selesai'] . ' ' . ucfirst($r['semester']);
+            $data[] = [
+                'no'              => $no,
+                'tahun'           => $nama_tahun,
+                'semester'        => ucfirst($r['semester']),
+                'tanggal_mulai'   => $r['tanggal_mulai'] ?? '-',
+                'tanggal_selesai' => $r['tanggal_selesai'] ?? '-',
+                'status'          => $status_html,
+                'aksi'            =>
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_tahun_ajaran'].'"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_tahun_ajaran'].'"><i class="fas fa-trash"></i></button>',
+            ];
         }
-
-        $output = [
-            'draw' => isset($_POST['draw']) ? $_POST['draw'] : 0,
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered,
-            'data' => $data
-        ];
-
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode($output));
+        $this->_json($data, $total, $filtered);
     }
 }

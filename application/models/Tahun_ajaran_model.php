@@ -3,14 +3,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Model untuk CRUD Tahun Ajaran
+ * 
+ * Kolom DB: id_tahun_ajaran, tahun_mulai, tahun_selesai, semester, 
+ *           is_aktif, tanggal_mulai, tanggal_selesai, status (draft/active/closed)
  */
 class Tahun_ajaran_model extends CI_Model {
 
     private $table = 'tahun_ajaran';
     private $primary_key = 'id_tahun_ajaran';
-    private $column_order = ['tahun', 'semester', 'status', 'tanggal_mulai', 'tanggal_selesai'];
-    private $column_search = ['tahun', 'semester', 'status'];
-    private $order = ['tanggal_mulai' => 'DESC'];
+    private $column_order = ['tahun_mulai', 'semester', 'status', 'tanggal_mulai', 'tanggal_selesai'];
+    private $column_search = ['tahun_mulai', 'tahun_selesai', 'semester', 'status'];
+    private $order = ['tahun_mulai' => 'DESC'];
 
     public function __construct()
     {
@@ -58,13 +61,11 @@ class Tahun_ajaran_model extends CI_Model {
         }
 
         if (isset($_POST['order'])) {
-            $this->db->order_by(
-                $this->column_order[$_POST['order']['0']['column']], 
-                $_POST['order']['0']['dir']
-            );
-        } elseif (isset($this->order)) {
-            $order = $this->order;
-            foreach ($order as $key => $value) {
+            $col_index = intval($_POST['order']['0']['column']);
+            $col_name  = isset($this->column_order[$col_index]) ? $this->column_order[$col_index] : 'tahun_mulai';
+            $this->db->order_by($col_name, $_POST['order']['0']['dir']);
+        } else {
+            foreach ($this->order as $key => $value) {
                 $this->db->order_by($key, $value);
             }
         }
@@ -93,51 +94,63 @@ class Tahun_ajaran_model extends CI_Model {
     }
 
     /**
-     * Check if tahun ajaran + semester combination exists
-     */
-    public function check_tahun_exists($tahun, $semester, $exclude_id = null)
-    {
-        $this->db->where('tahun', $tahun);
-        $this->db->where('semester', $semester);
-        if ($exclude_id) {
-            $this->db->where($this->primary_key . ' !=', $exclude_id);
-        }
-        return $this->db->count_all_results($this->table) > 0;
-    }
-
-    /**
-     * Set all tahun ajaran to tidak_aktif
-     */
-    public function set_all_inactive($exclude_id = null)
-    {
-        $this->db->set('status', 'tidak_aktif');
-        if ($exclude_id) {
-            $this->db->where($this->primary_key . ' !=', $exclude_id);
-        }
-        return $this->db->update($this->table);
-    }
-
-    /**
-     * Get active tahun ajaran
+     * Get active tahun ajaran (is_aktif=1 ATAU status='active')
      */
     public function get_aktif()
     {
-        return $this->db->get_where($this->table, ['status' => 'aktif'])->row_array();
+        // Coba is_aktif=1 dulu, fallback ke status='active'
+        $result = $this->db->where('is_aktif', 1)->get($this->table)->row_array();
+        if (!$result) {
+            $result = $this->db->where('status', 'active')->get($this->table)->row_array();
+        }
+        // Normalkan nama tampilan
+        if ($result && !isset($result['nama_tahun'])) {
+            $result['nama_tahun'] = ($result['tahun_mulai'] ?? '') . '/' . ($result['tahun_selesai'] ?? '') . ' ' . ucfirst($result['semester'] ?? '');
+        }
+        return $result;
+    }
+
+    /** Alias */
+    public function get_active()
+    {
+        return $this->get_aktif();
     }
 
     /**
-     * Count active tahun ajaran
+     * Get all tahun ajaran
+     */
+    public function get_all()
+    {
+        $rows = $this->db->order_by('tahun_mulai', 'DESC')->get($this->table)->result_array();
+        foreach ($rows as &$r) {
+            if (!isset($r['nama_tahun'])) {
+                $r['nama_tahun'] = ($r['tahun_mulai'] ?? '') . '/' . ($r['tahun_selesai'] ?? '') . ' ' . ucfirst($r['semester'] ?? '');
+            }
+        }
+        return $rows;
+    }
+
+    /**
+     * Count active
      */
     public function count_active()
     {
-        return $this->db->from($this->table)->where('status', 'aktif')->count_all_results();
+        return $this->db->from($this->table)->where('is_aktif', 1)->count_all_results();
     }
 
     /**
-     * Get all tahun ajaran ordered by tanggal_mulai DESC
+     * Set all to inactive then set one active
      */
+    public function set_all_inactive($exclude_id = null)
+    {
+        if ($exclude_id) {
+            $this->db->where($this->primary_key . ' !=', $exclude_id);
+        }
+        $this->db->update($this->table, ['is_aktif' => 0, 'status' => 'draft']);
+    }
+
     public function get_all_ordered()
     {
-        return $this->db->order_by('tanggal_mulai', 'DESC')->get($this->table)->result_array();
+        return $this->db->order_by('tahun_mulai', 'DESC')->get($this->table)->result_array();
     }
 }

@@ -6,16 +6,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Deskripsi: Generate laporan PDF untuk jadwal dan beban guru
  * Referensi SRS: Bab 11.10 (PDF Engine)
  */
-require_once APPPATH . 'core/MY_Controller.php';
-
-class Laporan extends MY_Controller {
-
-    protected $allowed_roles = ['admin', 'waka'];
+class Laporan extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
-
+        
+        // Cek autentikasi
+        if (!$this->session->userdata('logged_in')) {
+            redirect('auth/login');
+        }
+        
         $this->load->model('Jadwal_model');
         $this->load->model('Penugasan_model');
         $this->load->model('Guru_model');
@@ -73,7 +74,7 @@ class Laporan extends MY_Controller {
         $dompdf->render();
         
         // Output: Download atau stream
-        $dompdf->stream('Jadwal_Kelas_' . $kelas->nama_kelas . '.pdf', ['Attachment' => 1]);
+        $dompdf->stream('Jadwal_Kelas_' . $kelas['nama_kelas'] . '.pdf', ['Attachment' => 1]);
     }
 
     /**
@@ -133,6 +134,6 @@ class Laporan extends MY_Controller {
         $dompdf->render();
         
         // Output: Download atau stream
-        $dompdf->stream('Beban_Mengajar_' . $guru->nama_guru . '.pdf', ['Attachment' => 1]);
+        $dompdf->stream('Beban_Mengajar_' . $guru['nama_lengkap'] . '.pdf', ['Attachment' => 1]);
     }
 }

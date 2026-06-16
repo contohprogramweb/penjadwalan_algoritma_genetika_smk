@@ -1,78 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?> - SIPEJAR</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/fontawesome.min.css') ?>">
-    <style>
-        .jadwal-grid {
-            font-size: 12px;
-        }
-        .jadwal-grid thead th {
-            vertical-align: middle;
-            text-align: center;
-            background-color: #343a40;
-            color: white;
-            padding: 10px 5px;
-        }
-        .jadwal-grid tbody td {
-            vertical-align: middle;
-            padding: 8px 5px;
-            height: 70px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .jadwal-grid tbody td:hover {
-            box-shadow: inset 0 0 0 2px #007bff;
-        }
-        .jadwal-kosong {
-            background-color: #F5F5F5 !important;
-            color: #999;
-            font-style: italic;
-        }
-        .jadwal-teori {
-            background-color: #E8F5E9;
-            border-left: 3px solid #4CAF50;
-        }
-        .jadwal-praktikum {
-            background-color: #E3F2FD;
-            border-left: 3px solid #2196F3;
-        }
-        .jadwal-konflik {
-            background-color: #f44336 !important;
-            color: white !important;
-        }
-        .slot-content {
-            max-width: 140px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: block;
-        }
-        .slot-content-small {
-            font-size: 11px;
-        }
-        .jam-istirahat {
-            background-color: #f8f9fa;
-            text-align: center;
-            font-weight: bold;
-            color: #666;
-        }
-        .btn-approve {
-            margin-top: 20px;
-        }
-        #conflict-alert {
-            display: none;
-            margin-top: 15px;
-        }
-        .loading-spinner {
-            display: none;
-        }
-    </style>
-</head>
-<body>
     <!-- Header akan di-load dari template -->
     
     <div class="container-fluid mt-4">
@@ -294,5 +219,5 @@
     <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/pages/jadwal-grid.js') ?>"></script>
-</body>
-</html>
+
+<script src="<?= base_url('assets/js/pages/jadwal-grid.js') ?>"></script>

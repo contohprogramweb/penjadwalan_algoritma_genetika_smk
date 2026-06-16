@@ -30,14 +30,15 @@ class Jadwal extends CI_Controller {
     public function index()
     {
         // Ambil tahun ajaran aktif
-        $tahun_ajaran = $this->db->where('status', 'active')->get('tahun_ajaran')->row();
+        $this->load->model('Tahun_ajaran_model');
+        $tahun_ajaran = $this->Tahun_ajaran_model->get_aktif();
         
         if (!$tahun_ajaran) {
             $this->session->set_flashdata('error', 'Tidak ada tahun ajaran aktif.');
             redirect('waka/dashboard');
         }
 
-        $id_tahun_ajaran = $tahun_ajaran->id;
+        $id_tahun_ajaran = $tahun_ajaran['id_tahun_ajaran'];
 
         // Ambil data jadwal yang sudah di-generate (status: draft/approved)
         $jadwal_data = $this->Jadwal_model->get_jadwal_by_tahun_ajaran($id_tahun_ajaran);
@@ -47,17 +48,18 @@ class Jadwal extends CI_Controller {
         
         $data = [
             'title' => 'Grid Jadwal Mingguan',
+            'page_title' => 'Grid Jadwal Mingguan',
             'tahun_ajaran' => $tahun_ajaran,
             'jadwal_data' => $jadwal_data,
             'meta_jadwal' => $meta_jadwal,
             'hari_list' => ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
             'jam_mapel' => $this->Jadwal_model->get_jam_pelajaran_per_hari(),
-            'content' => 'waka/jadwal_grid'
         ];
 
-        $this->load->view('templates/waka_header', $data);
-        $this->load->view('waka/jadwal_grid', $data);
-        $this->load->view('templates/waka_footer');
+        $this->load->view('layouts/main', [
+            'content' => $this->load->view('waka/jadwal_grid', $data, TRUE),
+            'page_title' => 'Grid Jadwal Mingguan',
+        ]);
     }
 
     /**

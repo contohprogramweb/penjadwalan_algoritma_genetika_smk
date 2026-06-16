@@ -9,8 +9,8 @@ class Penugasan_model extends CI_Model {
 
     private $table = 'penugasan_guru';
     private $primary_key = 'id_penugasan';
-    private $column_order = ['pg.id_penugasan', 'g.nama', 'mp.nama_mapel', 'k.nama_kelas', 'pg.semester', 'pg.jam_per_minggu'];
-    private $column_search = ['g.nama', 'mp.nama_mapel', 'k.nama_kelas', 'r.nama_ruangan'];
+    private $column_order = ['pg.id_penugasan', 'g.nama_lengkap', 'mp.nama_mapel', 'k.nama_kelas', 'pg.semester', 'pg.jam_per_minggu'];
+    private $column_search = ['g.nama_lengkap', 'mp.nama_mapel', 'k.nama_kelas', 'r.nama_ruangan'];
     private $order = ['pg.id_penugasan' => 'DESC'];
 
     public function __construct()
@@ -116,7 +116,7 @@ class Penugasan_model extends CI_Model {
      */
     public function get_by_id($id)
     {
-        $this->db->select('pg.*, g.nama as nama_guru, mp.nama_mapel, k.nama_kelas, r.nama_ruangan, ta.tahun');
+        $this->db->select("pg.*, g.nama_lengkap as nama_guru, mp.nama_mapel, k.nama_kelas, r.nama_ruangan, CONCAT(ta.tahun_mulai, '/', ta.tahun_selesai) as tahun");
         $this->db->from($this->table . ' pg');
         $this->db->join('guru g', 'pg.id_guru = g.id_guru', 'left');
         $this->db->join('mata_pelajaran mp', 'pg.id_mapel = mp.id_mapel', 'left');
@@ -230,7 +230,7 @@ class Penugasan_model extends CI_Model {
      */
     public function get_all_for_dropdown($id_tahun_ajaran = null, $semester = null)
     {
-        $this->db->select('pg.id_penugasan, g.nama as nama_guru, mp.nama_mapel, k.nama_kelas');
+        $this->db->select('pg.id_penugasan, g.nama_lengkap as nama_guru, mp.nama_mapel, k.nama_kelas');
         $this->db->from($this->table . ' pg');
         $this->db->join('guru g', 'pg.id_guru = g.id_guru', 'left');
         $this->db->join('mata_pelajaran mp', 'pg.id_mapel = mp.id_mapel', 'left');
@@ -244,7 +244,15 @@ class Penugasan_model extends CI_Model {
             $this->db->where('pg.semester', $semester);
         }
         
-        $this->db->order_by('g.nama', 'ASC');
+        $this->db->order_by('g.nama_lengkap', 'ASC');
         return $this->db->get()->result_array();
+    }
+
+    /**
+     * Count penugasan by tahun ajaran
+     */
+    public function count_by_tahun($id_tahun_ajaran)
+    {
+        return $this->count_all($id_tahun_ajaran);
     }
 }

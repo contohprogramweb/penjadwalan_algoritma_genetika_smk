@@ -24,15 +24,23 @@ class Dashboard extends MY_Controller
 
     /**
      * Halaman Dashboard Waka Kurikulum
-     * TODO: Implementasi sesuai SRS Bab 11.7
      */
     public function index()
     {
-        // Placeholder untuk dashboard waka
-        // Akan diimplementasikan terpisah
-        echo '<h1>Waka Kurikulum Dashboard</h1>';
-        echo '<p>Selamat datang, ' . $this->session->userdata('nama_lengkap') . '</p>';
-        echo '<p>Role: ' . $this->session->userdata('role') . '</p>';
-        echo '<a href="' . site_url('auth/logout') . '">Logout</a>';
+        $this->load->model('Guru_model');
+        $this->load->model('Kelas_model');
+        $this->load->model('Mapel_model');
+        $this->load->model('Penugasan_model');
+        $this->load->model('Tahun_ajaran_model');
+
+        $data = [
+            'total_guru'        => $this->Guru_model->count_all(),
+            'total_kelas'       => $this->Kelas_model->count_all(),
+            'total_mapel'       => $this->Mapel_model->count_all(),
+            'tahun_ajaran_aktif'=> $this->Tahun_ajaran_model->get_aktif(),
+            'page_title'        => 'Dashboard Waka Kurikulum',
+        ];
+
+        $this->load->view('waka/dashboard', $data);
     }
 }

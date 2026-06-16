@@ -3,12 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Controller untuk CRUD Guru
- * Referensi: SRS Bab 11.5, 13.1
+ * Field sesuai DB: nip, nuptk, nama_lengkap, jenis_kelamin,
+ *                  jam_min_minggu, jam_maks_minggu, status_aktif
  */
+require_once APPPATH . 'core/MY_Controller.php';
+
 class Guru extends MY_Controller {
 
     protected $allowed_roles = ['admin'];
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -16,360 +19,115 @@ class Guru extends MY_Controller {
         $this->load->library('form_validation');
     }
 
-    /**
-     * Halaman daftar guru dengan DataTables
-     */
     public function index()
     {
-        $this->load->view('admin/guru_list');
+        $data['page_title'] = 'Data Guru';
+        $this->load->view('admin/guru_list', $data);
     }
 
-    /**
-     * Tambah guru baru
-     */
+    private function _json($success, $message, $extra = [])
+    {
+        $payload = array_merge(['success' => $success, 'message' => $message], $extra);
+        $this->output->set_content_type('application/json')->set_output(json_encode($payload));
+    }
+
+    private function _validate_guru()
+    {
+        $rules = [
+            ['field' => 'nip',          'label' => 'NIP',           'rules' => 'required|exact_length[18]|numeric'],
+            ['field' => 'nuptk',        'label' => 'NUPTK',         'rules' => 'permit_empty|exact_length[16]|numeric'],
+            ['field' => 'nama_lengkap', 'label' => 'Nama Lengkap',  'rules' => 'required|min_length[3]|max_length[100]'],
+            ['field' => 'jenis_kelamin','label' => 'Jenis Kelamin', 'rules' => 'required|in_list[L,P]'],
+            ['field' => 'jam_min_minggu','label' => 'Jam Min',      'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[40]'],
+            ['field' => 'jam_maks_minggu','label' => 'Jam Maks',    'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[40]'],
+            ['field' => 'status_aktif', 'label' => 'Status',        'rules' => 'required|in_list[0,1]'],
+        ];
+        $this->form_validation->set_rules($rules);
+        return $this->form_validation->run();
+    }
+
     public function tambah()
     {
-        if ($this->input->method() !== 'post') {
-            show_error('Method tidak diizinkan', 405);
-        }
+        if ($this->input->method() !== 'post') { show_error('Method tidak diizinkan', 405); }
 
-        // Validasi form
-        $this->form_validation->set_rules([
-            'nip' => [
-                'label' => 'NIP',
-                'rules' => 'required|exact_length[18]|numeric',
-                'errors' => [
-                    'required' => 'NIP wajib diisi',
-                    'exact_length' => 'NIP harus 18 digit',
-                    'numeric' => 'NIP harus berupa angka'
-                ]
-            ],
-            'nuptk' => [
-                'label' => 'NUPTK',
-                'rules' => 'permit_empty|exact_length[16]|numeric',
-                'errors' => [
-                    'exact_length' => 'NUPTK harus 16 digit jika diisi',
-                    'numeric' => 'NUPTK harus berupa angka'
-                ]
-            ],
-            'nama' => [
-                'label' => 'Nama Lengkap',
-                'rules' => 'required|min_length[3]|max_length[100]',
-                'errors' => [
-                    'required' => 'Nama wajib diisi',
-                    'min_length' => 'Nama minimal 3 karakter',
-                    'max_length' => 'Nama maksimal 100 karakter'
-                ]
-            ],
-            'email' => [
-                'label' => 'Email',
-                'rules' => 'required|valid_email|max_length[100]',
-                'errors' => [
-                    'required' => 'Email wajib diisi',
-                    'valid_email' => 'Format email tidak valid',
-                    'max_length' => 'Email maksimal 100 karakter'
-                ]
-            ],
-            'no_hp' => [
-                'label' => 'Nomor HP',
-                'rules' => 'required|min_length[10]|max_length[15]|numeric',
-                'errors' => [
-                    'required' => 'Nomor HP wajib diisi',
-                    'min_length' => 'Nomor HP minimal 10 digit',
-                    'max_length' => 'Nomor HP maksimal 15 digit',
-                    'numeric' => 'Nomor HP harus berupa angka'
-                ]
-            ],
-            'jam_min' => [
-                'label' => 'Jam Minimal',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]',
-                'errors' => [
-                    'required' => 'Jam minimal wajib diisi',
-                    'integer' => 'Jam minimal harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam minimal minimal 1',
-                    'less_than_equal_to' => 'Jam minimal maksimal 48'
-                ]
-            ],
-            'jam_maks' => [
-                'label' => 'Jam Maksimal',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]|callback_check_jam',
-                'errors' => [
-                    'required' => 'Jam maksimal wajib diisi',
-                    'integer' => 'Jam maksimal harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam maksimal minimal 1',
-                    'less_than_equal_to' => 'Jam maksimal maksimal 48'
-                ]
-            ],
-            'status' => [
-                'label' => 'Status Kepegawaian',
-                'rules' => 'required|in_list[pns,honorer,ttk]',
-                'errors' => [
-                    'required' => 'Status wajib dipilih',
-                    'in_list' => 'Status tidak valid'
-                ]
-            ]
-        ]);
-
-        if ($this->form_validation->run() === FALSE) {
-            $errors = validation_errors_array();
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Validasi gagal',
-                    'errors' => $errors
-                ]));
+        if ($this->_validate_guru() === FALSE) {
+            $this->_json(FALSE, 'Validasi gagal', ['errors' => $this->form_validation->error_array()]);
             return;
         }
 
-        // Simpan data
+        $nip = $this->input->post('nip');
+        if ($this->Guru_model->check_nip_exists($nip)) {
+            $this->_json(FALSE, 'NIP sudah terdaftar'); return;
+        }
+
         $data = [
-            'nip' => $this->input->post('nip'),
-            'nuptk' => $this->input->post('nuptk'),
-            'nama' => $this->input->post('nama'),
-            'email' => $this->input->post('email'),
-            'no_hp' => $this->input->post('no_hp'),
-            'jam_min' => $this->input->post('jam_min'),
-            'jam_maks' => $this->input->post('jam_maks'),
-            'status' => $this->input->post('status')
+            'nip'            => $nip,
+            'nuptk'          => $this->input->post('nuptk') ?: NULL,
+            'nama_lengkap'   => $this->input->post('nama_lengkap'),
+            'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
+            'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),
+            'jam_maks_minggu'=> intval($this->input->post('jam_maks_minggu')),
+            'status_aktif'   => intval($this->input->post('status_aktif')),
         ];
 
-        $result = $this->Guru_model->insert($data);
-
-        if ($result) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => TRUE,
-                    'message' => 'Data guru berhasil ditambahkan'
-                ]));
-        } else {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Gagal menambahkan data guru'
-                ]));
+        if ($data['jam_maks_minggu'] < $data['jam_min_minggu']) {
+            $this->_json(FALSE, 'Jam maksimal tidak boleh kurang dari jam minimal'); return;
         }
+
+        $ok = $this->Guru_model->insert($data);
+        $this->_json((bool)$ok, $ok ? 'Data guru berhasil ditambahkan' : 'Gagal menambahkan data guru');
     }
 
-    /**
-     * Callback validasi jam min <= jam maks
-     */
-    public function check_jam()
-    {
-        $jam_min = $this->input->post('jam_min');
-        $jam_maks = $this->input->post('jam_maks');
-
-        if ($jam_maks < $jam_min) {
-            $this->form_validation->set_message('check_jam', 'Jam maksimal harus lebih besar atau sama dengan jam minimal');
-            return FALSE;
-        }
-        return TRUE;
-    }
-
-    /**
-     * Edit guru
-     */
     public function edit($id)
     {
-        if ($this->input->method() !== 'post') {
-            show_error('Method tidak diizinkan', 405);
+        if ($this->input->method() !== 'post') { show_error('Method tidak diizinkan', 405); }
+
+        if (!$this->Guru_model->get_by_id($id)) {
+            $this->_json(FALSE, 'Data guru tidak ditemukan'); return;
         }
 
-        // Cek apakah guru ada
-        $guru = $this->Guru_model->get_by_id($id);
-        if (!$guru) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Data guru tidak ditemukan'
-                ]));
+        if ($this->_validate_guru() === FALSE) {
+            $this->_json(FALSE, 'Validasi gagal', ['errors' => $this->form_validation->error_array()]);
             return;
         }
 
-        // Validasi form (sama seperti tambah, kecuali NIP/NUPTK bisa optional jika tidak diubah)
-        $this->form_validation->set_rules([
-            'nip' => [
-                'label' => 'NIP',
-                'rules' => 'required|exact_length[18]|numeric',
-                'errors' => [
-                    'required' => 'NIP wajib diisi',
-                    'exact_length' => 'NIP harus 18 digit',
-                    'numeric' => 'NIP harus berupa angka'
-                ]
-            ],
-            'nuptk' => [
-                'label' => 'NUPTK',
-                'rules' => 'permit_empty|exact_length[16]|numeric',
-                'errors' => [
-                    'exact_length' => 'NUPTK harus 16 digit jika diisi',
-                    'numeric' => 'NUPTK harus berupa angka'
-                ]
-            ],
-            'nama' => [
-                'label' => 'Nama Lengkap',
-                'rules' => 'required|min_length[3]|max_length[100]',
-                'errors' => [
-                    'required' => 'Nama wajib diisi',
-                    'min_length' => 'Nama minimal 3 karakter',
-                    'max_length' => 'Nama maksimal 100 karakter'
-                ]
-            ],
-            'email' => [
-                'label' => 'Email',
-                'rules' => 'required|valid_email|max_length[100]',
-                'errors' => [
-                    'required' => 'Email wajib diisi',
-                    'valid_email' => 'Format email tidak valid',
-                    'max_length' => 'Email maksimal 100 karakter'
-                ]
-            ],
-            'no_hp' => [
-                'label' => 'Nomor HP',
-                'rules' => 'required|min_length[10]|max_length[15]|numeric',
-                'errors' => [
-                    'required' => 'Nomor HP wajib diisi',
-                    'min_length' => 'Nomor HP minimal 10 digit',
-                    'max_length' => 'Nomor HP maksimal 15 digit',
-                    'numeric' => 'Nomor HP harus berupa angka'
-                ]
-            ],
-            'jam_min' => [
-                'label' => 'Jam Minimal',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]',
-                'errors' => [
-                    'required' => 'Jam minimal wajib diisi',
-                    'integer' => 'Jam minimal harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam minimal minimal 1',
-                    'less_than_equal_to' => 'Jam minimal maksimal 48'
-                ]
-            ],
-            'jam_maks' => [
-                'label' => 'Jam Maksimal',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[48]|callback_check_jam',
-                'errors' => [
-                    'required' => 'Jam maksimal wajib diisi',
-                    'integer' => 'Jam maksimal harus bilangan bulat',
-                    'greater_than_equal_to' => 'Jam maksimal minimal 1',
-                    'less_than_equal_to' => 'Jam maksimal maksimal 48'
-                ]
-            ],
-            'status' => [
-                'label' => 'Status Kepegawaian',
-                'rules' => 'required|in_list[pns,honorer,ttk]',
-                'errors' => [
-                    'required' => 'Status wajib dipilih',
-                    'in_list' => 'Status tidak valid'
-                ]
-            ]
-        ]);
-
-        if ($this->form_validation->run() === FALSE) {
-            $errors = validation_errors_array();
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Validasi gagal',
-                    'errors' => $errors
-                ]));
-            return;
-        }
-
-        // Update data
         $data = [
-            'nip' => $this->input->post('nip'),
-            'nuptk' => $this->input->post('nuptk'),
-            'nama' => $this->input->post('nama'),
-            'email' => $this->input->post('email'),
-            'no_hp' => $this->input->post('no_hp'),
-            'jam_min' => $this->input->post('jam_min'),
-            'jam_maks' => $this->input->post('jam_maks'),
-            'status' => $this->input->post('status')
+            'nip'            => $this->input->post('nip'),
+            'nuptk'          => $this->input->post('nuptk') ?: NULL,
+            'nama_lengkap'   => $this->input->post('nama_lengkap'),
+            'jenis_kelamin'  => $this->input->post('jenis_kelamin'),
+            'jam_min_minggu' => intval($this->input->post('jam_min_minggu')),
+            'jam_maks_minggu'=> intval($this->input->post('jam_maks_minggu')),
+            'status_aktif'   => intval($this->input->post('status_aktif')),
         ];
 
-        $result = $this->Guru_model->update($id, $data);
-
-        if ($result) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => TRUE,
-                    'message' => 'Data guru berhasil diperbarui'
-                ]));
-        } else {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Gagal memperbarui data guru'
-                ]));
+        if ($data['jam_maks_minggu'] < $data['jam_min_minggu']) {
+            $this->_json(FALSE, 'Jam maksimal tidak boleh kurang dari jam minimal'); return;
         }
+
+        $ok = $this->Guru_model->update($id, $data);
+        $this->_json((bool)$ok, $ok ? 'Data guru berhasil diperbarui' : 'Gagal memperbarui data guru');
     }
 
-    /**
-     * Hapus guru
-     */
     public function hapus($id)
     {
-        if ($this->input->method() !== 'post') {
-            show_error('Method tidak diizinkan', 405);
+        if ($this->input->method() !== 'post') { show_error('Method tidak diizinkan', 405); }
+
+        if (!$this->Guru_model->get_by_id($id)) {
+            $this->_json(FALSE, 'Data guru tidak ditemukan'); return;
         }
 
-        // Cek apakah guru ada
-        $guru = $this->Guru_model->get_by_id($id);
-        if (!$guru) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Data guru tidak ditemukan'
-                ]));
-            return;
-        }
-
-        $result = $this->Guru_model->delete($id);
-
-        if ($result) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => TRUE,
-                    'message' => 'Data guru berhasil dihapus'
-                ]));
-        } else {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Gagal menghapus data guru'
-                ]));
-        }
+        $ok = $this->Guru_model->delete($id);
+        $this->_json((bool)$ok, $ok ? 'Data guru berhasil dihapus' : 'Gagal menghapus data guru');
     }
 
-    /**
-     * Get detail guru untuk edit modal
-     */
     public function get_detail($id)
     {
         $guru = $this->Guru_model->get_by_id($id);
-        
         if ($guru) {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => TRUE,
-                    'data' => $guru
-                ]));
+            $this->_json(TRUE, 'OK', ['data' => $guru]);
         } else {
-            $this->output
-                ->set_content_type('application/json')
-                ->set_output(json_encode([
-                    'success' => FALSE,
-                    'message' => 'Data guru tidak ditemukan'
-                ]));
+            $this->_json(FALSE, 'Data guru tidak ditemukan');
         }
     }
 }

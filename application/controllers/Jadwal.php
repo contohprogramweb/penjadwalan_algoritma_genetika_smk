@@ -19,6 +19,18 @@ class Jadwal extends CI_Controller {
         $this->load->model('Jadwal_model');
         $this->load->model('Penugasan_model');
         $this->load->model('Ruangan_model');
+        $this->load->model('Kelas_model');
+        $this->load->model('Tahun_ajaran_model');
+    }
+
+    /**
+     * Method: index()
+     * Deskripsi: Halaman lihat jadwal - redirect ke waka/jadwal
+     * Route: /jadwal
+     */
+    public function index()
+    {
+        redirect('waka/jadwal');
     }
 
     /**

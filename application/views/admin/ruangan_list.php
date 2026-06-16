@@ -1,46 +1,4 @@
 <?php $this->load->view('layouts/header'); ?>
-<!-- OLD: <!DOCTYPE html> -->
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Ruangan - Admin</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-     <!-- DataTables CSS - Menggunakan CDN -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
-	
-    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --danger-color: #dc2626;
-            --danger-hover: #b91c1c;
-            --success-color: #16a34a;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-500: #6b7280;
-            --gray-700: #374151;
-        }
-        
-        body { background-color: var(--gray-100); font-family: 'Inter', sans-serif; }
-        .card { border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .card-header { background: white; border-bottom: 1px solid var(--gray-200); padding: 1.5rem; border-radius: 12px 12px 0 0 !important; }
-        .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
-        .btn-primary:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
-        .btn-danger { background-color: var(--danger-color); border-color: var(--danger-color); }
-        .btn-danger:hover { background-color: var(--danger-hover); border-color: var(--danger-hover); }
-        .table thead th { background-color: var(--gray-50); color: var(--gray-700); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
-        .modal-header { border-bottom: 1px solid var(--gray-200); }
-        .modal-footer { border-top: 1px solid var(--gray-200); }
-        .form-label { font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem; }
-        .is-invalid { border-color: var(--danger-color) !important; }
-        .invalid-feedback { display: block; color: var(--danger-color); font-size: 0.875rem; margin-top: 0.25rem; }
-    </style>
-</head>
-<body>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -89,14 +47,14 @@
                         
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="kode" class="form-label">Kode Ruangan <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="kode" name="kode" maxlength="10" placeholder="Contoh: R.001" required>
+                                <label for="kode_ruangan" class="form-label">Kode Ruangan <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="kode_ruangan" name="kode_ruangan" maxlength="10" placeholder="Contoh: R.001" required>
                                 <div class="invalid-feedback" id="error-kode"></div>
                             </div>
 
                             <div class="col-md-8 mb-3">
-                                <label for="nama" class="form-label">Nama Ruangan <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="nama" name="nama" maxlength="100" placeholder="Contoh: Ruang Teori 1" required>
+                                <label for="nama_ruangan" class="form-label">Nama Ruangan <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" maxlength="100" placeholder="Contoh: Ruang Teori 1" required>
                                 <div class="invalid-feedback" id="error-nama"></div>
                             </div>
                         </div>
@@ -110,8 +68,8 @@
                             </div>
 
                             <div class="col-md-8 mb-3">
-                                <label for="lokasi" class="form-label">Lokasi</label>
-                                <input type="text" class="form-control" id="lokasi" name="lokasi" maxlength="100" placeholder="Contoh: Gedung A, Lantai 1">
+                                <label for="lantai" class="form-label">Lokasi</label>
+                                <input type="text" class="form-control" id="lantai" name="lantai" maxlength="100" placeholder="Contoh: 1, 2, Dasar">
                                 <div class="invalid-feedback" id="error-lokasi"></div>
                             </div>
                         </div>
@@ -231,10 +189,10 @@
                             const data = response.data;
                             $('#modalTitle').text('Edit Ruangan');
                             $('#ruanganId').val(data.id);
-                            $('#kode').val(data.kode);
-                            $('#nama').val(data.nama);
+                            $('#kode_ruangan').val(data.kode_ruangan);
+                            $('#nama_ruangan').val(data.nama_ruangan);
                             $('#kapasitas').val(data.kapasitas);
-                            $('#lokasi').val(data.lokasi || '');
+                            $('#lantai').val(data.lantai || '');
                             $('#fasilitas').val(data.fasilitas || '');
                             $('#btnSubmit').prop('disabled', false);
                             modal.show();
@@ -338,7 +296,5 @@
             });
         });
     </script>
-<!-- OLD: </body> -->
 
 <?php $this->load->view('layouts/footer'); ?>
-<!-- OLD: </html> -->

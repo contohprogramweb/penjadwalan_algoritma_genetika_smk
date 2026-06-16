@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Routes untuk Admin
 $route['admin/dashboard'] = 'Admin/Dashboard/index';
+$route['admin/onboarding'] = 'Admin/Onboarding/index';
 $route['admin/guru'] = 'Admin/Guru/index';
 $route['admin/guru/tambah'] = 'Admin/Guru/tambah';
 $route['admin/guru/edit/(:num)'] = 'Admin/Guru/edit/$1';
@@ -91,6 +92,10 @@ $route['waka/dashboard'] = 'Waka/Dashboard/index';
 $route['waka/penugasan'] = 'Waka/Penugasan/index';
 $route['waka/generate'] = 'Waka/Generate/index';
 $route['waka/jadwal'] = 'Waka/Jadwal/index';
+
+// Routes untuk Jadwal (publik - semua role)
+$route['jadwal'] = 'Jadwal/index';
+$route['jadwal/check_conflict'] = 'Jadwal/check_conflict';
 
 // Routes untuk Datatables (Server-side processing)
 $route['datatables/guru'] = 'Datatables/guru';

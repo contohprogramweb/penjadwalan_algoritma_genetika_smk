@@ -30,6 +30,21 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
   
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap 4.6 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables 1.10 -->
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  
+  
   <!-- Custom CSS -->
   <link rel="stylesheet" href="<?= base_url('assets/css/variables.css') ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/app.css') ?>">
@@ -193,7 +208,8 @@
             </a>
             <div class="dropdown-menu">
               <?php 
-              $kelas_list = $this->kelas_model->get_all();
+              $this->load->model('Kelas_model');
+              $kelas_list = $this->Kelas_model->get_all();
               foreach ($kelas_list as $k): 
               ?>
               <a class="dropdown-item" href="<?= site_url('laporan/pdf_jadwal/' . $k->id_kelas) ?>" target="_blank">
@@ -212,11 +228,12 @@
             </a>
             <div class="dropdown-menu">
               <?php 
-              $guru_list = $this->guru_model->get_all();
+              $this->load->model('Guru_model');
+              $guru_list = $this->Guru_model->get_all();
               foreach ($guru_list as $g): 
               ?>
               <a class="dropdown-item" href="<?= site_url('laporan/pdf_beban_guru/' . $g->id_guru) ?>" target="_blank">
-                <i class="fas fa-print mr-2"></i><?= htmlspecialchars($g->nama_guru) ?>
+                <i class="fas fa-print mr-2"></i><?= htmlspecialchars($g->nama_lengkap) ?>
               </a>
               <?php endforeach; ?>
             </div>

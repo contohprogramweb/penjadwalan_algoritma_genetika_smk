@@ -1,45 +1,4 @@
 <?php $this->load->view('layouts/header'); ?>
-<!-- OLD: <!DOCTYPE html> -->
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Tahun Ajaran - Admin</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/datatables.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css') ?>">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --danger-color: #dc2626;
-            --danger-hover: #b91c1c;
-            --success-color: #16a34a;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-500: #6b7280;
-            --gray-700: #374151;
-        }
-        
-        body { background-color: var(--gray-100); font-family: 'Inter', sans-serif; }
-        .card { border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .card-header { background: white; border-bottom: 1px solid var(--gray-200); padding: 1.5rem; border-radius: 12px 12px 0 0 !important; }
-        .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
-        .btn-primary:hover { background-color: var(--primary-hover); border-color: var(--primary-hover); }
-        .btn-danger { background-color: var(--danger-color); border-color: var(--danger-color); }
-        .btn-danger:hover { background-color: var(--danger-hover); border-color: var(--danger-hover); }
-        .table thead th { background-color: var(--gray-50); color: var(--gray-700); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
-        .badge-aktif { background-color: #dcfce7; color: #166534; }
-        .badge-tidak_aktif { background-color: #fee2e2; color: #991b1b; }
-        .modal-header { border-bottom: 1px solid var(--gray-200); }
-        .modal-footer { border-top: 1px solid var(--gray-200); }
-        .form-label { font-weight: 500; color: var(--gray-700); margin-bottom: 0.5rem; }
-        .is-invalid { border-color: var(--danger-color) !important; }
-        .invalid-feedback { display: block; color: var(--danger-color); font-size: 0.875rem; margin-top: 0.25rem; }
-    </style>
-</head>
-<body>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -89,7 +48,18 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="tahun" class="form-label">Tahun Ajaran <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="tahun" name="tahun" maxlength="9" placeholder="2024/2025" required>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="tahun_mulai">Tahun Mulai</label>
+                                        <input type="number" class="form-control" id="tahun_mulai" name="tahun_mulai" 
+                                               min="2020" max="2099" placeholder="2024" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="tahun_selesai">Tahun Selesai</label>
+                                        <input type="number" class="form-control" id="tahun_selesai" name="tahun_selesai" 
+                                               min="2020" max="2099" placeholder="2025" required>
+                                    </div>
+                                </div>
                                 <div class="invalid-feedback" id="error-tahun"></div>
                                 <small class="text-muted">Format: YYYY/YYYY (contoh: 2024/2025)</small>
                             </div>
@@ -108,7 +78,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
-                                <select class="form-select" id="status" name="status" required>
+                                <select class="form-control" id="status" name="status" required>
                                     <option value="">-- Pilih Status --</option>
                                     <option value="aktif">Aktif</option>
                                     <option value="tidak_aktif">Tidak Aktif</option>
@@ -245,9 +215,9 @@
                             const data = response.data;
                             $('#modalTitle').text('Edit Tahun Ajaran');
                             $('#tahunAjaranId').val(data.id);
-                            $('#tahun').val(data.tahun);
+                            $('#tahun_mulai').val(data.tahun_mulai); $('#tahun_selesai').val(data.tahun_selesai);
                             $('#semester').val(data.semester);
-                            $('#status').val(data.status);
+                            $('#status').val((data.is_aktif == 1 || data.status === 'active') ? 'aktif' : 'tidak_aktif');
                             $('#tanggal_mulai').val(data.tanggal_mulai);
                             $('#tanggal_selesai').val(data.tanggal_selesai);
                             $('#btnSubmit').prop('disabled', false);
@@ -352,7 +322,5 @@
             });
         });
     </script>
-<!-- OLD: </body> -->
 
 <?php $this->load->view('layouts/footer'); ?>
-<!-- OLD: </html> -->

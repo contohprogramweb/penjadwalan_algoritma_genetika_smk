@@ -1,4 +1,4 @@
-<?php $this->load->view('layouts/header'); ?>
+<?php  $this->load->view('layouts/header'); ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -22,7 +22,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total Guru</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalGuru">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalGuru"><?= $total_guru ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
@@ -40,7 +40,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total Kelas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalKelas">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalKelas"><?= $total_kelas ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-school fa-2x text-gray-300"></i>
@@ -58,7 +58,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Total Mata Pelajaran</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMapel">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMapel"><?= $total_mapel ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-book fa-2x text-gray-300"></i>
@@ -76,7 +76,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Total Ruangan</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalRuangan">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalRuangan"><?= $total_ruangan ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-door-open fa-2x text-gray-300"></i>
@@ -97,7 +97,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
                                 Total Tahun Ajaran</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalTahunAjaran">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalTahunAjaran"><?= $total_tahun_ajaran ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
@@ -115,7 +115,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                 Total Jam Mengajar</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalJam">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalJam"><?= $total_jam ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clock fa-2x text-gray-300"></i>
@@ -155,44 +155,44 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/guru') ?>" class="btn btn-primary btn-block">
+                            <a href="<?= site_url('admin/guru') ?>" class="btn btn-primary btn-block">
                                 <i class="fas fa-chalkboard-teacher mr-2"></i>Kelola Guru
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/kelas') ?>" class="btn btn-success btn-block">
+                            <a href="<?= site_url('admin/kelas') ?>" class="btn btn-success btn-block">
                                 <i class="fas fa-school mr-2"></i>Kelola Kelas
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/mapel') ?>" class="btn btn-info btn-block">
+                            <a href="<?= site_url('admin/mapel') ?>" class="btn btn-info btn-block">
                                 <i class="fas fa-book mr-2"></i>Kelola Mapel
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/ruangan') ?>" class="btn btn-warning btn-block">
+                            <a href="<?= site_url('admin/ruangan') ?>" class="btn btn-warning btn-block">
                                 <i class="fas fa-door-open mr-2"></i>Kelola Ruangan
                             </a>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/tahun_ajaran') ?>" class="btn btn-secondary btn-block">
+                            <a href="<?= site_url('admin/tahun_ajaran') ?>" class="btn btn-secondary btn-block">
                                 <i class="fas fa-calendar-alt mr-2"></i>Kelola Tahun Ajaran
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/jam') ?>" class="btn btn-danger btn-block">
+                            <a href="<?= site_url('admin/jam') ?>" class="btn btn-danger btn-block">
                                 <i class="fas fa-clock mr-2"></i>Kelola Jam Mengajar
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('auth/logout') ?>" class="btn btn-outline-dark btn-block">
+                            <a href="<?= site_url('auth/logout') ?>" class="btn btn-outline-dark btn-block">
                                 <i class="fas fa-sign-out-alt mr-2"></i>Logout
                             </a>
                         </div>
                         <div class="col-md-3 col-sm-6 mb-3">
-                            <a href="<?php site_url('admin/onboarding') ?>" class="btn btn-outline-primary btn-block">
+                            <a href="<?= site_url('admin/onboarding') ?>" class="btn btn-outline-primary btn-block">
                                 <i class="fas fa-question-circle mr-2"></i>Panduan
                             </a>
                         </div>
@@ -207,17 +207,23 @@
 
 <script>
 $(document).ready(function() {
-    // Load dashboard statistics from server data
+    // Load dashboard statistics
     loadDashboardStats();
 
     function loadDashboardStats() {
-        // Gunakan data yang sudah dikirim dari controller
-        <?php if (isset($total_guru)): ?>$('#totalGuru').text('<?= $total_guru ?>');<?php endif; ?>
-        <?php if (isset($total_kelas)): ?>$('#totalKelas').text('<?= $total_kelas ?>');<?php endif; ?>
-        <?php if (isset($total_mapel)): ?>$('#totalMapel').text('<?= $total_mapel ?>');<?php endif; ?>
-        <?php if (isset($total_ruangan)): ?>$('#totalRuangan').text('<?= $total_ruangan ?>');<?php endif; ?>
-        <?php if (isset($total_tahun_ajaran)): ?>$('#totalTahunAjaran').text('<?= $total_tahun_ajaran ?>');<?php endif; ?>
-        <?php if (isset($total_jam)): ?>$('#totalJam').text('<?= $total_jam ?>');<?php endif; ?>
+        // Fetch stats from API or controller
+        // For now, using placeholder values
+        // In production, this should fetch from actual data
+
+        // Example: $.ajax({ url: '<?php site_url('admin/dashboard/stats') ?>', ... })
+
+        // Placeholder values (remove when real API is implemented)
+        $('#totalGuru').text('0');
+        $('#totalKelas').text('0');
+        $('#totalMapel').text('0');
+        $('#totalRuangan').text('0');
+        $('#totalTahunAjaran').text('0');
+        $('#totalJam').text('0');
     }
 });
 </script>
