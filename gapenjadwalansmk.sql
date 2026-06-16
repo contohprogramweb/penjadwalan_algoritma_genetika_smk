@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `guru` (
   `tempat_lahir` varchar(50) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `pendidikan_terakhir` enum('S1','S2','S3','D3','D4') DEFAULT 'S1',
+  `status_kepegawaian` enum('pns','honorer','ttk') DEFAULT 'honorer',
   `jam_maks_minggu` tinyint DEFAULT '24' COMMENT 'Maksimal 24 jam/minggu',
   `jam_min_minggu` tinyint DEFAULT '12' COMMENT 'Minimal 12 jam/minggu',
   `status_aktif` tinyint(1) DEFAULT '1' COMMENT '1=aktif, 0=nonaktif',
@@ -38,17 +39,17 @@ CREATE TABLE IF NOT EXISTS `guru` (
   KEY `idx_status` (`status_aktif`)
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
-INSERT INTO `guru` (`id_guru`, `nip`, `nuptk`, `nama_lengkap`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `pendidikan_terakhir`, `jam_maks_minggu`, `jam_min_minggu`, `status_aktif`, `created_at`, `updated_at`) VALUES
-	(1, '198501152010011001', '1234567890123456', 'Ahmad Fauzi, S.Pd', 'L', 'Bandung', '1985-01-15', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(2, '198703202011012002', '2345678901234567', 'Siti Nurhaliza, S.Pd', 'P', 'Jakarta', '1987-03-20', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(3, '199005102012011003', '3456789012345678', 'Budi Santoso, S.Kom', 'L', 'Surabaya', '1990-05-10', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(4, '198808152013012004', '4567890123456789', 'Dewi Lestari, M.Pd', 'P', 'Yogyakarta', '1988-08-15', 'S2', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(5, '199202202014011005', '5678901234567890', 'Eko Prasetyo, S.T', 'L', 'Semarang', '1992-02-20', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(6, '198906102015012006', '6789012345678901', 'Fitri Handayani, S.Pd', 'P', 'Malang', '1989-06-10', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(7, '199109152016011007', '7890123456789012', 'Gunawan Wibowo, S.Pd', 'L', 'Medan', '1991-09-15', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(8, '199304202017012008', '8901234567890123', 'Hana Pertiwi, S.Kom', 'P', 'Denpasar', '1993-04-20', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(9, '198607102018011009', '9012345678901234', 'Indra Kusuma, M.T', 'L', 'Makassar', '1986-07-10', 'S2', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
-	(10, '199408152019012010', '0123456789012345', 'Juliarti Sari, S.Pd', 'P', 'Palembang', '1994-08-15', 'S1', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03');
+INSERT INTO `guru` (`id_guru`, `nip`, `nuptk`, `nama_lengkap`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `pendidikan_terakhir`, `status_kepegawaian`, `jam_maks_minggu`, `jam_min_minggu`, `status_aktif`, `created_at`, `updated_at`) VALUES
+	(1, '198501152010011001', '1234567890123456', 'Ahmad Fauzi, S.Pd', 'L', 'Bandung', '1985-01-15', 'S1', 'pns', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(2, '198703202011012002', '2345678901234567', 'Siti Nurhaliza, S.Pd', 'P', 'Jakarta', '1987-03-20', 'S1', 'pns', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(3, '199005102012011003', '3456789012345678', 'Budi Santoso, S.Kom', 'L', 'Surabaya', '1990-05-10', 'S1', 'honorer', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(4, '198808152013012004', '4567890123456789', 'Dewi Lestari, M.Pd', 'P', 'Yogyakarta', '1988-08-15', 'S2', 'pns', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(5, '199202202014011005', '5678901234567890', 'Eko Prasetyo, S.T', 'L', 'Semarang', '1992-02-20', 'S1', 'honorer', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(6, '198906102015012006', '6789012345678901', 'Fitri Handayani, S.Pd', 'P', 'Malang', '1989-06-10', 'S1', 'ttk', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(7, '199109152016011007', '7890123456789012', 'Gunawan Wibowo, S.Pd', 'L', 'Medan', '1991-09-15', 'S1', 'honorer', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(8, '199304202017012008', '8901234567890123', 'Hana Pertiwi, S.Kom', 'P', 'Denpasar', '1993-04-20', 'S1', 'ttk', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(9, '198607102018011009', '9012345678901234', 'Indra Kusuma, M.T', 'L', 'Makassar', '1986-07-10', 'S2', 'pns', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03'),
+	(10, '199408152019012010', '0123456789012345', 'Juliarti Sari, S.Pd', 'P', 'Palembang', '1994-08-15', 'S1', 'honorer', 24, 12, 1, '2026-06-11 23:34:03', '2026-06-11 23:34:03');
 
 -- =============================================
 -- 2. Tabel jam_pelajaran (mandiri)
