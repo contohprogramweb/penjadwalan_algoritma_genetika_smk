@@ -1,10 +1,15 @@
 # Compiled and build artifacts
 *.pyc
 __pycache__/
+*.o
+*.obj
+dist/
+build/
 
 # Dependencies
-vendor/
-composer.lock
+.venv/
+venv/
+node_modules/
 
 # Logs and temp files
 *.log
@@ -14,8 +19,11 @@ composer.lock
 # Environment
 .env
 .env.local
-*.env.*
+.env.*
 
 # Editors
 .vscode/
 .idea/
+
+# Original rules preserved
+*.log
