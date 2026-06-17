@@ -93,9 +93,10 @@ class Datatables extends MY_Controller {
                 'tipe'         => '<span class="badge badge-' . ($r['tipe'] === 'praktikum' ? 'warning' : 'info') . '">' . ucfirst($r['tipe']) . '</span>',
                 'jp_per_minggu'=> $r['jam_per_minggu'] . ' JP',
                 'semester'     => 'Kelompok ' . $r['kelompok'],
+                'id'           => $r['id_mapel'],
                 'aksi'         =>
-                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_mapel'].'"><i class="fas fa-edit"></i></button>' .
-                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_mapel'].'"><i class="fas fa-trash"></i></button>',
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" onclick="editData('.$r['id_mapel'].')"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" onclick="hapusData('.$r['id_mapel'].')"><i class="fas fa-trash"></i></button>',
             ];
         }
         $this->_json($data, $total, $filtered);

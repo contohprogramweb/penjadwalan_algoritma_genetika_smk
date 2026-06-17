@@ -189,9 +189,15 @@
             $('#kelompok').data('label', 'Kelompok');
 
             // Setup CSRF dari app.js
+            var CSRF_NAME  = $('meta[name="csrf_token_name"]').attr('content');
+            var CSRF_HASH  = $('meta[name="csrf_token_hash"]').attr('content');
+            
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                data: function(d) {
+                    d[CSRF_NAME] = CSRF_HASH;
                 }
             });
 
@@ -313,7 +319,7 @@
                 $.ajax({
                     url: url,
                     type: 'POST',
-                    data: $(this).serialize(),
+                    data: $(this).serialize() + '&' + CSRF_NAME + '=' + CSRF_HASH,
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
@@ -400,6 +406,10 @@
             });
 
             // Reset modal when hidden
+            $('#modalForm').on('hidden.bs.modal', function() {
+                resetForm();
+            });
+
             $('#modalHapus').on('hidden.bs.modal', function() {
                 deleteId = null;
                 $('#btnKonfirmasiHapus').prop('disabled', false);

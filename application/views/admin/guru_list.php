@@ -18,9 +18,6 @@
                             <th scope="col">NIP</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Kelamin</th>
-                            <th scope="col">Tempat Lahir</th>
-                            <th scope="col">Tanggal Lahir</th>
-                            <th scope="col">Pendidikan</th>
                             <th scope="col">Status Kepegawaian</th>
                             <th scope="col">Status Aktif</th>
                             <th scope="col"><span class="sr-only">Aksi</span></th>
@@ -245,9 +242,6 @@
                     {data: 'nip'},
                     {data: 'nama'},
                     {data: 'jenis_kelamin'},
-                    {data: 'tempat_lahir'},
-                    {data: 'tanggal_lahir'},
-                    {data: 'pendidikan'},
                     {data: 'status_kepegawaian'},
                     {data: 'status_aktif'},
                     {data: 'aksi', orderable: false, searchable: false}
