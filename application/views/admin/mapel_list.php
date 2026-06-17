@@ -319,7 +319,7 @@
                 $.ajax({
                     url: url,
                     type: 'POST',
-                    data: $(this).serialize() + '&' + CSRF_NAME + '=' + CSRF_HASH,
+                    data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {

@@ -65,12 +65,11 @@ class Mapel extends MY_Controller {
                 ]
             ],
             'kelompok' => [
-                'label' => 'Semester',
-                'rules' => 'required|integer|in_list[1,2]',
+                'label' => 'Kelompok Mapel',
+                'rules' => 'required|in_list[A,B,C,D]',
                 'errors' => [
-                    'required' => 'Semester wajib dipilih',
-                    'integer' => 'Semester harus bilangan bulat',
-                    'in_list' => 'Semester harus 1 atau 2'
+                    'required' => 'Kelompok mapel wajib dipilih',
+                    'in_list' => 'Kelompok harus A, B, C, atau D'
                 ]
             ]
         ]);
@@ -181,12 +180,11 @@ class Mapel extends MY_Controller {
                 ]
             ],
             'kelompok' => [
-                'label' => 'Semester',
-                'rules' => 'required|integer|in_list[1,2]',
+                'label' => 'Kelompok Mapel',
+                'rules' => 'required|in_list[A,B,C,D]',
                 'errors' => [
-                    'required' => 'Semester wajib dipilih',
-                    'integer' => 'Semester harus bilangan bulat',
-                    'in_list' => 'Semester harus 1 atau 2'
+                    'required' => 'Kelompok mapel wajib dipilih',
+                    'in_list' => 'Kelompok harus A, B, C, atau D'
                 ]
             ]
         ]);
