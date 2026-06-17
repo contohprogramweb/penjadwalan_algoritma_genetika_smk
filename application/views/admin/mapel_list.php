@@ -38,7 +38,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">Tambah Mapel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
                 <form id="formMapel">
                     <div class="modal-body">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmit">
                             <span class="spinner-border spinner-border-sm me-1 d-none" id="spinner"></span>
                             <span id="btnText">Simpan</span>
@@ -105,14 +105,14 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title"><i class="fa fa-exclamation-triangle me-2"></i>Konfirmasi Hapus</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="close btn-close-white" data-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <p>Apakah Anda yakin ingin menghapus data mapel ini?</p>
                     <p class="mb-0 text-danger"><strong>Tindakan ini tidak dapat dibatalkan!</strong></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="button" class="btn btn-danger" id="btnKonfirmasiHapus">
                         <span class="spinner-border spinner-border-sm me-1 d-none" id="spinnerHapus"></span>
                         Hapus
@@ -246,14 +246,15 @@
                 ],
                 order: [[1, 'asc']],
                 language: {
-                    processing: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'
+                    url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Indonesian.json',
+                    processing: '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>'
                 }
             });
 
             let modalEdit = false;
             let deleteId = null;
-            const modal = new bootstrap.Modal(document.getElementById('modalForm'));
-            const modalHapus = new bootstrap.Modal(document.getElementById('modalHapus'));
+            const modal = $('#modalForm').modal({show: false});
+            const modalHapus = $('#modalHapus').modal({show: false});
 
             // Reset form
             function resetForm() {
@@ -271,7 +272,7 @@
                 modalEdit = false;
                 resetForm();
                 $('#modalTitle').text('Tambah Mapel');
-                modal.show();
+                $('#modalForm').modal('show');
             }
 
             // Edit data
@@ -294,7 +295,7 @@
                             $('#jam_per_minggu').val(data.jam_per_minggu);
                             $('#kelompok').val(data.kelompok);
                             $('#btnSubmit').prop('disabled', false);
-                            modal.show();
+                            $('#modalForm').modal('show');
                         } else {
                             alert('Data tidak ditemukan');
                         }
@@ -309,7 +310,7 @@
             // Hapus data
             window.hapusData = function(id) {
                 deleteId = id;
-                modalHapus.show();
+                $('#modalHapus').modal('show');
             }
 
             // Submit form
@@ -333,7 +334,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            modal.hide();
+                            $('#modalForm').modal('hide');
                             table.ajax.reload();
                             Swal.fire({
                                 icon: 'success',
@@ -383,7 +384,7 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function(response) {
-                        modalHapus.hide();
+                        $('#modalHapus').modal('hide');
                         if (response.success) {
                             table.ajax.reload();
                             Swal.fire({
