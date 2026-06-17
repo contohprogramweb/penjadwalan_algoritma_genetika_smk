@@ -216,13 +216,23 @@
                     { 
                         data: 'tipe',
                         render: function(data) {
-                            const badgeClass = data === 'teori' ? 'badge-teori' : 'badge-praktikum';
-                            const label = data === 'teori' ? 'Teori' : 'Praktikum';
-                            return `<span class="badge ${badgeClass}">${label}</span>`;
+                            const badgeClass = data === 'teori' ? 'badge-info' : 'badge-warning';
+                            return `<span class="badge ${badgeClass}">${data.charAt(0).toUpperCase() + data.slice(1)}</span>`;
                         }
                     },
-                    { data: 'jp_per_minggu' },
-                    { data: 'semester', title: 'Kelompok' },
+                    { 
+                        data: 'jp_per_minggu',
+                        render: function(data) {
+                            return data + ' JP';
+                        }
+                    },
+                    { data: 'semester' },
+                    { 
+                        data: 'kelompok',
+                        render: function(data) {
+                            return 'Kelompok ' + data;
+                        }
+                    },
                     { 
                         data: 'aksi',
                         orderable: false,
