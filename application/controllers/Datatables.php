@@ -92,8 +92,6 @@ class Datatables extends MY_Controller {
                 'nama'           => htmlspecialchars($r['nama_mapel']),
                 'tipe'           => $r['tipe'],
                 'jp_per_minggu'  => intval($r['jam_per_minggu']),
-                'semester'       => '-',
-                'kelompok'       => $r['kelompok'],
                 'id'             => intval($r['id_mapel']),
                 'aksi'           =>
                     '<button class="btn btn-sm btn-warning mr-1 btn-edit" onclick="editData('.intval($r['id_mapel']).')"><i class="fas fa-edit"></i></button>' .

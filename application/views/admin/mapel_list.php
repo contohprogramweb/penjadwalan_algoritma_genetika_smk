@@ -19,7 +19,6 @@
                                         <th>Nama Mapel</th>
                                         <th>Tipe</th>
                                         <th>JP/Minggu</th>
-                                        <th>Semester</th>
                                         <th width="15%">Aksi</th>
                                     </tr>
                                 </thead>
@@ -227,16 +226,10 @@
                             return data + ' JP';
                         }
                     },
-                    { data: 'semester' },
-                    { 
-                        data: 'kelompok',
-                        render: function(data) {
-                            return 'Kelompok ' + data;
-                        }
-                    },
                     { 
                         data: 'aksi',
                         orderable: false,
+                        searchable: false,
                         render: function(data) {
                             return `<div class="btn-group btn-group-sm">
                                 <button class="btn btn-info" onclick="editData(${data.id})"><i class="fa fa-edit"></i></button>
@@ -245,7 +238,7 @@
                         }
                     }
                 ],
-                order: [[1, 'asc']], 
+                order: [[1, 'asc']],
                 drawCallback: function(settings) {
                     $('#table-mapel_processing').hide();
                 }
