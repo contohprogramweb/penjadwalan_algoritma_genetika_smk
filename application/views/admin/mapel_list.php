@@ -61,7 +61,7 @@
 
                         <div class="mb-3">
                             <label for="tipe" class="form-label">Tipe Mapel <span class="text-danger">*</span></label>
-                            <select class="form-select" id="tipe" name="tipe" required>
+                            <select class="form-control select2" id="tipe" name="tipe" required>
                                 <option value="">-- Pilih Tipe --</option>
                                 <option value="teori">Teori</option>
                                 <option value="praktikum">Praktikum</option>
@@ -78,7 +78,7 @@
 
                         <div class="mb-3">
                             <label for="kelompok" class="form-label">Kelompok Mapel <span class="text-danger">*</span></label>
-                            <select class="form-control" id="kelompok" name="kelompok" required>
+                            <select class="form-control select2" id="kelompok" name="kelompok" required>
                                 <option value="">-- Pilih Kelompok --</option>
                                 <option value="A">Kelompok A (Normatif)</option>
                                 <option value="B">Kelompok B (Adaptif)</option>
@@ -230,15 +230,15 @@
                         data: 'aksi',
                         orderable: false,
                         searchable: false,
-                        render: function(data) {
-                            return `<div class="btn-group btn-group-sm">
-                                <button class="btn btn-info" onclick="editData(${data.id})"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" onclick="hapusData(${data.id})"><i class="fa fa-trash"></i></button>
-                            </div>`;
+                        render: function(data, type, row) {
+                            return '<div class="btn-group btn-group-sm">' +
+                                '<button class="btn btn-info" onclick="editData(' + row.id + ')"><i class="fa fa-edit"></i></button>' +
+                                '<button class="btn btn-danger" onclick="hapusData(' + row.id + ')"><i class="fa fa-trash"></i></button>' +
+                                '</div>';
                         }
                     }
                 ],
-                order: [[1, 'asc']],
+                order: [[0, 'asc']],
                 drawCallback: function(settings) {
                     $('#table-mapel_processing').hide();
                 }
@@ -258,6 +258,13 @@
                 $('#btnSubmit').prop('disabled', false);
                 $('#spinner').addClass('d-none');
                 $('#btnText').text('Simpan');
+                // Reset Select2
+                if ($('#tipe').data('select2')) {
+                    $('#tipe').val(null).trigger('change');
+                }
+                if ($('#kelompok').data('select2')) {
+                    $('#kelompok').val(null).trigger('change');
+                }
             }
 
             // Open modal tambah
@@ -281,20 +288,29 @@
                         if (response.success) {
                             const data = response.data;
                             $('#modalTitle').text('Edit Mapel');
-                            $('#mapelId').val(data.id);
+                            $('#mapelId').val(data.id_mapel);
                             $('#kode_mapel').val(data.kode_mapel);
                             $('#nama_mapel').val(data.nama_mapel);
-                            $('#tipe').val(data.tipe);
+                            $('#tipe').val(data.tipe).trigger('change');
                             $('#jam_per_minggu').val(data.jam_per_minggu);
-                            $('#kelompok').val(data.kelompok);
+                            $('#kelompok').val(data.kelompok).trigger('change');
                             $('#btnSubmit').prop('disabled', false);
                             $('#modalForm').modal('show');
                         } else {
-                            alert('Data tidak ditemukan');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Data tidak ditemukan'
+                            });
                         }
                     },
-                    error: function() {
-                        alert('Terjadi kesalahan saat mengambil data');
+                    error: function(xhr, status, error) {
+                        console.error('Ajax error:', status, error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat mengambil data: ' + (xhr.responseText || error)
+                        });
                         $('#btnSubmit').prop('disabled', false);
                     }
                 });
@@ -412,6 +428,27 @@
             // Reset modal when hidden
             $('#modalForm').on('hidden.bs.modal', function() {
                 resetForm();
+            });
+
+            // Initialize Select2 saat modal dibuka
+            $('#modalForm').on('shown.bs.modal', function() {
+                $('.select2').each(function() {
+                    if (!$(this).data('select2')) {
+                        $(this).select2({
+                            theme: 'bootstrap4',
+                            dropdownParent: $(this).closest('.modal'),
+                            placeholder: $(this).find('option[value=""]').text() || '-- Pilih --',
+                            allowClear: true,
+                            language: {
+                                noResults: function() {
+                                    return "Data tidak ditemukan";
+                                }
+                            }
+                        });
+                    }
+                    // Trigger change untuk update tampilan setelah select2 initialized
+                    $(this).trigger('change');
+                });
             });
 
             $('#modalHapus').on('hidden.bs.modal', function() {
