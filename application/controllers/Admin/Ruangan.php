@@ -57,7 +57,7 @@ class Ruangan extends MY_Controller {
             ],
             'tipe' => [
                 'label' => 'Jenis Ruangan',
-                'rules' => 'required|in_list[reguler,laboratorium,lapangan,aula]',
+                'rules' => 'required|in_list[kelas,lab,bengkel,lapangan,aula]',
                 'errors' => [
                     'required' => 'Jenis ruangan wajib dipilih',
                     'in_list' => 'Jenis tidak valid'
@@ -181,7 +181,7 @@ class Ruangan extends MY_Controller {
             ],
             'tipe' => [
                 'label' => 'Jenis Ruangan',
-                'rules' => 'required|in_list[reguler,laboratorium,lapangan,aula]',
+                'rules' => 'required|in_list[kelas,lab,bengkel,lapangan,aula]',
                 'errors' => [
                     'required' => 'Jenis ruangan wajib dipilih',
                     'in_list' => 'Jenis tidak valid'
