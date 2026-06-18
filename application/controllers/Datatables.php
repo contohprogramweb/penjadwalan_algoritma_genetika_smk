@@ -147,9 +147,7 @@ class Datatables extends MY_Controller {
                 'lokasi'    => $r['lantai'] ? 'Lantai ' . $r['lantai'] : '-',
                 'fasilitas' => $r['fasilitas'] ?? '-',
                 'id'        => intval($r['id_ruangan']),
-                'aksi'      => [
-                    'id' => intval($r['id_ruangan'])
-                ],
+                'aksi'      => intval($r['id_ruangan']),
             ];
         }
         $this->_json($data, $total, $filtered);

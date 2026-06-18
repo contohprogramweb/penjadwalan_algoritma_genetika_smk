@@ -40,10 +40,10 @@
                     <h5 class="modal-title" id="modalTitle">Tambah Ruangan</h5>
                     <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
-                <form id="formRuangan">
+                <form id="formRuangan" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="ruanganId">
-                        <?= csrf_field() ?>
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
                         
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -119,6 +119,7 @@
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/js/app.js') ?>"></script>
+    <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
     <script>
         $(document).ready(function() {
             const table = $('#table-ruangan').DataTable({
@@ -126,7 +127,11 @@
                 serverSide: true,
                 ajax: {
                     url: '<?= site_url("datatables/ruangan") ?>',
-                    type: 'POST'
+                    type: 'POST',
+                    data: function(d) {
+                        d[$('meta[name="csrf_token_name"]').attr('content')] = 
+                            $('meta[name="csrf_token_hash"]').attr('content');
+                    }
                 },
                 columns: [
                     { data: 'no', orderable: false },
@@ -145,8 +150,8 @@
                         orderable: false,
                         render: function(data) {
                             return `<div class="btn-group btn-group-sm">
-                                <button class="btn btn-info" onclick="editData(${data.id})"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" onclick="hapusData(${data.id})"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-info" onclick="editData(${data})"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" onclick="hapusData(${data})"><i class="fa fa-trash"></i></button>
                             </div>`;
                         }
                     }
@@ -219,6 +224,12 @@
                 const url = isEdit ? '<?= site_url("admin/ruangan/edit") ?>/' + $('#ruanganId').val() 
                                    : '<?= site_url("admin/ruangan/tambah") ?>';
                 
+                const $form = $(this);
+                const $btn = $('#btnSubmit');
+                
+                // Update CSRF token before submit
+                $form.find('input[name="<?php echo $this->security->get_csrf_token_name(); ?>"]').val('<?php echo $this->security->get_csrf_hash(); ?>');
+                
                 $('#btnSubmit').prop('disabled', true);
                 $('#spinner').removeClass('d-none');
                 $('#btnText').text(isEdit ? 'Menyimpan...' : 'Menambahkan...');
@@ -228,7 +239,7 @@
                 $.ajax({
                     url: url,
                     type: 'POST',
-                    data: $(this).serialize(),
+                    data: $form.serialize(),
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
@@ -268,6 +279,10 @@
                     url: '<?= site_url("admin/ruangan/hapus") ?>/' + deleteId,
                     type: 'POST',
                     dataType: 'json',
+                    data: {
+                        '<?php echo $this->security->get_csrf_token_name(); ?>': 
+                            '<?php echo $this->security->get_csrf_hash(); ?>'
+                    },
                     success: function(response) {
                         modalHapus.hide();
                         if (response.success) {
