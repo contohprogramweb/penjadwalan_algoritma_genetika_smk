@@ -138,7 +138,7 @@ class Ruangan extends MY_Controller {
         }
     }
 
-    public function edit($id)
+    public function update($id)
     {
         if ($this->input->method() !== 'post') {
             show_error('Method tidak diizinkan', 405);
@@ -209,7 +209,6 @@ class Ruangan extends MY_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $errors = validation_errors_array();
-            // Format errors agar key sesuai dengan ID elemen di form (tanpa underscore setelah kata kunci)
             $formatted_errors = [];
             foreach ($errors as $key => $message) {
                 $shortKey = str_replace('_ruangan', '', $key);
@@ -245,9 +244,6 @@ class Ruangan extends MY_Controller {
             'lantai' => trim($this->input->post('lantai')),
             'fasilitas' => trim($this->input->post('fasilitas'))
         ];
-
-        // Debug log
-        log_message('debug', 'Update ruangan ID: ' . $id . ', Data: ' . json_encode($data));
 
         $result = $this->Ruangan_model->update($id, $data);
 
