@@ -43,7 +43,6 @@
                 <form id="formRuangan" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="ruanganId">
-                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -62,9 +61,9 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="kapasitas" class="form-label">Kapasitas <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="kapasitas" name="kapasitas" min="10" max="100" placeholder="10-100" required>
+                                <input type="number" class="form-control" id="kapasitas" name="kapasitas" min="1" placeholder="Minimal 1" required>
                                 <div class="invalid-feedback" id="error-kapasitas"></div>
-                                <small class="text-muted">Rentang: 10 - 100 orang</small>
+                                <small class="text-muted">Minimal: 1 orang</small>
                             </div>
 
                             <div class="col-md-4 mb-3">
@@ -256,10 +255,16 @@
                 const $form = $(this);
                 const $btn = $('#btnSubmit');
 
-                // Update CSRF token before submit
-                const csrfData = {};
-                csrfData[csrfTokenName] = csrfTokenHash;
-                $form.find('input[name="' + csrfTokenName + '"]').val(csrfTokenHash);
+                // Update CSRF token before submit (get from meta tags)
+                if (csrfTokenName && csrfTokenHash) {
+                    // Add hidden input if not exists, or update existing one
+                    let $csrfInput = $form.find('input[name="' + csrfTokenName + '"]');
+                    if ($csrfInput.length === 0) {
+                        $form.prepend('<input type="hidden" name="' + csrfTokenName + '" value="' + csrfTokenHash + '">');
+                    } else {
+                        $csrfInput.val(csrfTokenHash);
+                    }
+                }
 
                 $('#btnSubmit').prop('disabled', true);
                 $('#spinner').removeClass('d-none');
