@@ -139,18 +139,17 @@ class Datatables extends MY_Controller {
         $data = [];
         foreach ($list as $r) {
             $no++;
-            $tipe_map = ['kelas' => 'info', 'lab' => 'warning', 'bengkel' => 'danger', 'lapangan' => 'success', 'aula' => 'primary'];
-            $badge_cls = $tipe_map[$r['tipe']] ?? 'secondary';
             $data[] = [
-                'no'       => $no,
-                'kode'     => htmlspecialchars($r['kode_ruangan']),
-                'nama'     => htmlspecialchars($r['nama_ruangan']),
-                'kapasitas'=> $r['kapasitas'] . ' orang',
-                'jenis'    => '<span class="badge badge-'.$badge_cls.'">'.ucfirst($r['tipe']).'</span>',
-                'lantai'   => $r['lantai'] ? 'Lantai ' . $r['lantai'] : '-',
-                'aksi'     =>
-                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_ruangan'].'"><i class="fas fa-edit"></i></button>' .
-                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_ruangan'].'"><i class="fas fa-trash"></i></button>',
+                'no'        => $no,
+                'kode'      => htmlspecialchars($r['kode_ruangan']),
+                'nama'      => htmlspecialchars($r['nama_ruangan']),
+                'kapasitas' => intval($r['kapasitas']),
+                'lokasi'    => $r['lantai'] ? 'Lantai ' . $r['lantai'] : '-',
+                'fasilitas' => $r['fasilitas'] ?? '-',
+                'id'        => intval($r['id_ruangan']),
+                'aksi'      => [
+                    'id' => intval($r['id_ruangan'])
+                ],
             ];
         }
         $this->_json($data, $total, $filtered);
