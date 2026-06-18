@@ -38,7 +38,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">Tambah Mapel</h5>
-                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form id="formMapel">
                     <div class="modal-body">
@@ -105,7 +107,9 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title"><i class="fa fa-exclamation-triangle me-2"></i>Konfirmasi Hapus</h5>
-                    <button type="button" class="close btn-close-white" data-dismiss="modal"></button>
+                    <button type="button" class="close btn-close-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <p>Apakah Anda yakin ingin menghapus data mapel ini?</p>
@@ -207,7 +211,11 @@
                 serverSide: true,
                 ajax: {
                     url: '<?= site_url("datatables/mapel") ?>',
-                    type: 'POST'
+                    type: 'POST',
+                    error: function(xhr, error, thrown) {
+                        console.error('Ajax error:', error);
+                        $('#table-mapel_processing').hide();
+                    }
                 },
                 columns: [
                     { data: 'no', orderable: false },
@@ -248,6 +256,9 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Indonesian.json',
                     processing: '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>'
+                },
+                drawCallback: function(settings) {
+                    $('#table-mapel_processing').hide();
                 }
             });
 
