@@ -91,13 +91,13 @@ class Datatables extends MY_Controller {
                 'kode'           => htmlspecialchars($r['kode_mapel']),
                 'nama'           => htmlspecialchars($r['nama_mapel']),
                 'tipe'           => $r['tipe'],
-                'jp_per_minggu'  => $r['jam_per_minggu'],
+                'jp_per_minggu'  => intval($r['jam_per_minggu']),
                 'semester'       => '-',
                 'kelompok'       => $r['kelompok'],
-                'id'             => $r['id_mapel'],
+                'id'             => intval($r['id_mapel']),
                 'aksi'           =>
-                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" onclick="editData('.$r['id_mapel'].')"><i class="fas fa-edit"></i></button>' .
-                    '<button class="btn btn-sm btn-danger btn-hapus" onclick="hapusData('.$r['id_mapel'].')"><i class="fas fa-trash"></i></button>',
+                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" onclick="editData('.intval($r['id_mapel']).')"><i class="fas fa-edit"></i></button>' .
+                    '<button class="btn btn-sm btn-danger btn-hapus" onclick="hapusData('.intval($r['id_mapel']).')"><i class="fas fa-trash"></i></button>',
             ];
         }
         $this->_json($data, $total, $filtered);

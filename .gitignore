@@ -1,1 +1,26 @@
-Nothing needs to be added to the .gitignore file based on the provided file changes, as only a PHP source file was modified and no build artifacts, dependencies, or temporary files were detected.
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+
+# Dependencies
+vendor/
+composer.lock
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+```
