@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmit">
                             <span class="spinner-border spinner-border-sm me-1 d-none" id="spinner"></span>
                             <span id="btnText">Simpan</span>
@@ -116,7 +116,7 @@
                     <p class="mb-0 text-danger"><strong>Tindakan ini tidak dapat dibatalkan!</strong></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                     <button type="button" class="btn btn-danger" id="btnKonfirmasiHapus">
                         <span class="spinner-border spinner-border-sm me-1 d-none" id="spinnerHapus"></span>
                         Hapus
