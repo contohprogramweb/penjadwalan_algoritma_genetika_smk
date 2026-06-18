@@ -47,12 +47,11 @@ class Ruangan extends MY_Controller {
             ],
             'kapasitas' => [
                 'label' => 'Kapasitas',
-                'rules' => 'required|integer|greater_than_equal_to[10]|less_than_equal_to[100]',
+                'rules' => 'required|integer|greater_than_equal_to[1]',
                 'errors' => [
                     'required' => 'Kapasitas wajib diisi',
                     'integer' => 'Kapasitas harus bilangan bulat',
-                    'greater_than_equal_to' => 'Kapasitas minimal 10',
-                    'less_than_equal_to' => 'Kapasitas maksimal 100'
+                    'greater_than_equal_to' => 'Kapasitas minimal 1'
                 ]
             ],
             'tipe' => [
@@ -105,11 +104,12 @@ class Ruangan extends MY_Controller {
 
         $data = [
             'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
-            'nama_ruangan' => $this->input->post('nama_ruangan'),
-            'kapasitas' => $this->input->post('kapasitas'),
+            'nama_ruangan' => trim($this->input->post('nama_ruangan')),
+            'kapasitas' => (int) $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
-            'lantai' => $this->input->post('lantai'),
-            'fasilitas' => $this->input->post('fasilitas')
+            'lantai' => trim($this->input->post('lantai')),
+            'fasilitas' => trim($this->input->post('fasilitas')),
+            'status_aktif' => 1
         ];
 
         $result = $this->Ruangan_model->insert($data);
@@ -170,12 +170,11 @@ class Ruangan extends MY_Controller {
             ],
             'kapasitas' => [
                 'label' => 'Kapasitas',
-                'rules' => 'required|integer|greater_than_equal_to[10]|less_than_equal_to[100]',
+                'rules' => 'required|integer|greater_than_equal_to[1]',
                 'errors' => [
                     'required' => 'Kapasitas wajib diisi',
                     'integer' => 'Kapasitas harus bilangan bulat',
-                    'greater_than_equal_to' => 'Kapasitas minimal 10',
-                    'less_than_equal_to' => 'Kapasitas maksimal 100'
+                    'greater_than_equal_to' => 'Kapasitas minimal 1'
                 ]
             ],
             'tipe' => [
@@ -228,11 +227,11 @@ class Ruangan extends MY_Controller {
 
         $data = [
             'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
-            'nama_ruangan' => $this->input->post('nama_ruangan'),
-            'kapasitas' => $this->input->post('kapasitas'),
+            'nama_ruangan' => trim($this->input->post('nama_ruangan')),
+            'kapasitas' => (int) $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
-            'lantai' => $this->input->post('lantai'),
-            'fasilitas' => $this->input->post('fasilitas')
+            'lantai' => trim($this->input->post('lantai')),
+            'fasilitas' => trim($this->input->post('fasilitas'))
         ];
 
         // Debug log
