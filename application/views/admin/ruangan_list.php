@@ -81,10 +81,9 @@
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label for="lantai" class="form-label">Lantai <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="lantai" name="lantai" min="1" max="10" placeholder="1-10" required>
+                                <label for="lantai" class="form-label">Lantai</label>
+                                <input type="text" class="form-control" id="lantai" name="lantai" maxlength="10" placeholder="Contoh: 1, 2, Dasar">
                                 <div class="invalid-feedback" id="error-lantai"></div>
-                                <small class="text-muted">Rentang: 1 - 10</small>
                             </div>
                         </div>
 

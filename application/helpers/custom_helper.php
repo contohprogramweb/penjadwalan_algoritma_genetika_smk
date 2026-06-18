@@ -18,9 +18,24 @@ if (!function_exists('validation_errors_array')) {
         $errors = [];
         
         if ($CI->form_validation->run() === FALSE) {
-            $fields = $CI->form_validation->_error_array;
-            foreach ($fields as $field => $message) {
-                $errors[$field] = $message;
+            // Gunakan method publik error_array() jika tersedia (CI 3+)
+            if (method_exists($CI->form_validation, 'error_array')) {
+                $errors = $CI->form_validation->error_array();
+            } else {
+                // Fallback: parse dari string error
+                $error_string = $CI->form_validation->error_string();
+                if (!empty($error_string)) {
+                    // Hapus tag <p> dan </p>, lalu pecah berdasarkan baris
+                    $error_string = str_replace(['<p>', '</p>'], '', trim($error_string));
+                    $error_lines = explode('</p><p>', $error_string);
+                    foreach ($error_lines as $line) {
+                        if (!empty($line)) {
+                            // Coba ekstrak nama field dari pesan error
+                            // Format umum: "Field Name" error message
+                            $errors[] = $line;
+                        }
+                    }
+                }
             }
         }
         
