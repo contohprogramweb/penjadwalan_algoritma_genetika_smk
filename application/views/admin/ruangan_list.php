@@ -38,13 +38,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">Tambah Ruangan</h5>
-                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <button type="button" class="close btn-close-white" data-dismiss="modal"></button>
                 </div>
                 <form id="formRuangan" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="id" id="ruanganId">
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                        
+
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="kode_ruangan" class="form-label">Kode Ruangan <span class="text-danger">*</span></label>
@@ -67,10 +67,23 @@
                                 <small class="text-muted">Rentang: 10 - 100 orang</small>
                             </div>
 
-                            <div class="col-md-8 mb-3">
-                                <label for="lantai" class="form-label">Lokasi</label>
-                                <input type="text" class="form-control" id="lantai" name="lantai" maxlength="100" placeholder="Contoh: 1, 2, Dasar">
-                                <div class="invalid-feedback" id="error-lokasi"></div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tipe" class="form-label">Jenis Ruangan <span class="text-danger">*</span></label>
+                                <select class="form-control" id="tipe" name="tipe" required>
+                                    <option value="">-- Pilih Jenis --</option>
+                                    <option value="reguler">Reguler</option>
+                                    <option value="laboratorium">Laboratorium</option>
+                                    <option value="lapangan">Lapangan</option>
+                                    <option value="aula">Aula</option>
+                                </select>
+                                <div class="invalid-feedback" id="error-tipe"></div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label for="lantai" class="form-label">Lantai <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="lantai" name="lantai" min="1" max="10" placeholder="1-10" required>
+                                <div class="invalid-feedback" id="error-lantai"></div>
+                                <small class="text-muted">Rentang: 1 - 10</small>
                             </div>
                         </div>
 
@@ -122,6 +135,12 @@
     <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
     <script>
         $(document).ready(function() {
+            // Get CSRF token from meta tag or initial load
+            let csrfTokenName = $('meta[name="csrf_token_name"]').length ?
+                $('meta[name="csrf_token_name"]').attr('content') : '';
+            let csrfTokenHash = $('meta[name="csrf_token_hash"]').length ?
+                $('meta[name="csrf_token_hash"]').attr('content') : '';
+
             const table = $('#table-ruangan').DataTable({
                 processing: true,
                 serverSide: true,
@@ -129,8 +148,17 @@
                     url: '<?= site_url("datatables/ruangan") ?>',
                     type: 'POST',
                     data: function(d) {
-                        d[$('meta[name="csrf_token_name"]').attr('content')] = 
-                            $('meta[name="csrf_token_hash"]').attr('content');
+                        if (csrfTokenName && csrfTokenHash) {
+                            d[csrfTokenName] = csrfTokenHash;
+                        }
+                    },
+                    dataSrc: function(json) {
+                        // Update CSRF tokens from response
+                        if (json.csrf_token_name && json.csrf_hash) {
+                            csrfTokenName = json.csrf_token_name;
+                            csrfTokenHash = json.csrf_hash;
+                        }
+                        return json.data;
                     }
                 },
                 columns: [
@@ -139,19 +167,19 @@
                     { data: 'nama' },
                     { data: 'kapasitas' },
                     { data: 'lokasi' },
-                    { 
+                    {
                         data: 'fasilitas',
                         render: function(data) {
                             return data ? data.substring(0, 50) + (data.length > 50 ? '...' : '') : '-';
                         }
                     },
-                    { 
+                    {
                         data: 'aksi',
                         orderable: false,
-                        render: function(data) {
+                        render: function(data, type, row) {
                             return `<div class="btn-group btn-group-sm">
-                                <button class="btn btn-info" onclick="editData(${data})"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" onclick="hapusData(${data})"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-info" onclick="editData(${row.id})"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" onclick="hapusData(${row.id})"><i class="fa fa-trash"></i></button>
                             </div>`;
                         }
                     }
@@ -161,8 +189,8 @@
 
             let modalEdit = false;
             let deleteId = null;
-            const modal = $('#modalForm').modal({show: false});
-            const modalHapus = $('#modalHapus').modal({show: false});
+            const modalEl = $('#modalForm');
+            const modalHapusEl = $('#modalHapus');
 
             function resetForm() {
                 $('#formRuangan')[0].reset();
@@ -178,13 +206,13 @@
                 modalEdit = false;
                 resetForm();
                 $('#modalTitle').text('Tambah Ruangan');
-                modal.show();
+                modalEl.modal('show');
             }
 
             window.editData = function(id) {
                 modalEdit = true;
                 $('#btnSubmit').prop('disabled', true);
-                
+
                 $.ajax({
                     url: '<?= site_url("admin/ruangan/get_detail") ?>/' + id,
                     type: 'GET',
@@ -193,20 +221,21 @@
                         if (response.success) {
                             const data = response.data;
                             $('#modalTitle').text('Edit Ruangan');
-                            $('#ruanganId').val(data.id);
+                            $('#ruanganId').val(data.id_ruangan || data.id);
                             $('#kode_ruangan').val(data.kode_ruangan);
                             $('#nama_ruangan').val(data.nama_ruangan);
                             $('#kapasitas').val(data.kapasitas);
+							$('#tipe').val(data.tipe || '');
                             $('#lantai').val(data.lantai || '');
                             $('#fasilitas').val(data.fasilitas || '');
                             $('#btnSubmit').prop('disabled', false);
-                            modal.show();
+                            modalEl.modal('show');
                         } else {
-                            alert('Data tidak ditemukan');
+                            Swal.fire({ icon: 'error', title: 'Gagal', text: 'Data tidak ditemukan' });
                         }
                     },
                     error: function() {
-                        alert('Terjadi kesalahan saat mengambil data');
+                        Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan saat mengambil data' });
                         $('#btnSubmit').prop('disabled', false);
                     }
                 });
@@ -214,22 +243,24 @@
 
             window.hapusData = function(id) {
                 deleteId = id;
-                modalHapus.show();
+                modalHapusEl.modal('show');
             }
 
             $('#formRuangan').submit(function(e) {
                 e.preventDefault();
-                
+
                 const isEdit = modalEdit;
-                const url = isEdit ? '<?= site_url("admin/ruangan/edit") ?>/' + $('#ruanganId').val() 
+                const url = isEdit ? '<?= site_url("admin/ruangan/edit") ?>/' + $('#ruanganId').val()
                                    : '<?= site_url("admin/ruangan/tambah") ?>';
-                
+
                 const $form = $(this);
                 const $btn = $('#btnSubmit');
-                
+
                 // Update CSRF token before submit
-                $form.find('input[name="<?php echo $this->security->get_csrf_token_name(); ?>"]').val('<?php echo $this->security->get_csrf_hash(); ?>');
-                
+                const csrfData = {};
+                csrfData[csrfTokenName] = csrfTokenHash;
+                $form.find('input[name="' + csrfTokenName + '"]').val(csrfTokenHash);
+
                 $('#btnSubmit').prop('disabled', true);
                 $('#spinner').removeClass('d-none');
                 $('#btnText').text(isEdit ? 'Menyimpan...' : 'Menambahkan...');
@@ -243,7 +274,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            modal.hide();
+                            modalEl.modal('hide');
                             table.ajax.reload();
                             Swal.fire({ icon: 'success', title: 'Berhasil', text: response.message });
                         } else {
@@ -271,20 +302,20 @@
 
             $('#btnKonfirmasiHapus').click(function() {
                 if (!deleteId) return;
-                
+
                 $(this).prop('disabled', true);
                 $('#spinnerHapus').removeClass('d-none');
+
+                const csrfData = {};
+                csrfData[csrfTokenName] = csrfTokenHash;
 
                 $.ajax({
                     url: '<?= site_url("admin/ruangan/hapus") ?>/' + deleteId,
                     type: 'POST',
                     dataType: 'json',
-                    data: {
-                        '<?php echo $this->security->get_csrf_token_name(); ?>': 
-                            '<?php echo $this->security->get_csrf_hash(); ?>'
-                    },
+                    data: csrfData,
                     success: function(response) {
-                        modalHapus.hide();
+                        modalHapusEl.modal('hide');
                         if (response.success) {
                             table.ajax.reload();
                             Swal.fire({ icon: 'success', title: 'Berhasil', text: response.message });
@@ -304,7 +335,11 @@
                 });
             });
 
-            $('#modalHapus').on('hidden.bs.modal', function() {
+            modalEl.on('hidden.bs.modal', function() {
+                resetForm();
+            });
+
+            modalHapusEl.on('hidden.bs.modal', function() {
                 deleteId = null;
                 $('#btnKonfirmasiHapus').prop('disabled', false);
                 $('#spinnerHapus').addClass('d-none');
