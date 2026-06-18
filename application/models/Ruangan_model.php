@@ -65,10 +65,16 @@ class Ruangan_model extends CI_Model {
         return $this->db->get_where($this->table, [$this->primary_key => $id])->row_array();
     }
 
-    public function insert($data) { return $this->db->insert($this->table, $data); }
+    public function insert($data)
+    {
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['updated_at'] = date('Y-m-d H:i:s');
+        return $this->db->insert($this->table, $data);
+    }
 
     public function update($id, $data)
     {
+        $data['updated_at'] = date('Y-m-d H:i:s');
         $this->db->where($this->primary_key, $id);
         return $this->db->update($this->table, $data);
     }
