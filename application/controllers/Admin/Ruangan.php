@@ -80,12 +80,18 @@ class Ruangan extends MY_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $errors = validation_errors_array();
+            // Format errors agar key sesuai dengan ID elemen di form (tanpa underscore setelah kata kunci)
+            $formatted_errors = [];
+            foreach ($errors as $key => $message) {
+                $shortKey = str_replace('_ruangan', '', $key);
+                $formatted_errors[$shortKey] = $message;
+            }
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Validasi gagal',
-                    'errors' => $errors
+                    'errors' => $formatted_errors
                 ]));
             return;
         }
@@ -97,13 +103,13 @@ class Ruangan extends MY_Controller {
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode ruangan sudah digunakan',
-                    'errors' => ['kode_ruangan' => 'Kode ruangan sudah digunakan']
+                    'errors' => ['kode' => 'Kode ruangan sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
+            'kode_ruangan' => strtoupper(trim($this->input->post('kode_ruangan'))),
             'nama_ruangan' => trim($this->input->post('nama_ruangan')),
             'kapasitas' => (int) $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
@@ -203,12 +209,18 @@ class Ruangan extends MY_Controller {
 
         if ($this->form_validation->run() === FALSE) {
             $errors = validation_errors_array();
+            // Format errors agar key sesuai dengan ID elemen di form (tanpa underscore setelah kata kunci)
+            $formatted_errors = [];
+            foreach ($errors as $key => $message) {
+                $shortKey = str_replace('_ruangan', '', $key);
+                $formatted_errors[$shortKey] = $message;
+            }
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Validasi gagal',
-                    'errors' => $errors
+                    'errors' => $formatted_errors
                 ]));
             return;
         }
@@ -220,13 +232,13 @@ class Ruangan extends MY_Controller {
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Kode ruangan sudah digunakan',
-                    'errors' => ['kode_ruangan' => 'Kode ruangan sudah digunakan']
+                    'errors' => ['kode' => 'Kode ruangan sudah digunakan']
                 ]));
             return;
         }
 
         $data = [
-            'kode_ruangan' => strtoupper($this->input->post('kode_ruangan')),
+            'kode_ruangan' => strtoupper(trim($this->input->post('kode_ruangan'))),
             'nama_ruangan' => trim($this->input->post('nama_ruangan')),
             'kapasitas' => (int) $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
