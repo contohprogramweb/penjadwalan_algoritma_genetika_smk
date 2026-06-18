@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmit">
                             <span class="spinner-border spinner-border-sm me-1 d-none" id="spinner"></span>
                             <span id="btnText">Simpan</span>
@@ -116,7 +116,7 @@
                     <p class="mb-0 text-danger"><strong>Tindakan ini tidak dapat dibatalkan!</strong></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Batal</button>
                     <button type="button" class="btn btn-danger" id="btnKonfirmasiHapus">
                         <span class="spinner-border spinner-border-sm me-1 d-none" id="spinnerHapus"></span>
                         Hapus
@@ -126,14 +126,7 @@
         </div>
     </div>
 
-    <script src="<?= base_url('assets/js/jquery.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
-    
-	 <!-- DataTables JS - Menggunakan CDN -->
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+ 
 	
     <script src="<?= base_url('assets/js/app.js') ?>"></script>
     <script>
@@ -252,11 +245,7 @@
                         }
                     }
                 ],
-                order: [[1, 'asc']],
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Indonesian.json',
-                    processing: '<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>'
-                },
+                order: [[1, 'asc']], 
                 drawCallback: function(settings) {
                     $('#table-mapel_processing').hide();
                 }
