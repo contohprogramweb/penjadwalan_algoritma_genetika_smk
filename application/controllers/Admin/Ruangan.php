@@ -65,12 +65,18 @@ class Ruangan extends MY_Controller {
             ],
             'lantai' => [
                 'label' => 'Lantai',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
+                'rules' => 'permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
                 'errors' => [
-                    'required' => 'Lantai wajib diisi',
                     'integer' => 'Lantai harus bilangan bulat',
                     'greater_than_equal_to' => 'Lantai minimal 1',
                     'less_than_equal_to' => 'Lantai maksimal 10'
+                ]
+            ],
+            'fasilitas' => [
+                'label' => 'Fasilitas',
+                'rules' => 'permit_empty|max_length[255]',
+                'errors' => [
+                    'max_length' => 'Fasilitas maksimal 255 karakter'
                 ]
             ]
         ]);
@@ -104,7 +110,8 @@ class Ruangan extends MY_Controller {
             'nama_ruangan' => $this->input->post('nama_ruangan'),
             'kapasitas' => $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
-            'lantai' => $this->input->post('lantai')
+            'lantai' => $this->input->post('lantai'),
+            'fasilitas' => $this->input->post('fasilitas')
         ];
 
         $result = $this->Ruangan_model->insert($data);
@@ -182,12 +189,18 @@ class Ruangan extends MY_Controller {
             ],
             'lantai' => [
                 'label' => 'Lantai',
-                'rules' => 'required|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
+                'rules' => 'permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
                 'errors' => [
-                    'required' => 'Lantai wajib diisi',
                     'integer' => 'Lantai harus bilangan bulat',
                     'greater_than_equal_to' => 'Lantai minimal 1',
                     'less_than_equal_to' => 'Lantai maksimal 10'
+                ]
+            ],
+            'fasilitas' => [
+                'label' => 'Fasilitas',
+                'rules' => 'permit_empty|max_length[255]',
+                'errors' => [
+                    'max_length' => 'Fasilitas maksimal 255 karakter'
                 ]
             ]
         ]);
@@ -221,7 +234,8 @@ class Ruangan extends MY_Controller {
             'nama_ruangan' => $this->input->post('nama_ruangan'),
             'kapasitas' => $this->input->post('kapasitas'),
             'tipe' => $this->input->post('tipe'),
-            'lantai' => $this->input->post('lantai')
+            'lantai' => $this->input->post('lantai'),
+            'fasilitas' => $this->input->post('fasilitas')
         ];
 
         $result = $this->Ruangan_model->update($id, $data);
