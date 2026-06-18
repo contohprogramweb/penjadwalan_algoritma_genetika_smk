@@ -73,7 +73,10 @@ class Jam extends MY_Controller {
                 'errors' => [
                     'in_list' => 'Nilai istirahat harus 0 atau 1'
                 ]
-            ]',
+            ],
+            'keterangan' => [
+                'label' => 'Keterangan',
+                'rules' => 'max_length[200]',
                 'errors' => [
                     'max_length' => 'Keterangan maksimal 200 karakter'
                 ]
@@ -209,7 +212,10 @@ class Jam extends MY_Controller {
                 'errors' => [
                     'in_list' => 'Nilai aktif harus 0 atau 1'
                 ]
-            ]',
+            ],
+            'keterangan' => [
+                'label' => 'Keterangan',
+                'rules' => 'max_length[200]',
                 'errors' => [
                     'max_length' => 'Keterangan maksimal 200 karakter'
                 ]
