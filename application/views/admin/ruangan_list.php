@@ -213,7 +213,7 @@
                 $('#btnSubmit').prop('disabled', true);
 
                 $.ajax({
-                    url: '<?= site_url("admin/ruangan/get_detail") ?>/' + id,
+                    url: '<?= site_url("admin/ruangan/get_detail/") ?>' + id,
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {
@@ -221,10 +221,10 @@
                             const data = response.data;
                             $('#modalTitle').text('Edit Ruangan');
                             $('#ruanganId').val(data.id_ruangan || data.id);
-                            $('#kode_ruangan').val(data.kode_ruangan);
-                            $('#nama_ruangan').val(data.nama_ruangan);
-                            $('#kapasitas').val(data.kapasitas);
-							$('#tipe').val(data.tipe || '');
+                            $('#kode_ruangan').val(data.kode_ruangan || '');
+                            $('#nama_ruangan').val(data.nama_ruangan || '');
+                            $('#kapasitas').val(data.kapasitas || '');
+                            $('#tipe').val(data.tipe || '');
                             $('#lantai').val(data.lantai || '');
                             $('#fasilitas').val(data.fasilitas || '');
                             $('#btnSubmit').prop('disabled', false);
@@ -249,7 +249,8 @@
                 e.preventDefault();
 
                 const isEdit = modalEdit;
-                const url = isEdit ? '<?= site_url("admin/ruangan/edit") ?>/' + $('#ruanganId').val()
+                const roomId = $('#ruanganId').val();
+                const url = isEdit ? '<?= site_url("admin/ruangan/update/") ?>' + roomId
                                    : '<?= site_url("admin/ruangan/tambah") ?>';
 
                 const $form = $(this);
@@ -315,7 +316,7 @@
                 csrfData[csrfTokenName] = csrfTokenHash;
 
                 $.ajax({
-                    url: '<?= site_url("admin/ruangan/hapus") ?>/' + deleteId,
+                    url: '<?= site_url("admin/ruangan/hapus/") ?>' + deleteId,
                     type: 'POST',
                     dataType: 'json',
                     data: csrfData,
