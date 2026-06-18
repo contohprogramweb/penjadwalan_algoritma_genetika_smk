@@ -10,8 +10,8 @@ class Mapel_model extends CI_Model {
 
     private $table       = 'mata_pelajaran';
     private $primary_key = 'id_mapel';
-    private $column_order  = ['kode_mapel', 'nama_mapel', 'tipe', 'jam_per_minggu', 'kelompok'];
-    private $column_search = ['kode_mapel', 'nama_mapel', 'tipe', 'kelompok'];
+    private $column_order  = ['kode_mapel', 'nama_mapel', 'tipe', 'jam_per_minggu'];
+    private $column_search = ['kode_mapel', 'nama_mapel', 'tipe'];
     private $order = ['id_mapel' => 'DESC'];
 
     public function __construct() { parent::__construct(); }
