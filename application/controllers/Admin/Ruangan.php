@@ -65,11 +65,9 @@ class Ruangan extends MY_Controller {
             ],
             'lantai' => [
                 'label' => 'Lantai',
-                'rules' => 'permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
+                'rules' => 'permit_empty|max_length[10]',
                 'errors' => [
-                    'integer' => 'Lantai harus bilangan bulat',
-                    'greater_than_equal_to' => 'Lantai minimal 1',
-                    'less_than_equal_to' => 'Lantai maksimal 10'
+                    'max_length' => 'Lantai maksimal 10 karakter'
                 ]
             ],
             'fasilitas' => [
@@ -124,11 +122,12 @@ class Ruangan extends MY_Controller {
                     'message' => 'Data ruangan berhasil ditambahkan'
                 ]));
         } else {
+            log_message('error', 'Gagal insert ruangan, DB Error: ' . $this->db->_error_message());
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
-                    'message' => 'Gagal menambahkan data ruangan'
+                    'message' => 'Gagal menambahkan data ruangan: ' . $this->db->_error_message()
                 ]));
         }
     }
@@ -189,11 +188,9 @@ class Ruangan extends MY_Controller {
             ],
             'lantai' => [
                 'label' => 'Lantai',
-                'rules' => 'permit_empty|integer|greater_than_equal_to[1]|less_than_equal_to[10]',
+                'rules' => 'permit_empty|max_length[10]',
                 'errors' => [
-                    'integer' => 'Lantai harus bilangan bulat',
-                    'greater_than_equal_to' => 'Lantai minimal 1',
-                    'less_than_equal_to' => 'Lantai maksimal 10'
+                    'max_length' => 'Lantai maksimal 10 karakter'
                 ]
             ],
             'fasilitas' => [
@@ -238,6 +235,9 @@ class Ruangan extends MY_Controller {
             'fasilitas' => $this->input->post('fasilitas')
         ];
 
+        // Debug log
+        log_message('debug', 'Update ruangan ID: ' . $id . ', Data: ' . json_encode($data));
+
         $result = $this->Ruangan_model->update($id, $data);
 
         if ($result) {
@@ -248,11 +248,12 @@ class Ruangan extends MY_Controller {
                     'message' => 'Data ruangan berhasil diperbarui'
                 ]));
         } else {
+            log_message('error', 'Gagal update ruangan ID: ' . $id . ', DB Error: ' . $this->db->_error_message());
             $this->output
                 ->set_content_type('application/json')
                 ->set_output(json_encode([
                     'success' => FALSE,
-                    'message' => 'Gagal memperbarui data ruangan'
+                    'message' => 'Gagal memperbarui data ruangan: ' . $this->db->_error_message()
                 ]));
         }
     }
