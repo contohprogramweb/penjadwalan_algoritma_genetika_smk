@@ -71,8 +71,9 @@
                                 <label for="tipe" class="form-label">Jenis Ruangan <span class="text-danger">*</span></label>
                                 <select class="form-control" id="tipe" name="tipe" required>
                                     <option value="">-- Pilih Jenis --</option>
-                                    <option value="reguler">Reguler</option>
-                                    <option value="laboratorium">Laboratorium</option>
+                                    <option value="kelas">Kelas</option>
+                                    <option value="lab">Laboratorium</option>
+                                    <option value="bengkel">Bengkel</option>
                                     <option value="lapangan">Lapangan</option>
                                     <option value="aula">Aula</option>
                                 </select>
