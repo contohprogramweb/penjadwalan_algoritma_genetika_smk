@@ -29,6 +29,9 @@ class Profile extends CI_Controller
         $data['page_title'] = 'Profil Saya';
         $data['breadcrumbs'] = ['Profile' => ''];
         
+        // Render konten profil ke variabel
+        $data['content'] = $this->load->view('profile/index', $data, TRUE);
+        
         // Load layout yang sesuai dengan role
         $role = $this->session->userdata('role');
         if ($role === 'admin') {
@@ -37,7 +40,6 @@ class Profile extends CI_Controller
             $this->load->view('layouts/footer');
         } else {
             $this->load->view('layouts/main', $data);
-            $this->load->view('profile/index', $data);
             $this->load->view('layouts/footer');
         }
     }
@@ -47,6 +49,11 @@ class Profile extends CI_Controller
      */
     public function update()
     {
+        // Pastikan hanya request AJAX yang diproses
+        if (!$this->input->is_ajax_request()) {
+            redirect('profile');
+        }
+
         $this->output->set_content_type('application/json');
         
         if ($this->input->server('REQUEST_METHOD') !== 'POST') {
@@ -94,16 +101,21 @@ class Profile extends CI_Controller
             // Update session username jika berubah
             $this->session->set_userdata('username', $data['nama_lengkap']);
 
-            $this->output->set_status_header(200)->set_output(json_encode([
+            // Kembalikan token CSRF terbaru untuk rotasi token
+            $csrf_data = [
                 'success' => true,
-                'message' => 'Profil berhasil diperbarui'
-            ]));
+                'message' => 'Profil berhasil diperbarui',
+                'csrf_hash' => $this->security->get_csrf_hash()
+            ];
+
+            $this->output->set_status_header(200)->set_output(json_encode($csrf_data));
 
         } catch (Exception $e) {
             log_message('error', 'Profile update error: ' . $e->getMessage());
             $this->output->set_status_header(500)->set_output(json_encode([
                 'success' => false,
-                'message' => 'Terjadi kesalahan pada server. Silakan hubungi administrator.'
+                'message' => 'Terjadi kesalahan pada server. Silakan hubungi administrator.',
+                'csrf_hash' => $this->security->get_csrf_hash()
             ]));
         }
     }

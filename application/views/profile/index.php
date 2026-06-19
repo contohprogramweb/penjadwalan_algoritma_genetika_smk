@@ -155,23 +155,38 @@ $(document).ready(function() {
   $('#profileForm').on('submit', function(e) {
     e.preventDefault();
     
-    const formData = new FormData(this);
-    // Tambahkan CSRF token
-    formData.append('<?= $this->security->get_csrf_token_name() ?>', '<?= $this->security->get_csrf_hash() ?>');
+    // Ambil nama token CSRF dari input hidden
+    const csrfName = $('input[name="<?= $this->security->get_csrf_token_name() ?>"]').attr('name');
+    const csrfToken = $('input[name="<?= $this->security->get_csrf_token_name() ?>"]').val();
     
+    // Serialize form data
+    const formData = $(this).serialize();
+    
+    Swal.fire({
+      title: 'Memproses...',
+      text: 'Sedang memperbarui profil Anda.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
       data: formData,
-      processData: false,
-      contentType: false,
       dataType: 'json',
       success: function(response) {
-        if (response.success) {
+        // Update token CSRF jika server mengembalikan token baru (rotasi token)
+        if (response.csrf_hash) {
+          $('input[name="' + csrfName + '"]').val(response.csrf_hash);
+        }
+        
+        if (response.success || response.status === 'success') {
           Swal.fire({
             icon: 'success',
             title: 'Berhasil!',
-            text: response.message,
+            text: response.message || 'Profil berhasil diperbarui.',
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
@@ -181,15 +196,32 @@ $(document).ready(function() {
           Swal.fire({
             icon: 'error',
             title: 'Gagal!',
-            html: response.errors || response.message
+            html: response.errors || response.message || 'Terjadi kesalahan saat memperbarui profil.'
           });
         }
       },
       error: function(xhr, status, error) {
         let message = 'Terjadi kesalahan pada server.';
+        
+        // Handle CSRF error (403 Forbidden)
+        if (xhr.status === 403) {
+          message = 'Sesi keamanan kadaluarsa. Halaman akan dimuat ulang otomatis.';
+          Swal.fire({
+            icon: 'warning',
+            title: 'Sesi Kadaluarsa',
+            text: message,
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            location.reload();
+          });
+          return;
+        }
+        
         if (xhr.responseJSON && xhr.responseJSON.message) {
           message = xhr.responseJSON.message;
         }
+        
         Swal.fire({
           icon: 'error',
           title: 'Error!',

@@ -463,7 +463,7 @@ $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 
-$config['csrf_exclude_uris'] = ['auth/proses_login', 'admin/.*', 'waka/.*', 'datatables/.*'];
+$config['csrf_exclude_uris'] = ['auth/proses_login', 'admin/.*', 'waka/.*', 'datatables/.*', 'profile/update'];
 /*
 |--------------------------------------------------------------------------
 | Output Compression
