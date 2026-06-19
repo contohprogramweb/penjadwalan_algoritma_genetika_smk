@@ -271,8 +271,12 @@
           <nav aria-label="breadcrumb" class="d-none d-md-block">
             <ol class="breadcrumb mb-0 bg-transparent p-0">
               <?php if (isset($breadcrumbs)): ?>
-                <?php foreach ($breadcrumbs as $key => $value): ?>
-                  <?php if ($key !== end(array_keys($breadcrumbs))): ?>
+                <?php 
+                $breadcrumb_keys = array_keys($breadcrumbs);
+                $last_key = end($breadcrumb_keys);
+                foreach ($breadcrumbs as $key => $value): 
+                ?>
+                  <?php if ($key !== $last_key): ?>
                     <li class="breadcrumb-item"><a href="<?= $value ?>"><?= ucfirst(str_replace('_', ' ', $key)) ?></a></li>
                   <?php else: ?>
                     <li class="breadcrumb-item active" aria-current="page"><?= ucfirst(str_replace('_', ' ', $key)) ?></li>
