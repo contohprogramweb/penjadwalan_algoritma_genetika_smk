@@ -59,6 +59,18 @@
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar Navigation">
       <!-- Sidebar Header -->
       <div class="sidebar-header">
+        <?php 
+          $role = $this->session->userdata('role');
+          if ($role === 'admin') {
+            $dashboard_url = site_url('admin/dashboard');
+          } elseif ($role === 'waka') {
+            $dashboard_url = site_url('waka/dashboard');
+          } elseif ($role === 'wali_kelas') {
+            $dashboard_url = site_url('wali_kelas/dashboard');
+          } else {
+            $dashboard_url = site_url('guru/dashboard');
+          }
+        ?>
         <a href="<?= $dashboard_url ?>" class="sidebar-brand">
           <i class="fas fa-calendar-alt mr-2"></i>
           SIJADWAL
