@@ -204,6 +204,36 @@
         </ul>
         <?php endif; ?>
         
+        <!-- Menu Guru (Guru Only) -->
+        <?php if ($role === 'guru'): ?>
+        <div class="sidebar-nav-title">Menu Guru</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="<?= site_url('guru/jadwal') ?>" class="sidebar-menu-link <?php ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'jadwal') ? 'active' : '' ?>">
+              <span class="sidebar-menu-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </span>
+              <span class="sidebar-menu-text">Jadwal Mengajar</span>
+            </a>
+          </li>
+        </ul>
+        <?php endif; ?>
+        
+        <!-- Menu Wali Kelas (Wali Kelas Only) -->
+        <?php if ($role === 'wali_kelas'): ?>
+        <div class="sidebar-nav-title">Menu Wali Kelas</div>
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="<?= site_url('wali_kelas/jadwal') ?>" class="sidebar-menu-link <?php ($this->uri->segment(1) == 'wali_kelas' && $this->uri->segment(2) == 'jadwal') ? 'active' : '' ?>">
+              <span class="sidebar-menu-icon">
+                <i class="fas fa-calendar-check"></i>
+              </span>
+              <span class="sidebar-menu-text">Jadwal Kelas</span>
+            </a>
+          </li>
+        </ul>
+        <?php endif; ?>
+        
         <!-- Pengaturan (Admin Only) -->
         <?php if ($role === 'admin'): ?>
         <div class="sidebar-nav-title">Pengaturan</div>
