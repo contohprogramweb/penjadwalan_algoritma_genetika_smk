@@ -90,15 +90,19 @@
             $dashboard_url = site_url('waka/dashboard');
           } elseif ($role === 'guru') {
             $dashboard_url = site_url('guru/dashboard');
+          } elseif ($role === 'wali_kelas') {
+            $dashboard_url = site_url('wali_kelas/dashboard');
           } else {
-            $dashboard_url = site_url('dashboard');
+            $dashboard_url = site_url('admin/dashboard');
           }
         ?>
         
         <!-- Dashboard (Semua Role) -->
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= $dashboard_url ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'dashboard' || ($this->uri->segment(1) == 'waka' && $this->uri->segment(2) == 'dashboard') || ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'dashboard') ? 'active' : '' ?>">
+            <a href="<?= $dashboard_url ?>" class="sidebar-menu-link <?php 
+              ($this->uri->segment(1) == $role && $this->uri->segment(2) == 'dashboard') ? 'active' : '' 
+            ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
