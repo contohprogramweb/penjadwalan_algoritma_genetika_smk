@@ -152,14 +152,17 @@
 
 <script>
 $(document).ready(function() {
+  // Ambil nama token CSRF sekali di awal
+  const csrfName = '<?= $this->security->get_csrf_token_name() ?>';
+  
   $('#profileForm').on('submit', function(e) {
     e.preventDefault();
     
-    // Ambil nama token CSRF dari input hidden
-    const csrfName = $('input[name="<?= $this->security->get_csrf_token_name() ?>"]').attr('name');
+    // Ambil nilai token CSRF terbaru dari input hidden
+    const csrfToken = $('input[name="' + csrfName + '"]').val();
     
-    // Serialize form data
-    const formData = $(this).serialize();
+    // Serialize form data dan tambahkan CSRF token
+    const formData = $(this).serialize() + '&' + csrfName + '=' + csrfToken;
     
     Swal.fire({
       title: 'Memproses...',
