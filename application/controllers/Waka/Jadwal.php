@@ -6,15 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Deskripsi: Mengelola tampilan grid jadwal mingguan, edit slot, dan approval jadwal.
  * Referensi SRS: Bab 11.8 (Use Case Review & Edit Jadwal), Bab 15.2 (Format Response AJAX)
  */
-class Jadwal extends CI_Controller {
+require_once APPPATH . 'core/MY_Controller.php';
+
+class Jadwal extends MY_Controller {
+
+    protected $allowed_roles = ['waka', 'admin'];
 
     public function __construct()
     {
         parent::__construct();
-        // Pastikan user terautentikasi dan memiliki role Waka/Kurikulum
-        if (!$this->session->userdata('logged_in')) {
-            redirect('auth/login');
-        }
         
         $this->load->model('Jadwal_model');
         $this->load->model('Penugasan_model');
