@@ -59,7 +59,7 @@
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar Navigation">
       <!-- Sidebar Header -->
       <div class="sidebar-header">
-        <a href="<?= site_url('dashboard') ?>" class="sidebar-brand">
+        <a href="<?= $dashboard_url ?>" class="sidebar-brand">
           <i class="fas fa-calendar-alt mr-2"></i>
           SIJADWAL
           <small>Sistem Penjadwalan SMK</small>
@@ -71,12 +71,22 @@
       
       <!-- Sidebar Navigation -->
       <nav class="sidebar-nav">
-        <?php $role = $this->session->userdata('role'); ?>
+        <?php 
+          $role = $this->session->userdata('role');
+          // Tentukan dashboard URL berdasarkan role
+          if ($role === 'waka') {
+            $dashboard_url = site_url('waka/dashboard');
+          } elseif ($role === 'guru') {
+            $dashboard_url = site_url('guru/dashboard');
+          } else {
+            $dashboard_url = site_url('dashboard');
+          }
+        ?>
         
         <!-- Dashboard (Semua Role) -->
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('dashboard') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
+            <a href="<?= $dashboard_url ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'dashboard' || ($this->uri->segment(1) == 'waka' && $this->uri->segment(2) == 'dashboard') || ($this->uri->segment(1) == 'guru' && $this->uri->segment(2) == 'dashboard') ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-tachometer-alt"></i>
               </span>
@@ -307,7 +317,7 @@
                   <?php endif; ?>
                 <?php endforeach; ?>
               <?php else: ?>
-                <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= $dashboard_url ?>">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?= isset($page_title) ? $page_title : 'Dashboard' ?></li>
               <?php endif; ?>
             </ol>
