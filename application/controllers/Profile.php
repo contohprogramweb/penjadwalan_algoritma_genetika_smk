@@ -36,11 +36,9 @@ class Profile extends CI_Controller
         $role = $this->session->userdata('role');
         if ($role === 'admin') {
             $this->load->view('layouts/header', $data);
-            $this->load->view('profile/index', $data);
             $this->load->view('layouts/footer');
         } else {
             $this->load->view('layouts/main', $data);
-            $this->load->view('layouts/footer');
         }
     }
 
@@ -61,10 +59,19 @@ class Profile extends CI_Controller
                 'success' => false,
                 'message' => 'Method tidak diizinkan.'
             ]));
-            return;
+            exit;
         }
 
         $user_id = $this->session->userdata('user_id');
+        
+        // Cek apakah user_id ada di session
+        if (empty($user_id)) {
+            $this->output->set_status_header(401)->set_output(json_encode([
+                'success' => false,
+                'message' => 'Sesi login kadaluarsa. Silakan login kembali.'
+            ]));
+            exit;
+        }
         
         // Validasi input
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
@@ -81,7 +88,7 @@ class Profile extends CI_Controller
                 'message' => 'Validasi gagal',
                 'errors' => strip_tags($errors)
             ]));
-            return;
+            exit;
         }
 
         try {
@@ -98,8 +105,9 @@ class Profile extends CI_Controller
 
             $this->user->update($user_id, $data);
 
-            // Update session username jika berubah
-            $this->session->set_userdata('username', $data['nama_lengkap']);
+            // Update session nama_lengkap dan email jika berubah
+            $this->session->set_userdata('nama_lengkap', $data['nama_lengkap']);
+            $this->session->set_userdata('email', $data['email']);
 
             // Kembalikan token CSRF terbaru untuk rotasi token
             $csrf_data = [
@@ -109,6 +117,7 @@ class Profile extends CI_Controller
             ];
 
             $this->output->set_status_header(200)->set_output(json_encode($csrf_data));
+            exit;
 
         } catch (Exception $e) {
             log_message('error', 'Profile update error: ' . $e->getMessage());
@@ -117,6 +126,7 @@ class Profile extends CI_Controller
                 'message' => 'Terjadi kesalahan pada server. Silakan hubungi administrator.',
                 'csrf_hash' => $this->security->get_csrf_hash()
             ]));
+            exit;
         }
     }
 }
