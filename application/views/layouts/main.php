@@ -71,7 +71,9 @@
       
       <!-- Sidebar Navigation -->
       <nav class="sidebar-nav">
-        <!-- Dashboard -->
+        <?php $role = $this->session->userdata('role'); ?>
+        
+        <!-- Dashboard (Semua Role) -->
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
             <a href="<?= site_url('dashboard') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'dashboard' ? 'active' : '' ?>">
@@ -83,8 +85,8 @@
           </li>
         </ul>
         
-        <!-- Master Data (Admin & Waka) -->
-        <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
+        <!-- Master Data (Admin Only - Full Access) -->
+        <?php if ($role === 'admin'): ?>
         <div class="sidebar-nav-title">Master Data</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
@@ -96,7 +98,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/mata_pelajaran') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'mata_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/mapel') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'mapel' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-book"></i>
               </span>
@@ -120,7 +122,7 @@
             </a>
           </li>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/jam_pelajaran') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'jam_pelajaran' ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/jam') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'jam' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clock"></i>
               </span>
@@ -138,8 +140,8 @@
         </ul>
         <?php endif; ?>
         
-        <!-- Penugasan & Preferensi -->
-        <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
+        <!-- Penugasan Guru (Waka & Admin) -->
+        <?php if ($role === 'waka' || $role === 'admin'): ?>
         <div class="sidebar-nav-title">Penugasan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
@@ -156,18 +158,10 @@
         </ul>
         <?php endif; ?>
         
-        <!-- Jadwal -->
+        <!-- Jadwal (Waka & Admin) -->
+        <?php if ($role === 'waka' || $role === 'admin'): ?>
         <div class="sidebar-nav-title">Jadwal</div>
         <ul class="sidebar-menu">
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('waka/jadwal') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'waka' && $this->uri->segment(2) == 'jadwal' ? 'active' : '' ?>">
-              <span class="sidebar-menu-icon">
-                <i class="fas fa-calendar-week"></i>
-              </span>
-              <span class="sidebar-menu-text">Grid Jadwal</span>
-            </a>
-          </li>
-          <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
           <li class="sidebar-menu-item">
             <a href="<?= site_url('waka/generate') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
@@ -176,11 +170,19 @@
               <span class="sidebar-menu-text">Generate Jadwal</span>
             </a>
           </li>
-          <?php endif; ?>
+          <li class="sidebar-menu-item">
+            <a href="<?= site_url('waka/jadwal') ?>" class="sidebar-menu-link <?php ($this->uri->segment(1) == 'waka' && $this->uri->segment(2) == 'jadwal') ? 'active' : '' ?>">
+              <span class="sidebar-menu-icon">
+                <i class="fas fa-calendar-week"></i>
+              </span>
+              <span class="sidebar-menu-text">Grid Jadwal</span>
+            </a>
+          </li>
         </ul>
+        <?php endif; ?>
         
-        <!-- Laporan -->
-        <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
+        <!-- Laporan (Waka & Admin) -->
+        <?php if ($role === 'waka' || $role === 'admin'): ?>
         <div class="sidebar-nav-title">Laporan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
@@ -202,8 +204,8 @@
         </ul>
         <?php endif; ?>
         
-        <!-- Settings (Admin Only) -->
-        <?php if ($this->session->userdata('role') === 'admin'): ?>
+        <!-- Pengaturan (Admin Only) -->
+        <?php if ($role === 'admin'): ?>
         <div class="sidebar-nav-title">Pengaturan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">

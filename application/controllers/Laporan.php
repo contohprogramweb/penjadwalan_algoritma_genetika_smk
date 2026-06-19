@@ -6,16 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Deskripsi: Generate laporan PDF untuk jadwal dan beban guru
  * Referensi SRS: Bab 11.10 (PDF Engine)
  */
-class Laporan extends CI_Controller {
+require_once APPPATH . 'core/MY_Controller.php';
+
+class Laporan extends MY_Controller {
+    
+    protected $allowed_roles = ['waka', 'admin'];
 
     public function __construct()
     {
         parent::__construct();
-        
-        // Cek autentikasi
-        if (!$this->session->userdata('logged_in')) {
-            redirect('auth/login');
-        }
         
         $this->load->model('Jadwal_model');
         $this->load->model('Penugasan_model');
