@@ -332,14 +332,16 @@ $(document).ready(function() {
             }
         },
         columns: [
-            {data: null, orderable: false},
-            {data: 'guru'},
-            {data: 'mapel'},
-            {data: 'kelas'},
-            {data: 'ruangan'},
-            {data: 'semester'},
-            {data: 'jam_minggu'},
-            {data: 'aksi', orderable: false, searchable: false}
+            {data: null, orderable: false, render: function(data, type, row, meta) {
+                return meta.row + meta.settings._iDisplayStart + 1;
+            }},
+            {data: 1},
+            {data: 2},
+            {data: 3},
+            {data: 4},
+            {data: 5},
+            {data: 6},
+            {data: 7, orderable: false, searchable: false}
         ],
         order: [[1, 'asc']],
         language: {

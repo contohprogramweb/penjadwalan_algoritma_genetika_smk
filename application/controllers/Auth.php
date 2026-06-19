@@ -165,7 +165,23 @@ class Auth extends CI_Controller
      */
     public function logout()
     {
+        // Clear semua session data terlebih dahulu
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('nama_lengkap');
+        $this->session->unset_userdata('role');
+        $this->session->unset_userdata('id_guru');
+        $this->session->unset_userdata('id_kelas');
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('nip');
+        $this->session->unset_userdata('last_login');
+        $this->session->unset_userdata('login_time');
+        
+        // Destroy session
         $this->session->sess_destroy();
+        
+        // Redirect ke halaman login
         redirect('auth/login', 'refresh');
     }
 
