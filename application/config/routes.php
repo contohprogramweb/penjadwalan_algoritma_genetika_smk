@@ -90,6 +90,10 @@ $route['admin/tahun_ajaran/get_detail/(:num)'] = 'Admin/Tahun_ajaran/get_detail/
 // Routes untuk Waka
 $route['waka/dashboard'] = 'Waka/Dashboard/index';
 $route['waka/penugasan'] = 'Waka/Penugasan/index';
+
+// Routes untuk Guru
+$route['guru/dashboard'] = 'Guru/Dashboard/index';
+
 $route['waka/penugasan/get_data'] = 'Waka/Penugasan/get_data';
 $route['waka/penugasan/tambah'] = 'Waka/Penugasan/tambah';
 $route['waka/penugasan/edit/(:num)'] = 'Waka/Penugasan/edit/$1';
