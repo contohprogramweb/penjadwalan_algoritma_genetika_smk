@@ -157,7 +157,6 @@ $(document).ready(function() {
     
     // Ambil nama token CSRF dari input hidden
     const csrfName = $('input[name="<?= $this->security->get_csrf_token_name() ?>"]').attr('name');
-    const csrfToken = $('input[name="<?= $this->security->get_csrf_token_name() ?>"]').val();
     
     // Serialize form data
     const formData = $(this).serialize();
