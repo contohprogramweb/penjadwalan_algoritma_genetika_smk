@@ -186,6 +186,8 @@ class Auth extends CI_Controller
                 return 'admin/dashboard';
             case 'waka':
                 return 'waka/dashboard';
+            case 'guru':
+                return 'guru/dashboard';
             default:
                 return 'auth/login';
         }

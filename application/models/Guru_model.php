@@ -97,4 +97,18 @@ class Guru_model extends CI_Model {
         if ($exclude_id) $this->db->where($this->primary_key . ' !=', $exclude_id);
         return $this->db->count_all_results($this->table) > 0;
     }
+
+    /**
+     * Get guru data by user_id from users table
+     * @param int $user_id
+     * @return array|null
+     */
+    public function get_by_user_id($user_id)
+    {
+        $this->db->select('g.*');
+        $this->db->from('guru g');
+        $this->db->join('users u', 'g.id_guru = u.id_guru');
+        $this->db->where('u.id', $user_id);
+        return $this->db->get()->row_array();
+    }
 }
