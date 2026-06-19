@@ -204,9 +204,8 @@ class Datatables extends MY_Controller {
                 'tanggal_mulai'   => $r['tanggal_mulai'] ?? '-',
                 'tanggal_selesai' => $r['tanggal_selesai'] ?? '-',
                 'status'          => $status_html,
-                'aksi'            =>
-                    '<button class="btn btn-sm btn-warning mr-1 btn-edit" data-id="'.$r['id_tahun_ajaran'].'"><i class="fas fa-edit"></i></button>' .
-                    '<button class="btn btn-sm btn-danger btn-hapus" data-id="'.$r['id_tahun_ajaran'].'"><i class="fas fa-trash"></i></button>',
+                'id_tahun_ajaran' => intval($r['id_tahun_ajaran']),
+                'aksi'            => intval($r['id_tahun_ajaran']),
             ];
         }
         $this->_json($data, $total, $filtered);
