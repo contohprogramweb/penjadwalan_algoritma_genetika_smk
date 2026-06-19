@@ -30,6 +30,35 @@ class User_model extends CI_Model
     }
 
     /**
+     * Ambil user berdasarkan ID
+     *
+     * @param int $user_id
+     * @return object|null
+     */
+    public function get_by_id($user_id)
+    {
+        $query = $this->db
+            ->where('id', $user_id)
+            ->get($this->table);
+
+        return $query->row();
+    }
+
+    /**
+     * Update data user
+     *
+     * @param int $user_id
+     * @param array $data
+     * @return bool
+     */
+    public function update($user_id, $data)
+    {
+        return $this->db
+            ->where('id', $user_id)
+            ->update($this->table, $data);
+    }
+
+    /**
      * Update last_login user
      *
      * @param int $user_id

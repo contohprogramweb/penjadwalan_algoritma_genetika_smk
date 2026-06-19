@@ -129,3 +129,7 @@ $route['laporan/pdf_beban_guru/(:num)'] = 'Laporan/pdf_beban_guru/$1';
 // Routes untuk Auth
 $route['auth/login'] = 'Auth/login';
 $route['auth/logout'] = 'Auth/logout';
+
+// Routes untuk Profile
+$route['profile'] = 'Profile/index';
+$route['profile/update'] = 'Profile/update';

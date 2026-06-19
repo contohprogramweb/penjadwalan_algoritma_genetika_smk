@@ -369,13 +369,38 @@
                 <i class="fas fa-cog mr-2"></i> Pengaturan
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="<?= site_url('auth/logout') ?>" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+              <a class="dropdown-item text-danger" href="#" id="logoutBtn">
                 <i class="fas fa-sign-out-alt mr-2"></i> Logout
               </a>
             </div>
           </div>
         </div>
       </header>
+
+      <!-- Logout Confirmation Script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const logoutBtn = document.getElementById('logoutBtn');
+          if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              Swal.fire({
+                title: 'Apakah Anda yakin ingin keluar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Batal'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = '<?= site_url('auth/logout') ?>';
+                }
+              });
+            });
+          }
+        });
+      </script>
       
       <!-- Flash Messages -->
       <?php if ($this->session->flashdata('success')): ?>
