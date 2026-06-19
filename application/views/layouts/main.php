@@ -143,7 +143,7 @@
         <div class="sidebar-nav-title">Penugasan</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/penugasan') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
+            <a href="<?= site_url('waka/penugasan') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'penugasan' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-clipboard-list"></i>
               </span>
@@ -153,14 +153,6 @@
               <?php endif; ?>
             </a>
           </li>
-          <li class="sidebar-menu-item">
-            <a href="<?= site_url('admin/preferensi') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'preferensi' ? 'active' : '' ?>">
-              <span class="sidebar-menu-icon">
-                <i class="fas fa-heart"></i>
-              </span>
-              <span class="sidebar-menu-text">Preferensi</span>
-            </a>
-          </li>
         </ul>
         <?php endif; ?>
         
@@ -168,16 +160,16 @@
         <div class="sidebar-nav-title">Jadwal</div>
         <ul class="sidebar-menu">
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('jadwal') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'jadwal' && $this->uri->segment(2) == '' ? 'active' : '' ?>">
+            <a href="<?= site_url('waka/jadwal') ?>" class="sidebar-menu-link <?php $this->uri->segment(1) == 'waka' && $this->uri->segment(2) == 'jadwal' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-calendar-week"></i>
               </span>
-              <span class="sidebar-menu-text">Lihat Jadwal</span>
+              <span class="sidebar-menu-text">Grid Jadwal</span>
             </a>
           </li>
           <?php if ($this->session->userdata('role') === 'admin' || $this->session->userdata('role') === 'waka'): ?>
           <li class="sidebar-menu-item">
-            <a href="<?= site_url('jadwal/generate') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
+            <a href="<?= site_url('waka/generate') ?>" class="sidebar-menu-link <?php $this->uri->segment(2) == 'generate' ? 'active' : '' ?>">
               <span class="sidebar-menu-icon">
                 <i class="fas fa-magic"></i>
               </span>
