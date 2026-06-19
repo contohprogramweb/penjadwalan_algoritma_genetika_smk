@@ -90,8 +90,21 @@ $route['admin/tahun_ajaran/get_detail/(:num)'] = 'Admin/Tahun_ajaran/get_detail/
 // Routes untuk Waka
 $route['waka/dashboard'] = 'Waka/Dashboard/index';
 $route['waka/penugasan'] = 'Waka/Penugasan/index';
+$route['waka/penugasan/get_data'] = 'Waka/Penugasan/get_data';
+$route['waka/penugasan/tambah'] = 'Waka/Penugasan/tambah';
+$route['waka/penugasan/edit/(:num)'] = 'Waka/Penugasan/edit/$1';
+$route['waka/penugasan/hapus/(:num)'] = 'Waka/Penugasan/hapus/$1';
+$route['waka/penugasan/get_detail/(:num)'] = 'Waka/Penugasan/get_detail/$1';
 $route['waka/generate'] = 'Waka/Generate/index';
+$route['waka/generate/trigger'] = 'Waka/Generate/trigger';
+$route['waka/generate/progress'] = 'Waka/Generate/progress';
+$route['waka/generate/reset_progress'] = 'Waka/Generate/reset_progress';
+$route['waka/generate/run_process/(:num)'] = 'Waka/Generate/run_process/$1';
 $route['waka/jadwal'] = 'Waka/Jadwal/index';
+$route['waka/jadwal/edit_slot'] = 'Waka/Jadwal/edit_slot';
+$route['waka/jadwal/approve'] = 'Waka/Jadwal/approve';
+$route['waka/jadwal/check_conflict'] = 'Waka/Jadwal/check_conflict';
+$route['waka/jadwal/get_penugasan_by_kelas'] = 'Waka/Jadwal/get_penugasan_by_kelas';
 
 // Routes untuk Jadwal (publik - semua role)
 $route['jadwal'] = 'Jadwal/index';
