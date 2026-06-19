@@ -44,6 +44,7 @@ a {
 
 a:hover {
   color: var(--color-primary-dark);
+  text-decoration: none;
 }
 
 /* =========================================
@@ -86,6 +87,11 @@ a:hover {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.sidebar-brand:hover {
   color: var(--color-white);
   text-decoration: none;
 }
@@ -151,11 +157,13 @@ a:hover {
 .sidebar-menu-link:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-white);
+  text-decoration: none;
 }
 
 .sidebar-menu-link.active {
   background: var(--color-accent);
   color: var(--color-white);
+  text-decoration: none;
 }
 
 .sidebar-menu-icon {
