@@ -178,7 +178,9 @@
             </div>
             <form id="formPenugasan" method="POST">
                 <div class="modal-body">
-                    <input type="hidden" name="<?php $this->security->get_csrf_token_name(); ?>" value="<?php $this->security->get_csrf_hash(); ?>">
+                    <?php $csrf_token = $this->security->get_csrf_token_name(); ?>
+                    <?php $csrf_hash = $this->security->get_csrf_hash(); ?>
+                    <input type="hidden" name="<?= $csrf_token; ?>" value="<?= $csrf_hash; ?>">
                     <input type="hidden" name="id_penugasan" id="id_penugasan">
                     <input type="hidden" name="id_tahun_ajaran" value="<?= $tahun_ajaran_aktif['id_tahun_ajaran']; ?>">
                     
