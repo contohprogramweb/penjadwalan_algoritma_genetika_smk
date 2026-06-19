@@ -117,6 +117,26 @@ class Tahun_ajaran_model extends CI_Model {
     }
 
     /**
+     * Check if tahun ajaran with same year and semester exists
+     * @param string $tahun_mulai Format: YYYY
+     * @param string $semester 'ganjil' or 'genap'
+     * @param int|null $exclude_id Exclude this ID (for update)
+     * @return bool
+     */
+    public function check_tahun_exists($tahun_mulai, $semester, $exclude_id = null)
+    {
+        $this->db->where('tahun_mulai', $tahun_mulai);
+        $this->db->where('semester', $semester);
+        
+        if ($exclude_id) {
+            $this->db->where($this->primary_key . ' !=', $exclude_id);
+        }
+        
+        $query = $this->db->get($this->table);
+        return $query->num_rows() > 0;
+    }
+
+    /**
      * Get all tahun ajaran
      */
     public function get_all()

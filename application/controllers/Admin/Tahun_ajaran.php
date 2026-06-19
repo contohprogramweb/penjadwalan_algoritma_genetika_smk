@@ -27,13 +27,24 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'tahun' => [
-                'label' => 'Tahun Ajaran',
-                'rules' => 'required|min_length[9]|max_length[9]',
+            'tahun_mulai' => [
+                'label' => 'Tahun Mulai',
+                'rules' => 'required|numeric|min_length[4]|max_length[4]',
                 'errors' => [
-                    'required' => 'Tahun ajaran wajib diisi',
-                    'min_length' => 'Format tahun ajaran YYYY/YYYY',
-                    'max_length' => 'Format tahun ajaran YYYY/YYYY'
+                    'required' => 'Tahun mulai wajib diisi',
+                    'numeric' => 'Tahun mulai harus angka',
+                    'min_length' => 'Tahun mulai harus 4 digit',
+                    'max_length' => 'Tahun mulai harus 4 digit'
+                ]
+            ],
+            'tahun_selesai' => [
+                'label' => 'Tahun Selesai',
+                'rules' => 'required|numeric|min_length[4]|max_length[4]',
+                'errors' => [
+                    'required' => 'Tahun selesai wajib diisi',
+                    'numeric' => 'Tahun selesai harus angka',
+                    'min_length' => 'Tahun selesai harus 4 digit',
+                    'max_length' => 'Tahun selesai harus 4 digit'
                 ]
             ],
             'semester' => [
@@ -90,7 +101,7 @@ class Tahun_ajaran extends MY_Controller {
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Tahun ajaran dan semester sudah digunakan',
-                    'errors' => ['tahun' => 'Kombinasi tahun ajaran dan semester sudah ada']
+                    'errors' => ['tahun_mulai' => 'Kombinasi tahun ajaran dan semester sudah ada']
                 ]));
             return;
         }
@@ -168,13 +179,24 @@ class Tahun_ajaran extends MY_Controller {
         }
 
         $this->form_validation->set_rules([
-            'tahun' => [
-                'label' => 'Tahun Ajaran',
-                'rules' => 'required|min_length[9]|max_length[9]',
+            'tahun_mulai' => [
+                'label' => 'Tahun Mulai',
+                'rules' => 'required|numeric|min_length[4]|max_length[4]',
                 'errors' => [
-                    'required' => 'Tahun ajaran wajib diisi',
-                    'min_length' => 'Format tahun ajaran YYYY/YYYY',
-                    'max_length' => 'Format tahun ajaran YYYY/YYYY'
+                    'required' => 'Tahun mulai wajib diisi',
+                    'numeric' => 'Tahun mulai harus angka',
+                    'min_length' => 'Tahun mulai harus 4 digit',
+                    'max_length' => 'Tahun mulai harus 4 digit'
+                ]
+            ],
+            'tahun_selesai' => [
+                'label' => 'Tahun Selesai',
+                'rules' => 'required|numeric|min_length[4]|max_length[4]',
+                'errors' => [
+                    'required' => 'Tahun selesai wajib diisi',
+                    'numeric' => 'Tahun selesai harus angka',
+                    'min_length' => 'Tahun selesai harus 4 digit',
+                    'max_length' => 'Tahun selesai harus 4 digit'
                 ]
             ],
             'semester' => [
@@ -231,7 +253,7 @@ class Tahun_ajaran extends MY_Controller {
                 ->set_output(json_encode([
                     'success' => FALSE,
                     'message' => 'Tahun ajaran dan semester sudah digunakan',
-                    'errors' => ['tahun' => 'Kombinasi tahun ajaran dan semester sudah ada']
+                    'errors' => ['tahun_mulai' => 'Kombinasi tahun ajaran dan semester sudah ada']
                 ]));
             return;
         }

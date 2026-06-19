@@ -169,10 +169,10 @@
                     { 
                         data: 'aksi',
                         orderable: false,
-                        render: function(data) {
+                        render: function(data, type, row) {
                             return `<div class="btn-group btn-group-sm">
-                                <button class="btn btn-info" onclick="editData(${data.id})"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" onclick="hapusData(${data.id})"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-info" onclick="editData(${row.id_tahun_ajaran})"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" onclick="hapusData(${row.id_tahun_ajaran})"><i class="fa fa-trash"></i></button>
                             </div>`;
                         }
                     }
@@ -182,8 +182,8 @@
 
             let modalEdit = false;
             let deleteId = null;
-            const modal = $('#modalForm').modal({show: false});
-            const modalHapus = $('#modalHapus').modal({show: false});
+            const modal = $('#modalForm').modal({show: false, backdrop: 'static', keyboard: false});
+            const modalHapus = $('#modalHapus').modal({show: false, backdrop: 'static', keyboard: false});
 
             function resetForm() {
                 $('#formTahunAjaran')[0].reset();
@@ -199,7 +199,7 @@
                 modalEdit = false;
                 resetForm();
                 $('#modalTitle').text('Tambah Tahun Ajaran');
-                modal.show();
+                modal.modal('show');
             }
 
             window.editData = function(id) {
@@ -214,19 +214,23 @@
                         if (response.success) {
                             const data = response.data;
                             $('#modalTitle').text('Edit Tahun Ajaran');
-                            $('#tahunAjaranId').val(data.id);
-                            $('#tahun_mulai').val(data.tahun_mulai); $('#tahun_selesai').val(data.tahun_selesai);
+                            $('#tahunAjaranId').val(data.id_tahun_ajaran || data.id);
+                            $('#tahun_mulai').val(data.tahun_mulai);
+                            $('#tahun_selesai').val(data.tahun_selesai);
                             $('#semester').val(data.semester);
                             $('#status').val((data.is_aktif == 1 || data.status === 'active') ? 'aktif' : 'tidak_aktif');
                             $('#tanggal_mulai').val(data.tanggal_mulai);
                             $('#tanggal_selesai').val(data.tanggal_selesai);
                             $('#btnSubmit').prop('disabled', false);
-                            modal.show();
+                            modal.modal('show');
                         } else {
                             alert('Data tidak ditemukan');
+                            $('#btnSubmit').prop('disabled', false);
                         }
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        console.log('Response:', xhr.responseText);
                         alert('Terjadi kesalahan saat mengambil data');
                         $('#btnSubmit').prop('disabled', false);
                     }
@@ -235,7 +239,7 @@
 
             window.hapusData = function(id) {
                 deleteId = id;
-                modalHapus.show();
+                modalHapus.modal('show');
             }
 
             $('#formTahunAjaran').submit(function(e) {
@@ -258,7 +262,7 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            modal.hide();
+                            modal.modal('hide');
                             table.ajax.reload();
                             Swal.fire({ icon: 'success', title: 'Berhasil', text: response.message });
                         } else {
@@ -275,7 +279,9 @@
                             $('#btnText').text(isEdit ? 'Simpan' : 'Tambah');
                         }
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        console.log('Response:', xhr.responseText);
                         Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan pada sistem' });
                         $('#btnSubmit').prop('disabled', false);
                         $('#spinner').addClass('d-none');
@@ -295,7 +301,7 @@
                     type: 'POST',
                     dataType: 'json',
                     success: function(response) {
-                        modalHapus.hide();
+                        modalHapus.modal('hide');
                         if (response.success) {
                             table.ajax.reload();
                             Swal.fire({ icon: 'success', title: 'Berhasil', text: response.message });
@@ -306,7 +312,9 @@
                         $('#btnKonfirmasiHapus').prop('disabled', false);
                         $('#spinnerHapus').addClass('d-none');
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        console.log('Response:', xhr.responseText);
                         Swal.fire({ icon: 'error', title: 'Error', text: 'Terjadi kesalahan pada sistem' });
                         deleteId = null;
                         $('#btnKonfirmasiHapus').prop('disabled', false);
